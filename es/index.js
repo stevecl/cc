@@ -24,6 +24,10 @@ let test = {
     name: 'cc'
 }
 
+test = (a) => {
+    console.log('do test', a)
+}
+
 let testProxy = new Proxy(test, {
     get (target, propKey, receiver) {
         console.log('get', target, propKey, receiver)
@@ -32,8 +36,25 @@ let testProxy = new Proxy(test, {
     set (target, propKey, value, receiver) {
         console.log('set', target, propKey, value, receiver)
         return Reflect.set(target, propKey, value, receiver)
+    },
+    apply (target, ctx, args) {
+        console.log(33, target, ctx, args)
+        return Reflect.apply(...arguments)
     }
 })
 
-console.log(testProxy.name = 'chenglian')
-console.log(testProxy.name)
+// console.log(testProxy.name = 'chenglian')
+// console.log(testProxy.name)
+testProxy(4)
+
+
+// Object.defineProperty({}, key, {
+//     enumerable: true,
+//     configurable: true,
+//     get () {
+
+//     },
+//     set () {
+
+//     }
+// })
