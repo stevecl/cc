@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import Materials from './components/Materials.vue';
 import PlayGround from './components/PlayGround.vue';
+import Test2 from './components/Test.vue'
 
 import globalData from './utils/data'
 const refData = ref(globalData)
@@ -18,7 +19,10 @@ const refData = ref(globalData)
         <PlayGround v-model="refData"></PlayGround>
       </div>
     </div>
-    <div class="right">设置栏</div>
+    <div class="right">
+      设置栏
+      <Test2></Test2>
+    </div>
   </div>
 </template>
 

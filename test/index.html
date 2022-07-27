@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <body>
+    <form id="form" action=""></form>
+    <input id="test" type="file">
+    <button onclick="submit()">提交</button>
+    <script>
+        function submit() {
+            var oData = new FormData(document.querySelector('#form')); 
+            oData.append('file', document.querySelector('#test').files[0]);
+            oData.append('name', 'cc');
+
+            var xhr = new XMLHttpRequest()
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var value = xhr.response
+                    console.log('value', value)
+                }
+            }
+            xhr.open('post', 'http://192.168.50.15:3001/upload', true)
+            xhr.send(oData)
+        }
+
+    </script>
+  </body>
+</html>
