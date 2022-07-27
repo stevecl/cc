@@ -11,7 +11,7 @@
 
 <script setup>
 import _ from 'lodash'
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { material } from '../utils/options'
 
 const props = defineProps({
@@ -58,6 +58,17 @@ const handleDragover = (event) => {
 const handleDragEnter = (event) => {
   // event.dataTransfer.dropEffect = 'move'
 }
+
+onMounted(() => {
+  let audio = document.createElement('audio')
+  audio.setAttribute('autoplay', true)
+  audio.setAttribute('src', 'https://file.maytek.cn/default/20211118/f_size11954492/lqp__QjS424y2hHdZv3GDkzWUPly.mp3')
+  audio.setAttribute('controls', true)
+  document.querySelector('.relation').appendChild(audio)
+  setTimeout(() => audio.play(), 1000)
+  console.log('onMounted', )
+
+})
 </script>
 
 <style lang="less" scoped>
