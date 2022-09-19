@@ -13,6 +13,8 @@
 import _ from 'lodash'
 import { computed, onMounted } from 'vue'
 import { material } from '../utils/options'
+import { setRem, setTitle } from 'commonjs-cc'
+console.log(333, setRem)
 
 const props = defineProps({
   modelValue: {

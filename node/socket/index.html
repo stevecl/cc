@@ -17,7 +17,7 @@
                     <input class="form-control" type="text" name="message" id="message" value="" />
                 </div>
                 <button type="button" id="send" class="btn btn-primary" onclick="sendMessage();">
-                    发送
+                下一题
                 </button>
             </form>
         </div>
@@ -34,7 +34,7 @@
     }
 
     function sendMessage() {
-        ws.send('222');
+        ws.send('next');
     };
 </script>
 
