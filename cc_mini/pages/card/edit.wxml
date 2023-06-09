@@ -1,0 +1,47 @@
+<!--pages/card/edit.wxml-->
+<view
+  class="card-wrap"
+  catchtouchstart="touch1.start"
+  catchtouchmove="touch1.move"
+  catchtouchend="touch1.end"
+  catchtouchcancel="touch1.cancel"
+  >
+  <!-- bindtouchstart="touchStart"
+  bindtouchmove="touchMove"
+  bindtouchend="touchEnd" -->
+  <view
+    class="card-item {{ item.active ? 'active' : '' }}"
+    wx:for="{{ dataList }}"
+    wx:key="item"
+    style="{{ item.style }}">
+    <!-- 背景 -->
+    <image class="card-bg" src="{{ item.src }}" mode="" wx:if="{{ item.type === 'bg' }}" />
+    <!-- 文字 -->
+    <view
+      class="item-text"
+      wx:if="{{ item.type === 'text' }}"
+      data-index="{{index}}">
+      {{item.text}}
+    </view>
+    <!-- 图片 -->
+    <image
+      class="item-img"
+      src="{{ item.src }}"
+      mode=""
+      wx:if="{{item.type === 'image'}}"
+      data-index="{{index}}"/>
+  </view>
+</view>
+
+<view class="done-wrap" bindtap="addContent">
+  <text data-type="image">图片</text>
+  <text data-type="text">文字</text>
+</view>
+
+<editText
+  text="{{text}}"
+  wx:if="{{textDialogShow}}"
+  bind:close="close"
+  bind:submit="updateText">
+</editText>
+

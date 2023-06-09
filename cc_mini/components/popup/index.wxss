@@ -1,0 +1,20 @@
+/* components/popup/index.wxss */
+.popup-wrap {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  border: 1px solid red;
+  background-color: rgba(0, 0, 0, .2);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.popup-wrap .popup-content {
+  width: 100%;
+  height: 0;
+  background-color: #fff;
+}

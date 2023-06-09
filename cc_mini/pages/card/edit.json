@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "popup": "/components/popup/index",
+    "editText": "./components/editText/index"
+  }
+}

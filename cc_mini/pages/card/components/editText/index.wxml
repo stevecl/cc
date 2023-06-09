@@ -1,0 +1,12 @@
+<!--pages/card/components/editText/index.wxml-->
+<!-- <text>pages/card/components/editText/index.wxml</text> -->
+<!-- <input type="text" name="" id=""/> -->
+<popup bind:close="close" height="200px">
+  <view>
+    <input value="{{value}}" type="text" placeholder="请输入替换文字" bindinput="bindKeyInput"/>
+  </view>
+  <view class="edit-btn" bindtap="clickHandle">
+    <text data-type="cancel">取消</text>
+    <text data-type="confirm">确认</text>
+  </view>
+</popup>

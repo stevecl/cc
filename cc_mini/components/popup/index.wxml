@@ -1,0 +1,6 @@
+<!--components/popup/index.wxml-->
+<view class="popup-wrap" bindtap="clickHandle">
+  <view class="popup-content" animation="{{animationData}}" catchtap>
+    <slot></slot>
+  </view>
+</view>

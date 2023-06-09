@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/card/edit",
     "pages/index/index",
     "pages/logs/logs",
     "pages/2048/loading",

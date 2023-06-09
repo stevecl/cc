@@ -12,7 +12,8 @@ const path = require('path');
 //     .pipe(zlib.createGzip())
 //     .pipe(fs.createWriteStream(path.resolve(__dirname, '../package.json.gz')));
 
-const res = fs.createReadStream(path.resolve(__dirname, '../../package.json'), {
+// const res = fs.createReadStream(path.resolve(__dirname, '../../package.json'), {
+const res = fs.createReadStream(path.resolve(__dirname, '../promise.md'), {
     flags: 'r',
     start: 0,
     // end: 20,
@@ -23,12 +24,12 @@ const res = fs.createReadStream(path.resolve(__dirname, '../../package.json'), {
 let arr = [];
 res.on('open', fd => console.log('fd', fd));
 res.on('data', data => {
-    console.log('data', data);
+    // console.log('data', data);
     arr.push(data);
 });
 res.on('end', () => {
     console.log('end', Buffer.concat(arr).toString())
-    fs.writeFile(path.resolve(__dirname, '../../cc2.json'), Buffer.concat(arr), function(err) {
+    fs.writeFile(path.resolve(__dirname, '../../cc2.md'), Buffer.concat(arr), function(err) {
         console.log('写入成功');
     })
 });

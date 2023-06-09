@@ -1,0 +1,51 @@
+/* pages/card/edit.wxss */
+page {
+  height: 100%;
+}
+/* 展示区域 */
+.card-wrap {
+  position: relative;
+  width: 80%;
+  height: 80%;
+  /* border: 1px solid red; */
+  margin: 0 auto;
+}
+
+.card-wrap .card-item {
+  border: 1px solid transparent;
+}
+
+.card-wrap .card-item.active {
+  border: 1px solid red;
+}
+
+.card-wrap .card-item .card-bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  /* position: relative; */
+}
+
+.card-wrap .card-item .item-text {
+  min-width: 100px;
+  min-height: 30px;
+}
+
+.card-wrap .card-item .item-img {
+  width: 100px;
+  height: 100px;
+}
+
+/* 底部按钮 */
+.done-wrap {
+  display: flex; 
+  margin: 20rpx;
+}
+
+.done-wrap text {
+  margin-right: 20rpx;
+}
