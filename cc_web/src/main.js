@@ -1,6 +1,11 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 
-import './assets/common.less'
+import router from './router'
 
-createApp(App).mount('#app')
+import './assets/reset.less'
+import './assets/base.less'
+
+createApp(App)
+  .use(router)
+  .mount('#app')
