@@ -3,6 +3,7 @@ const path = require('path')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const miniCssExtractPlugin = require('mini-css-extract-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -38,6 +39,7 @@ module.exports = {
   ]
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new VueLoaderPlugin(),
     new htmlWebpackPlugin({
       template: './index.html',
@@ -50,7 +52,7 @@ module.exports = {
   optimization: {
     splitChunks: {
       chunks: 'async',
-      minSize: 20000,
+      minSize: 200,
       minRemainingSize: 0,
       minChunks: 1,
       maxAsyncRequests: 30,

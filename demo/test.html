@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Lazy-Load</title>
+  <style>
+    .img {
+      width: 200px;
+      height: 200px;
+      background-color: gray;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .pic {
+      /* // 必要的img样式 */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="img">
+      <!-- // 注意我们并没有为它引入真实的src -->
+      <img class="pic" alt="加载中" data-src="./images/1.jpg">
+    </div>
+    <div class="img">
+      <img class="pic" alt="加载中" data-src="./images/2.jpg">
+    </div>
+    <div class="img">
+      <img class="pic" alt="加载中" data-src="./images/3.jpg">
+    </div>
+    <div class="img">
+      <img class="pic" alt="加载中" data-src="./images/4.jpg">
+    </div>
+    <div class="img">
+      <img class="pic" alt="加载中" data-src="./images/w6.webp">
+    </div>
+    <div class="img">
+      <img class="pic" alt="加载中" data-src="./images/w1.webp">
+    </div>
+    <div class="img">
+      <img class="pic" alt="加载中" data-src="./images/w2.webp">
+    </div>
+    <div class="img">
+      <img class="pic" alt="加载中" data-src="./images/w3.webp">
+    </div>
+    <div class="img">
+      <img class="pic" alt="加载中" data-src="./images/w4.webp">
+    </div>
+    <div class="img">
+      <img class="pic" alt="加载中" data-src="./images/w5.webp">
+    </div>
+  </div>
+
+  <script>
+    const imgs = document.getElementsByTagName('img')
+    const viewHeight = window.innerHeight || document.documentElement.clientHeight
+    let num = 0
+    function lazyload() {
+      for (let i = num; i < imgs.length; i++) {
+        let distance = viewHeight - imgs[i].getBoundingClientRect().top
+        if (distance >= 0) {
+          imgs[i].src = imgs[i].getAttribute('data-src')
+          num = i + 1
+        }
+      }
+    }
+    window.onload = function () {
+      lazyload()
+    }
+
+    // 监听Scroll事件
+    window.addEventListener('scroll', throttle(lazyload, 1000), false);
+
+    function throttle(fn, delay) {
+      let curTime = Date.now();
+      return function () {
+        let context = this,
+          args = arguments,
+          nowTime = Date.now();
+        if (nowTime - curTime >= delay) {
+          curTime = Date.now();
+          return fn.apply(context, args);
+        }
+      };
+    }
+  </script>
+</body>
+
+</html>
