@@ -1,3 +1,4 @@
+// 排列组合
 const _permute = (string) => {
   const result = [];
   const map = new Map()
@@ -17,4 +18,14 @@ const _permute = (string) => {
   return result
 }
 
-console.log(222, _permute('abcd'))
+// console.log(222, _permute('abcde'))
+
+function fn() {
+  let arr = [1, 2, 3]
+  arr.map(() => {
+    console.log('this:', this)
+    return 2
+  })
+}
+
+fn()
