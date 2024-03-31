@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>收银</title>
+  <link rel="stylesheet" href="./style/base.css">
+  <link rel="stylesheet" href="./style/cashier.css">
+</head>
+<body>
+  <div id="app" class="flex flex-col">
+    <!-- header -->
+    <div class="flex cash_header">
+      <img class="logo" src="./images/logo.png" alt="">
+      <span>欢迎使用自助收银</span>
+      <span class="flex-1"></span>
+      <span>浦东芯宠店 2ZPOS01</span>
+    </div>
+    <input type="text" v-model="searchVal" @keydown.enter="search">
+    <!-- list info -->
+    <div class="flex-1 cash_list">
+      <div class="cash_list_item" v-for="(item, index) in productList" :key="index">
+        <div class="img-box" >
+          <img :src="item.productImgurl" alt="" v-if="item.productImgurl">
+        </div>
+        <div class="item_right">
+          <div class="name">{{ item.productName }}<img class="delete" src="./images/delete.png" alt="" @click="handleDelete(index)"></div>
+          <div class="info">
+            <span class="gray" style="width: 3.3rem;">{{ item.barCode }}</span>
+            <span class="num">
+              <p class="btn" style="border-radius: 12px 0px 0px 12px;" @click="changeNum(item, -1)">-</p>
+              <p>
+                <input type="text" v-model="item.num">
+              </p>
+              <p class="btn" style="border-radius: 0px 12px 12px 0px;" @click="changeNum(item, 1)">+</p>
+            </span>
+            <span class="flex-1"></span>
+            <span class="fs24 light">￥</span>
+            <span class="fs36 light">{{ item.salesPrice }}</span>
+            <span class="gray del" v-if="item.originalPrice">￥{{ item.originalPrice }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- footer -->
+    <div class="cash_footer">
+      <div class="flex cash_footer_info">
+        <template @click="handleClear">
+          <img class="delete" src="./images/delete.png" alt="">
+          <span class="gray">清空商品</span>
+        </template>
+        <span class="flex-1"></span>
+        <span class="gray">合计：</span>
+        <span class="light">￥</span>
+        <span class="light fs48">{{ totalPrice }}</span>
+      </div>
+      <div class="cash_footer_pay"></div>
+    </div>
+  </div>
+  <script src="./js/vue3.js"></script>
+  <script type="module" src="./js/cashier.js"></script>
+</body>
+</html>

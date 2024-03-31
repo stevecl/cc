@@ -1,0 +1,49 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-size: .3rem;
+  color: #333;
+  border: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+/* 字体样式 */
+.fs24 {
+  font-size: .24rem;
+}
+.fs36 {
+  font-size: .36rem;
+}
+.fs48 {
+  font-size: .48rem;
+}
+.del {
+  text-decoration: line-through;
+}
+.gray {
+  color: #888992;
+}
+
+.light {
+  color: #FF8037;
+}
+
+/* flex */
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-1 {
+  flex: 1;
+}

@@ -1,0 +1,148 @@
+#app {
+  width: 100%;
+  height: 100%;
+  background: url('../images/bg2.png') no-repeat;
+  background-size: 100% auto;
+  align-items: center;
+}
+
+.cash_header {
+  width: 100%;
+  height: 1.28rem;
+  font-size: .36rem;
+  font-weight: bold;
+  align-items: center;
+  padding: 0 .4rem;
+}
+
+.cash_header .logo {
+  width: .74rem;
+  height: .6rem;
+  margin-right: .15rem;
+}
+
+.cash_list {
+  width: 100%;
+  overflow: auto;
+  /* border: 1px solid red; */
+}
+
+.cash_list_item {
+  display: flex;
+  align-items: center;
+  width: 10rem;
+  height: 1.88rem;
+  background: #FFFFFF;
+  box-shadow: 0px 6px 12px 0px rgba(182,165,151,0.08);
+  border-radius: .2rem;
+  margin: 0 auto;
+  padding: .2rem;
+  margin-bottom: .2rem;
+}
+
+.cash_list_item .img-box {
+  width: 1.48rem;
+  height: 1.48rem;
+  background-color: #F8F8FB;
+  border-radius: .12rem;
+  flex-shrink: 0;
+  margin-right: .2rem;
+  /* margin: 0 .2rem; */
+}
+
+.cash_list_item .img-box img {
+  width: 100%;
+  height: 100%;
+}
+
+.cash_list_item .item_right {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cash_list_item .item_right .name {
+  width: 100%;
+  position: relative;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  word-break: break-all;
+  padding-right: .36rem;
+}
+
+.cash_list_item .item_right .delete {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: .3rem;
+  height: .3rem;
+}
+
+.cash_list_item .item_right .info {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.cash_list_item .item_right .info .num {
+  display: flex;
+  width: 1.5rem;
+  height: .48rem;
+  background: #FFFFFF;
+  border-radius: 12px;
+  /* border: 1px solid #E5E5E5; */
+}
+
+.cash_list_item .item_right .info .num p {
+  flex: 1;
+  /* border: 1px solid red; */
+  border-top: 1px solid #E5E5E5;
+  border-bottom: 1px solid #E5E5E5;
+}
+
+.cash_list_item .item_right .info .num p input {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.cash_list_item .item_right .info .num .btn {
+  flex-shrink: 0;
+  width: .38rem;
+  line-height: .4rem;
+  text-align: center;
+  font-size: .44rem;
+  background: #FBFBFB;
+  border: 1px solid #E5E5E5;
+}
+
+.cash_footer {
+  width: 100%;
+  height: 2.54rem;
+  background: #FFFFFF;
+  border-top: 1px solid #EEEEEE;
+}
+
+.cash_footer .cash_footer_info {
+  height: 1.2rem;
+  align-items: center;
+  margin: 0 .48rem 0 .42rem;
+}
+
+.cash_footer .cash_footer_info .delete {
+  width: .3rem;
+  height: .3rem;
+  margin-right: .1rem;
+}
+
+.cash_footer .cash_footer_pay {
+  height: 1.3rem;
+  background: url('../images/ALIPAY.png') no-repeat -.1rem;
+  background-size: cover;
+}

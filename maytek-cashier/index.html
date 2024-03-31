@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style/base.css">
+  <link rel="stylesheet" href="style/index.css">
+  <title>收银</title>
+</head>
+<body>
+  <div id="app" class="flex flex-col">
+    <img class="logo" src="./images/logo_txt.png" alt="">
+    <div class="txt">自助收银</div>
+    <div class="input-block">
+      <div class="label">手机号码/用户名</div>
+      <input type="text" placeholder="手机号码/用户名">
+    </div>
+    <div class="input-block">
+      <div class="label">密码</div>
+      <input type="text" placeholder="密码">
+    </div>
+    <div class="btn-login" @click="handleLogin">登录</div>
+  </div>
+  <script src="./js/vue3.js"></script>
+  <script type="module" src="./js/index.js"></script>
+</body>
+</html>

@@ -12,5 +12,9 @@
     "koa": "^2.13.4",
     "koa-router": "^12.0.0",
     "koa-static": "^5.0.0"
+  },
+  "dependencies": {
+    "http-proxy-middleware": "^2.0.6",
+    "koa-connect": "^2.1.0"
   }
 }
