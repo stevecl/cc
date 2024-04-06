@@ -15,6 +15,12 @@ createApp({
     const handleLogin = async () => {
       console.log('login')
       let clientId = '428a8310cd442757ae699df5d894f051'
+      let test = await fetch('/api/test', {
+        method: 'get'
+      })
+      test.json().then(json => {
+        console.log('test json: ', json)
+      })
       let res = await fetch("/prod-api/auth/login", {
         method: "POST",
         headers: {
@@ -34,7 +40,7 @@ createApp({
         localStorage.setItem('token', access_token)
         localStorage.setItem('clientId', clientId)
         console.log('json:', access_token)
-        location.href = './cashier.html'
+        // location.href = './cashier.html'
       })
     }
     return {

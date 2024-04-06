@@ -10,8 +10,4 @@ let app = createApp(App)
   .use(router)
   .mount('#app')
 
-
-  app.config.errorHandler = (err) => {
-    /* 处理错误 */
-    console.log('error: ', err)
-  }
+  console.log('main js')
