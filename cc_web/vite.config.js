@@ -9,7 +9,6 @@ export default defineConfig({
   css: {
     postcss: {
       plugins: [
-
         postCssPxToRem({
           rootValue: 32,
           propList: ['*'],
@@ -39,7 +38,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:80',
+        target: 'http://192.168.1.192:80',
         changeOrigin: false,
         // rewrite: path => path.replace(/^\/api/, '')
       }

@@ -1,10 +1,6 @@
 ### server code
 
 ```
-49.235.98.93  Chengliancc103
-10qq.com  QWERasdf1234
-
-
 进入bin目录启动：pm2 start www / pm2 start app.js
 pm2 start app.js --name="fx67ll" 启动并命名为fx67ll，没有命名的话后续可以用id替代name
 pm2 start app.js --watch 当文件变化时自动重启应用
