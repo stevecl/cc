@@ -1,5 +1,5 @@
 // import './style.css'
-// import('./assets/base.less')
+import('./assets/base.less')
 
 import { createApp } from 'vue'
 import App from './views/home.vue'

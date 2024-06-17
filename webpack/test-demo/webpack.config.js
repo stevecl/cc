@@ -20,7 +20,7 @@ module.exports = {
       },
       {
         test: /\.less$/i,
-        use: [miniCssExtractPlugin.loader, 'css-loader', 'less-loader']
+        use: [miniCssExtractPlugin.loader, 'css-loader', path.resolve('./loaders/index.js'), 'less-loader']
       },
       { // webpack5 之后无需安装url-loader\file-loader, 秩序配置即可
         test: /.(jpg|jpeg|gif|png|svg)$/i,
@@ -28,14 +28,8 @@ module.exports = {
       },
       {
         test: /\.vue$/i,
-        use: ['vue-loader']
+        use: [path.resolve('./loaders/index.js'), 'vue-loader', path.resolve('./loaders/index.js')]
       },
-      // {
-      // test: /\.css$/i,
-      // use: [{
-      //   loader: path.resolve('./index.js')
-      // }]
-      // }
   ]
   },
   plugins: [
