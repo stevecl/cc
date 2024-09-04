@@ -1,0 +1,26 @@
+{
+  "name": "maytek-diy",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@vitejs/plugin-vue": "^5.0.5",
+    "@vitejs/plugin-vue-jsx": "^4.0.0",
+    "axios": "^1.7.2",
+    "colorpicker-v3": "^2.10.2",
+    "element-plus": "^2.7.6",
+    "pinia": "^2.1.7",
+    "sass": "^1.77.6",
+    "swiper": "^11.1.4",
+    "vue": "^3.0.4",
+    "vue-router": "^4.4.0",
+    "vuedraggable": "^4.1.0",
+    "yarn": "^1.22.22"
+  },
+  "devDependencies": {
+    "@vue/compiler-sfc": "^3.0.4",
+    "vite": "5"
+  }
+}

@@ -1,0 +1,30 @@
+.el-button[type="button"] {
+  $color: #FE6903;
+  background-color: $color;
+  color: #fff;
+  border-color: $color;
+  &:hover {
+    color: #fff;
+    border-color: lighten($color, 20%);
+    background-color: lighten($color, 20%);
+  }
+}
+
+// element 默认图片样式
+.el-image {
+  width: 100%;
+  height: 100%;
+  .image-slot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    // background: var(--el-fill-color-light);
+    color: var(--el-text-color-secondary);
+    font-size: 30px;
+    .el-icon {
+      font-size: 30px;
+    }
+  }
+}

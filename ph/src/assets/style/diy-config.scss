@@ -1,0 +1,164 @@
+// 模块 配置编辑框 通用style
+.wid70 { width: 70px; }
+.flex-full {
+  flex: 1;
+}
+.diy-edit-line {
+  margin-bottom: 10px;
+  border-bottom: 1px dashed #eee;
+}
+
+.module-edit-title {
+	font-size: 14px;
+	color: #909399;
+  margin: 20px 0;
+  &:first-of-type{
+    margin-top: 6px;
+  }
+}
+
+.slide-span--unit {
+  position: relative;
+  width: 65px;
+  padding-left: 10px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+  color: #606266;
+  text-align: left;
+  margin-left: 10px;
+  padding-right: 27px;
+  border: solid 1px #e4e7ed;
+  background-color: #ffffff;
+  border-radius: 5px;
+  span {
+    position: absolute;
+    right: 0px;
+    top: 0;
+    width: 22px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 12px;
+    color: #909399;
+    // margin-left: 5px;
+  }
+}
+
+.tips-info {
+  font-size: 12px;
+  color: #999;
+  margin-left: 10px;
+}
+
+.el-slider__runway, .el-slider__bar {
+  height: 4px;
+}
+.el-slider__button-wrapper {
+  top: -16px;
+}
+.el-slider__button {
+  width: 14px;
+  height: 14px;
+}
+
+.tips-box {
+  padding: 6px 10px;
+  color: #e1a72b;
+  margin-bottom: 10px;
+  background-color: #fdf6e7;
+  border: 1px solid  #eee6d4;
+  border-radius: 5px;
+}
+
+.diy-button {
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 10px;
+  border: 1px solid #EDEDED;
+  vertical-align: top;
+  cursor: pointer;
+}
+
+// <input type="text" class="cus-input>
+// <span class="cus-btn">选择链接</span>
+.cus-input {
+  flex: 1;
+  height: 30px;
+  width: 20px;
+  min-width: 20px!important;
+  padding: 0 10px;
+  font-size: 12px;
+  color: #5D5D5D;
+  border: 1px solid #dcdfe6;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  &:nth-last-child(1) {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  &[disabled] ~ .cus-btn{
+    cursor: unset;
+  }
+  &:focus{
+    border: 1px solid #409EFF;
+  }
+  & ~ .cus-btn {
+    font-size: 12px;
+    border-color: #dcdfe6;
+    border-left: none;
+    &:last-of-type {
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+  }
+}
+.cus-text {
+  width: auto;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  font-size: 14px;
+  background-color: #fdfdfd;
+  border-top: 1px solid #dcdfe6;
+  border-bottom: 1px solid #dcdfe6;
+  padding: 0 10px;
+  &:first-of-type {
+    border-radius: 5px 0 0 5px;
+    border-left: 1px solid #dcdfe6;
+  }
+}
+.cus-btn {
+  width: auto;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  font-size: 14px;
+  color: rgb(93, 93, 93);
+  background-color: #fdfdfd;
+  border: 1px solid #dcdfe6;
+  padding: 0 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: #f7f7f7;
+  }
+}
+
+.cus-list-btn {
+  width: 100%;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  font-size: 14px;
+  color: #909399;
+  background-color: #f8fafb;
+  border: 1px solid #eaedf0;
+  cursor: pointer;
+  border-radius: 5px;
+  &:hover {
+    // background-color: #f7f7f7;
+    color: #5CB6FF;
+    background-color: #fff;
+    border: 1px solid #5CB6FF;
+  }
+}
