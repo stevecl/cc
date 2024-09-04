@@ -3,7 +3,7 @@
     <pageTitle :title="'編輯'"></pageTitle>
     <div class="content-box">
       <materialPanel :activeIndex="activeIndex" @add="handleAddModule" @global="activeIndex = -1"></materialPanel>
-      <engine :pageConfig="globalConfig" @select="selectCurrentModule(-1)">
+      <engine :pageConfig="baseInfo" @select="selectCurrentModule(-1)">
         <draggable
           :style="{ height: baseInfo.type === 'advert' ? '100%' : 'unset' }"
           v-model="setting"

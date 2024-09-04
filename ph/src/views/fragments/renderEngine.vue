@@ -1,12 +1,12 @@
 // 手机容器
 <template>
   <div class="diy-phone">
-    <div class="text-overflow phone-title" @click="emit('select')" :style="titleStyleObj">
+    <div class="text-overflow phone-title" @click="emit('select')">
       <div class="phone-head"></div>
       <div class="phone-icon"></div>
-      {{ pageConfig.title }}
+      {{ pageConfig.templateTitle }}
     </div>
-    <div class="custom-scroll-bar phone-body" :style="{'background-color': pageConfig.bgColor}">
+    <div class="custom-scroll-bar phone-body" :style="{'background-color': pageConfig.backgroundColor}">
       <slot></slot>
     </div>
   </div>
@@ -20,13 +20,6 @@ const props = defineProps({
   pageConfig: Object
 })
 
-const titleStyleObj = computed(() => {
-  let { titleColor, titleBgColor, titleBgImg } = props.pageConfig || {}
-  return {
-    color: titleColor,
-    background: `${titleBgColor} url(${titleBgImg}) center / 100% 100% repeat`
-  }
-})
 </script>
 
 <style lang="scss" scoped>
@@ -57,7 +50,7 @@ const titleStyleObj = computed(() => {
       top: 10px;
       width: 276px;
       height: 13px;
-      background: url('@/assets/images/phone_top.png') no-repeat;
+      // background: url('@/assets/images/phone_top.png') no-repeat;
       background-size: 100% 100%;
       // margin-top: 30px;
     }

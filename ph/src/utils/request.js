@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
-import { getCookies } from '@/utils/index'
-import { tansParams } from "@/utils/index";
-import cache from '@/plugins/cache'
+// import { getCookies } from './cache'
+import { tansParams } from "./index";
+import cache from './cache'
 import slConfig from '@/config'
 
 // 是否显示重新登录

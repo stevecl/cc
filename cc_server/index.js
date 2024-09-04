@@ -7,7 +7,7 @@ const Router = require('koa-router')
 
 const app = new Koa();
 const router = new Router()
-app.use(serve('../maytek-cashier'))
+app.use(serve('./web'))
 
 app.use(koaConnect(createProxyMiddleware('/prod-api', { 
   target: 'https://pet-pre.maytek.cn', // 目标服务器地址
@@ -25,6 +25,15 @@ app.use(async (ctx, next)=> {
 // 测试 接口
 router.get('/api/test', ctx => {
   console.log('test')
+  ctx.body = {
+      status: 1,
+      content: 'test'
+  }
+  console.log('test22')
+})
+// 测试 接口
+router.get('/diyAdvert/list', ctx => {
+  console.log('/diyAdvert/list')
   ctx.body = {
       status: 1,
       content: 'test'
