@@ -10,9 +10,7 @@ const DEFAULT_CONFIG = {
 
 export default function (props) {
 
-  const currentStyle = computed(() => {
-    return props.config?.style || { ...DEFAULT_CONFIG }
-  })
+  const currentStyle = computed(() => (props.config?.style || { ...DEFAULT_CONFIG }))
   
   const height = computed({
     get() {
@@ -60,19 +58,29 @@ export default function (props) {
     },
     set(val) {
       let list = currentStyle.value.padding.split(' ')
-      list[0] = list[2] = val ? val + 'px' : 0
+      list[0] = val ? val + 'px' : 0
       currentStyle.value.padding = list.join(' ')
     }
   })
   
   const paddingLeft = computed({
     get() {
-      console.log('currentStyle.value', currentStyle.value)
       return Number(parseInt(currentStyle.value.padding.split(' ')[1]))
     },
     set(val) {
       let list = currentStyle.value.padding.split(' ')
       list[1] = list[3] = val ? val + 'px' : 0
+      currentStyle.value.padding = list.join(' ')
+    }
+  })
+
+  const paddingBottom = computed({
+    get() {
+      return Number(parseInt(currentStyle.value.padding.split(' ')[2]))
+    },
+    set(val) {
+      let list = currentStyle.value.padding.split(' ')
+      list[2] = val ? val + 'px' : 0
       currentStyle.value.padding = list.join(' ')
     }
   })
@@ -93,6 +101,7 @@ export default function (props) {
     marginLeft,
     paddingTop,
     paddingLeft,
+    paddingBottom,
     borderRadius
   }
 }

@@ -67,13 +67,18 @@ const props = defineProps({
   }
   .phone-body{
     position: relative;
-    width: $width - 87px;
-    height: $height - 146px;
-    margin-left: 43px;
+    left: 3px;
+    top: -90px;
+    // width: $width - 87px;
+    // height: $height - 146px;
+    width: 375px;
+    height: 785px;
     background-color: #F1F1F1;
     border-bottom-left-radius: 32px;
     border-bottom-right-radius: 32px;
     overflow: scroll;
+    // border: 1px solid red;
+    transform: scale(.785);
   }
   .phone-footer{
     height: 24px;

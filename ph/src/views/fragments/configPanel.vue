@@ -44,7 +44,8 @@ const baseInfo = inject('baseInfo')
 <style lang="scss" scoped>
 .diy-edit-box {
   position: relative;
-  width: 630px;
+  // width: 630px;
+  width: 700px;
   height: 700px;
   font-size: 12px;
   background-color: #ffffff;
@@ -55,6 +56,8 @@ const baseInfo = inject('baseInfo')
     display: flex;
     flex-direction: column;
     height: 100%;
+    overflow-y: auto;
+    padding-right: 40px;
     .header-info {
       width: calc(100% - 80px);
       background-color: #fff;

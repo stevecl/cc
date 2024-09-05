@@ -4,7 +4,7 @@ let config = {
   imgBorderRadius: 0,
   lineNum: 3,
   style: {
-    bgColor: '#ededed',
+    bgColor: '#ffffff',
     bgImageUrl: '',
     bgOpacity: 1,
     fontSize: '14px',
@@ -12,27 +12,27 @@ let config = {
     margin: '0 0 0 0'
   },
   datas: [{
-    defaultIcon: 'icon-1.png',
+    defaultIcon: 'btn1.png',
     icon: '',
-    text: '按钮文字1',
+    text: '按钮文字',
     color: '#666',
     link: ''
   },{
-    defaultIcon: 'icon-2.png',
+    defaultIcon: 'btn2.png',
     icon: '',
-    text: '按钮文字2',
+    text: '按钮文字',
     color: '#666',
     link: ''
   },{
-    defaultIcon: 'icon-3.png',
+    defaultIcon: 'btn3.png',
     icon: '',
-    text: '按钮文字3',
+    text: '按钮文字',
     color: '#666',
     link: ''
   },{
-    defaultIcon: 'icon-4.png',
+    defaultIcon: 'btn4.png',
     icon: '',
-    text: '按钮文字4',
+    text: '按钮文字',
     color: '#666',
     link: ''
   }]

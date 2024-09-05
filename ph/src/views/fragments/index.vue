@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <pageTitle :title="'編輯'"></pageTitle>
+    <pageTitle :title="'编辑'"></pageTitle>
     <div class="content-box">
       <materialPanel :activeIndex="activeIndex" @add="handleAddModule" @global="activeIndex = -1"></materialPanel>
       <engine :pageConfig="baseInfo" @select="selectCurrentModule(-1)">
@@ -11,13 +11,15 @@
           @update="handleMoveModule"
           item-key="index">
           <template #item="{ element: item, index: index }">
-            <component
-              :item-key="index"
-              :class="{'editing': true, 'selected': index === activeIndex}"
-              :config="item.config"
-              :is="item.componentName"
-              @click="selectCurrentModule(index)">
-            </component>
+            <div>
+              <component
+                :item-key="index"
+                :class="{'editing': true, 'selected': index === activeIndex}"
+                :config="item.config"
+                :is="item.componentName"
+                @click="selectCurrentModule(index)">
+              </component>
+            </div>
           </template>
         </draggable>
       </engine>
@@ -47,10 +49,7 @@ import { ElMessageBox } from 'element-plus'
 
 import { deepClone } from '@/utils'
 
-
-import { useCommonStore } from '@/stores/common'
-import useEditHook from './editHook'
-const { appCode } = useCommonStore()
+import useEditHook from '@/hooks/editHook'
 
 const route = useRoute()
 
@@ -61,7 +60,7 @@ const baseInfo = ref({
   templateName: '页面名称', // 页面名称
   templateTitle: '页面标题', // 页面标题
   templateImg: 'https://img0.baidu.com/it/u=3773090653,2338589126&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500', // 封面图片
-  backgroundColor: '#666', // 背景颜色
+  backgroundColor: '#ffffff', // 背景颜色
   searchKey: '首页', // 关键字
   templateConfigParams: '[]', // 配置信息
   componentIds: '', // 组件id
@@ -197,11 +196,11 @@ onMounted(() => {
       }
 
       &:hover::after {
-        border: 2px dashed #00a0e9;
+        border: 2px dashed #FE6903;
       }
 
       &.selected::after {
-        border: 2px dashed #00a0e9;
+        border: 2px dashed #FE6903;
       }
     }
   }

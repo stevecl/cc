@@ -13,9 +13,9 @@
 
 <script setup>
 import { computed } from 'vue'
-import useCommon from '../utils/useCommon'
+import useDefaultSource from '@/hooks/useDefaultSource'
 
-const { getDefaultImage } = useCommon()
+const { getDefaultImage } = useDefaultSource()
 
 const props = defineProps({
   config: Object
@@ -48,7 +48,7 @@ const styleObj = computed(() => {
       width: 100%;
       text-align: center;
       margin-top: 8px;
-      padding: 0 10px;
+      padding: 0 5px;
     }
   }
 }

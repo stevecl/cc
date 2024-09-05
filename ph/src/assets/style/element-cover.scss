@@ -9,6 +9,16 @@
     background-color: lighten($color, 20%);
   }
 }
+.config-edit-item {
+  // .el-slider__bar {
+  //   background-color: #FE6903!important; /* 红色 */
+  // }
+  .el-slider__button {
+    width: 16px;
+    height: 16px;
+    // border: 2px solid #FE6903!important;
+  }
+}
 
 // element 默认图片样式
 .el-image {
