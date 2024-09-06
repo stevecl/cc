@@ -46,12 +46,15 @@
     <configItem :label="'颜色'">
       <selectColor v-model="config.indicator.color" :resetColor="'#ffffff'"></selectColor>
     </configItem>
-    <configItem :label="'图片宽高比'" :labelWidth="70">
-      <input class="cus-input" type="text" v-model="config.imgRatio" placeholder="请输入图片宽高比，格式16:9">
+    <configItem :label="'图片比列'">
+      <el-radio-group v-model="config.imgRatio">
+        <el-radio value="1/1">1:1</el-radio>
+        <el-radio value="3/4">3:4</el-radio>
+        <el-radio value="4/3">4:3</el-radio>
+        <el-radio value="16/9">16:9</el-radio>
+      </el-radio-group>
     </configItem>
-    <div class="tips-info" style="margin: -10px 0 20px 16px;">提示: 输入格式为 16:9，默认会按照1:1进行展示</div>
     <div class="diy-edit-line"></div>
-    <div class="tips-box">建议尺寸: 使用的图片尺寸/比例相同 (大小建议不超过800k，以免影响加载速度)</div>
     
     <draggable v-model="config.datas" item-key="index">
       <template #item="{ element: item }">

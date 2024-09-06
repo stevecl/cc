@@ -1,7 +1,7 @@
 let config = {
   title: '图片轮播',
   imgRadius: 0,
-  imgRatio: '', // 图片宽高比
+  imgRatio: '1/1', // 图片宽高比
   indicator: {
     show: false,
     color: '#ffffff'
@@ -18,11 +18,7 @@ let config = {
   },
   datas: [{
     defaultIcon: 'banner.png',
-    url: '',
-    link: ''
-  },{
-    defaultIcon: 'banner.png',
-    url: '',
+    url: 'https://img0.baidu.com/it/u=2616823501,3205478532&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1725728400&t=9bfc66f4034977c95e05d37c90a5720a',
     link: ''
   },{
     defaultIcon: 'banner.png',

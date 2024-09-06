@@ -1,4 +1,5 @@
 <template>
+  
   <div class="edit-module-swiper">
     <swiper
       :modules="modules"
@@ -8,8 +9,11 @@
       :speed="1000"
       @swiper="onSwiper"
     >
-      <swiper-slide class="swiper-slide" :style="boxStyle" v-for="item in config.datas">
-        <el-image :src="item.url || getDefaultImage(item.defaultIcon)" :style="{ borderRadius: config.imgRadius + '%' }">
+      <swiper-slide class="swiper-slide" :style="boxStyle" v-for="(item, index) in config.datas">
+        <el-image
+          class="img"
+          :src="item.url || getDefaultImage(item.defaultIcon)"
+          :style="{ borderRadius: config.imgRadius + '%' }">
           <template #error>
             <div class="image-slot">
                 <el-icon><Picture /></el-icon>
@@ -28,7 +32,7 @@ import { Autoplay, Pagination, EffectFade } from 'swiper/modules';
 
 import useDefaultSource from '@/hooks/useDefaultSource';
 
-const { getDefaultImage, getImgRatio } = useDefaultSource()
+const { getDefaultImage } = useDefaultSource()
 
 const props = defineProps({
   config: Object
@@ -39,19 +43,11 @@ const boxStyle = computed(() => {
   let { imgRadius, imgRatio } = props.config
   bgStyle.background = `rgba(${bgStyle.bgColor.colorRgb()}, ${bgStyle.bgOpacity}) url(${bgStyle.bgImageUrl}) center / 100% 100% repeat`
   bgStyle.backgroundSize = '100% 100%'
-  console.log('style', style)
+  console.log('style', style, imgRatio)
   return {
     ...bgStyle,
     ...style,
-    height: `calc(${imgWidth.value}px / ${getImgRatio(imgRatio)})`,
-  }
-})
-
-const imgSize = computed(() => {
-  let { imgRadius, imgRatio } = props.config
-  return {
-    // height: `calc(${imgWidth.value}px / ${getImgRatio(imgRatio)})`,
-    // borderRadius: imgRadius + '%'
+    paddingTop: 100 / (imgRatio.split('/')[0] / imgRatio.split('/')[1] )+ '%'
   }
 })
 
@@ -74,9 +70,7 @@ const paginationSet = computed(() => {
 const modules = ref([ Autoplay, Pagination, EffectFade ])
 
 const swiperRef = ref(null)
-const onSwiper = (swiper) => {
-  swiperRef.value = swiper;
-};
+const onSwiper = swiper => swiperRef.value = swiper
 
 watch(() => props.config.datas.length, newVal => {
   nextTick(() => {
@@ -89,12 +83,8 @@ watch(() => props.config.indicator.color, newVal => {
     props.config.indicator.show && swiperRef.value.pagination.render()
   })
 })
-const imgWidth = ref(1)
 onMounted(() => {
-  setTimeout(() => {
-    imgWidth.value = document.querySelector('.edit-module-swiper .swiper-slide').offsetWidth
-    console.log('imgWidth.value', imgWidth.value)
-  }, 1000)
+
 })
 
 </script>
@@ -103,13 +93,20 @@ onMounted(() => {
 .edit-module-swiper {
   display: flex;
   flex-wrap: wrap;
-  font-size: 0;
   align-items: center;
-  // background-color: #fff;
   box-sizing: border-box;
   .swiper-slide {
+    position: relative;
     font-size: 0;
+    border: 1px solid red;
     overflow: hidden;
+    .img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 </style>
