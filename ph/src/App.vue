@@ -1,11 +1,11 @@
 <template>
   <layoutView></layoutView>
-  <!-- <register></register> -->
+  <registerVue></registerVue>
 </template>
 
 <script setup>
 import layoutView from './layout/index.vue'
-// import register from './material/utils/register.vue';
+import registerVue from '@/components/diyTools/register.vue';
 </script>
 
 <style>

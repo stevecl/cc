@@ -36,7 +36,7 @@
 
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
-import { getProductList } from '@/api/product'
+// import { getProductList } from '@/api/product'
 
 const emit = defineEmits(['select'])
 

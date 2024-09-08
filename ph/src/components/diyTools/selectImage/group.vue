@@ -9,22 +9,22 @@
     </div>
     <div
       class="group-item"
-      :class="{'active': currentGroup === item.numberCode}"
+      :class="{'active': currentGroup === item.picCategoryId}"
       v-for="(item, index) in groupList"
       :key="index"
-      @click="emit('select', item.numberCode)">
-      <span class="flex-1 text-overflow name">{{ item.nameCn }}</span>
+      @click="emit('select', item.picCategoryId)">
+      <span class="flex-1 text-overflow name">{{ item.picCategoryName }}</span>
       <span title="编辑" class="iconfont icon-edit1 edit" @click="handleEdit(item)"></span>
       <span title="删除" class="iconfont icon-delete1 delete" @click="handleDelete(item)"></span>
     </div>
   </div>
   <el-dialog
     v-model="editDialogVisible"
-    :title="editGroup.numberCode ? '编辑分组' : '添加分组'"
+    :title="editGroup.picCategoryId ? '编辑分组' : '添加分组'"
     width="400"
     append-to-body>
       <el-form-item label="分组名称">
-        <el-input v-model="editGroup.nameCn" autocomplete="off" />
+        <el-input v-model="editGroup.picCategoryName" autocomplete="off" />
       </el-form-item>
     <template #footer>
       <span class="dialog-footer">
@@ -37,7 +37,8 @@
 
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
-import { getImageGroupList, addImageGroup, editImageGroup, deleteImageGroup } from '@/api/imageManage'
+// import { getImageGroupList, addImageGroup, editImageGroup, deleteImageGroup } from '@/api/imageManage'
+import { getImageGroupList } from '@/api'
 import { ElMessage } from 'element-plus'
 
 const emit = defineEmits(['select'])
@@ -49,23 +50,24 @@ const groupList = ref([])
 const editDialogVisible = ref(false)
 const selectGroup = ref(null)
 const editGroup = reactive({
-  numberCode: '',
-  nameCn: ''
+  picCategoryId: '',
+  picCategoryName: ''
 })
 
 const getGroupList = async () => {
-  let { rows } = await getImageGroupList()
-  groupList.value = rows
+  let { dataList } = await getImageGroupList()
+  console.log('dataList', dataList)
+  groupList.value = dataList
 }
 const handleAdd = () => {
-  editGroup.numberCode = ''
-  editGroup.nameCn = ''
+  editGroup.picCategoryId = ''
+  editGroup.picCategoryName = ''
   changeEditDialogVisible()
 }
 const handleEdit = item => {
   selectGroup.value = item
-  editGroup.numberCode = item.numberCode
-  editGroup.nameCn = item.nameCn
+  editGroup.picCategoryId = item.picCategoryId
+  editGroup.picCategoryName = item.picCategoryName
   changeEditDialogVisible()
   console.log('edit:', item)
 }
@@ -75,11 +77,11 @@ const handleDelete = async item => {
   getGroupList()
 }
 const handleSubmit = async () => {
-  if (!editGroup.nameCn) return ElMessage ({ message: '分组名称不能为空', type: 'warning' })
-  editGroup.numberCode ? await editImageGroup({ ...selectGroup.value, nameCn: editGroup.nameCn }) : await addImageGroup(editGroup.nameCn)
+  if (!editGroup.picCategoryName) return ElMessage ({ message: '分组名称不能为空', type: 'warning' })
+  editGroup.picCategoryId ? await editImageGroup({ ...selectGroup.value, picCategoryName: editGroup.picCategoryName }) : await addImageGroup(editGroup.picCategoryName)
   changeEditDialogVisible(false)
   getGroupList()
-  console.log('submit', editGroup.nameCn)
+  console.log('submit', editGroup.picCategoryName)
 }
 
 const changeEditDialogVisible = (isOpen = true) => {
@@ -111,7 +113,7 @@ onMounted(async () => {
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #3296FA;
+      color: var(--lightColor);
 
     }
     .iconfont {

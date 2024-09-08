@@ -39,22 +39,6 @@ const datas = ref({
       name: '我的',
       link: '/pages/mine/mine'
     },
-    {
-      name: '修改用户信息',
-      link: '/pages/mine/updateUser'
-    },
-    {
-      name: '我的订单',
-      link: '/pages/order/order'
-    },
-    {
-      name: '我的收货地址',
-      link: '/pages/adress/adress'
-    },
-    {
-      name: '我的钱包',
-      link: '/pages/medal/medal'
-    },
   ],
 })
 

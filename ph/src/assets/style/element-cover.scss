@@ -1,12 +1,16 @@
-.el-button[type="button"] {
+.el-button.el-button--primary {
   $color: #FE6903;
   background-color: $color;
   color: #fff;
   border-color: $color;
   &:hover {
     color: #fff;
-    border-color: lighten($color, 20%);
-    background-color: lighten($color, 20%);
+    border-color: lighten($color, 20%)!important;
+    background-color: lighten($color, 20%)!important;
+  }
+  &.is-disabled {
+    border-color: lighten($color, 20%)!important;
+    background-color: lighten($color, 20%)!important;
   }
 }
 .config-edit-item {

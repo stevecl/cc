@@ -97,8 +97,8 @@ const props = defineProps({
 const { getDefaultImage } = useDefaultSource()
 const { fontSize, marginTop, marginLeft, paddingTop, paddingLeft, paddingBottom } = useStyle(props)
 
-const selectBgImage = () => Bus.emit('selectImage', res => props.config.style.bgImageUrl = res.url)
-const selectImage = item => Bus.emit('selectImage', res => item.icon = res.url)
+const selectBgImage = () => Bus.emit('selectImage', res => props.config.style.bgImageUrl = res.picUrl)
+const selectImage = item => Bus.emit('selectImage', res => item.icon = res.picUrl)
 const selectLink = item => Bus.emit('selectLink', link => item.link = link, item.link)
 
 const handleAdd = () => {

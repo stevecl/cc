@@ -27,6 +27,11 @@ const menuData = [
     pathName: 'home'
   },
   {
+    name: '惠生活',
+    icon: 'House',
+    pathName: 'hlife'
+  },
+  {
     name: '个人中心',
     icon: 'User',
     pathName: 'person'

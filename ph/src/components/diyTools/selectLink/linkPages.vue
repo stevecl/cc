@@ -10,7 +10,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { getDiyPageList } from '@/api/diyPage'
+// import { getDiyPageList } from '@/api/diyPage'
 import { useCommonStore } from '@/stores/common'
 const { appCode } = useCommonStore()
 
@@ -41,7 +41,7 @@ const getDatas = async () => {
 }
 
 onMounted(() => {
-  getDatas()
+  // getDatas()
 })
 
 </script>

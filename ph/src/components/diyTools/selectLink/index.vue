@@ -14,7 +14,6 @@
       <linkProduct class="link-content-box" v-if="state.activeIndex === 1" @select="handleSubmit"></linkProduct>
       <!-- diy页面 -->
       <linkPages class="link-content-box" v-if="state.activeIndex === 2" @select="handleSubmit"></linkPages>
-      <linkActivity class="link-content-box" v-if="state.activeIndex === 3" @select="handleSubmit"></linkActivity>
     </div>
     <template #footer>
       <el-button @click="handleClose">关 闭</el-button>
@@ -27,7 +26,6 @@ import { ref, reactive, onMounted } from 'vue'
 import linkBase from './linkBase.vue'
 import linkProduct from './linkProduct.vue'
 import linkPages from './linkPages.vue'
-import linkActivity from './linkActivity.vue'
 
 const typeList = ref([
   '内部链接',

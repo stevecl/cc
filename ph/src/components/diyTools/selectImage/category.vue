@@ -35,19 +35,19 @@ const switchType = type => {
       z-index: 22;
     }
     &:hover {
-      color: #3296fa;
+      color: var(--lightColor);
       &::after {
         display: none;
-        background-color: #3296fa;
+        background-color: var(--lightColor);
       }
     }
   }
   span.active {
     font-size: 18px;
-    color: #3296fa;
+    color: var(--lightColor);
     &::after{
       display: block;
-      background-color: #3296fa;
+      background-color: var(--lightColor);
     }
   }
 }

@@ -13,6 +13,11 @@ const routes = [
     component: () => import('../views/manage/listHome.vue')
   },
   {
+    path: '/hlife',
+    name: 'hlife',
+    component: () => import('../views/manage/listLife.vue')
+  },
+  {
     path: '/person',
     name: 'person',
     component: () => import('../views/manage/listPerson.vue')

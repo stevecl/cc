@@ -3,8 +3,8 @@
   <div class="search-box">
     <span class="cur-title">我的模版</span>
     <el-input class="mr20 search-input" v-model="searchVal" placeholder="输入名称查询"></el-input>
-    <el-button type="button" @click="emit('search')">搜索</el-button>
-    <el-button type="button" :icon="Plus" @click="emit('add')">添加</el-button>
+    <el-button type="primary" @click="emit('search')">搜索</el-button>
+    <el-button type="primary" :icon="Plus" @click="emit('add')">添加</el-button>
   </div>
 </template>
 

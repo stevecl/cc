@@ -18,8 +18,8 @@
       </el-date-picker>
       <el-input v-model="query.nameCn" placeholder="请输入图片名称" style="width: 120px;margin-right: 20px;"></el-input>
       <el-button type="primary" @click="emit('search')">查询</el-button>
-      <el-button class="fr" type="primary" plain @click="upload.click()">上传图片</el-button>
-      <el-button class="fr" type="danger" plain @click="emit('deleteSelected')" :disabled="!selectImgList.length">删除</el-button>
+      <el-button class="fr" type="primary" @click="upload.click()">上传图片</el-button>
+      <el-button class="fr" type="danger" @click="emit('deleteSelected')" :disabled="!selectImgList.length">删除</el-button>
       <input type="file" style="display: none;" @change="uploadImage" ref="upload" multiple="true" accept="image/jpg,image/jpeg,image/png,image/gif,image/bmp">
     </div>
   </div>
@@ -29,7 +29,7 @@
 import { ref } from 'vue'
 import { uploadFile } from '@/utils/upload.js'
 import { ElMessage } from 'element-plus'
-import { addDiyImage } from '@/api/imageManage'
+// import { addDiyImage } from '@/api/imageManage'
 
 const upload = ref(null)
 const emit = defineEmits(['search', 'update', 'delete'])

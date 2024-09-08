@@ -16,7 +16,7 @@
     </groupSearch>
     <div class="image-content-box">
       <div class="custom-scroll-bar left-slide">
-        <groupVue :currentGroup="query.groupId" @select="handleSelectGroup"></groupVue>
+        <groupVue :currentGroup="query.picCategoryId" @select="handleSelectGroup"></groupVue>
       </div>
       <div class="right-box" v-loading="isLoading">
         <div class="gray" v-if="!imageList.length" style="margin: 180px 0 0 300px;">暂无图片</div>
@@ -24,11 +24,11 @@
           class="right-image-item"
           v-for="(item, index) in imageList"
           :key="index"
-          @click="checkImage(item.id)">
-          <img :src="item.url" alt="">
-          <div class="text-overflow image-title">{{ item.nameCn }}</div>
-          <div class="delete-box"><span class="iconfont icon-shanchu2" @click="handleDeleteImage(item.id)"></span></div>
-          <div class="image-mask" v-show="selectImgList.includes(item.id)">
+          @click="checkImage(item.picId)">
+          <img :src="item.picUrl" alt="">
+          <div class="text-overflow image-title">{{ item.picName }}</div>
+          <div class="delete-box"><span class="iconfont icon-shanchu2" @click="handleDeleteImage(item.picId)"></span></div>
+          <div class="image-mask" v-show="selectImgList.includes(item.picId)">
             <span class="iconfont icon-xuanzhong"></span>
           </div>
         </div>
@@ -47,8 +47,8 @@
     </el-pagination>
     <template #footer>
       <span class="dialog-footer">
+        <el-button plain @click="handleClose">取消</el-button>
         <el-button type="primary" @click="handleSubmit" :disabled="!selectImgList.length">确定</el-button>
-        <el-button @click="handleClose">取消</el-button>
       </span>
     </template>
   </el-dialog>
@@ -61,7 +61,7 @@ import groupVue from './group.vue'
 import groupSearch from './search.vue'
 // import imageMenu from './components/imageMenu.vue'
 import { uploadFile } from '@/utils/upload'
-import { getDiyImage, deleteDiyImage } from '@/api/imageManage'
+import { getDiyImage, deleteDiyImage } from '@/api'
 
 import { ElMessageBox } from 'element-plus'
 
@@ -70,7 +70,7 @@ const query = ref({
   nameCn: '',
   startDate: '',
   endDate: '',
-  groupId: '',
+  picCategoryId: '',
   pageNum: 1,
   pageSize: 8
 })
@@ -82,7 +82,7 @@ const state = reactive({
 })
 
 const isLoading = ref(false)
-const listTotal = ref(0)
+const listTotal = ref(999)
 const imageList = ref([])
 const selectImgList = ref([])
 
@@ -100,8 +100,8 @@ const handleSearch = () => {
 }
 
 // 分组查询
-const handleSelectGroup = groupId => {
-  query.value.groupId = groupId
+const handleSelectGroup = picCategoryId => {
+  query.value.picCategoryId = picCategoryId
   query.value.pageNum = 1
   getImageList()
 }
@@ -123,11 +123,7 @@ const handleDeleteImage = async id => {
 }
 
 const handleSubmit = () => {
-  console.log('handleSubmit', selectImgList)
-  let resultList = selectImgList.value.map((id) => {
-    return imageList.value.filter(obj => obj.id === id)[0]
-  })
-  // let res = '',name=""
+  let resultList = selectImgList.value.map(picId => imageList.value.filter(obj => obj.picId === picId)[0])
   if (state.isMultiple) {
     typeof state.callback === 'function' && state.callback(resultList)
   } else {
@@ -139,10 +135,10 @@ const handleSubmit = () => {
 // 获取图片列表
 const getImageList = async () => {
   isLoading.value = true
-  let { rows, total } = await getDiyImage(query.value)
+  let { dataList } = await getDiyImage(query.value)
   isLoading.value = false
-  imageList.value = rows
-  listTotal.value = total
+  imageList.value = dataList
+  // listTotal.value = total
   selectImgList.value = []
 }
 

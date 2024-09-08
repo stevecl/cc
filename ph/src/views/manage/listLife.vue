@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col page-manager-wrap">
-    <pageTitle :title="'首页'"></pageTitle>
+    <pageTitle :title="'惠生活'"></pageTitle>
     <div class="flex-1 flex flex-col">
       <pageSearch
         :query="query"
@@ -29,12 +29,12 @@ const query = ref({
     pageNum: 1,
     pageSize: 10,
     searchKey: '',
-    category: 'HOME', // 页面分类(首页:HOME,惠生活:HSH,会员中心:MEMBER_CENTER,自定义页面:CUSTOM_PAGE,底部菜单:BOTTOM_MENU,启动广告:HOME_ADVERT)
+    category: 'HSH', // 页面分类(首页:HOME,惠生活:HSH,会员中心:MEMBER_CENTER,自定义页面:CUSTOM_PAGE,底部菜单:BOTTOM_MENU,启动广告:HOME_ADVERT)
     sourceType: 'MARKET_APPLETS'
   })
 
 const handleAdd = () => {
-  router.push({ name: 'edit', query: { type: 'HOME', id: '' } })
+  router.push({ name: 'edit', query: { type: 'HSH', id: '' } })
 }
 
 const getList = async () => {

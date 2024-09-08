@@ -1,104 +1,46 @@
 <template>
   <div class="flex flex-col page-manager-wrap">
-    <pageTitle :title="'启动广告'"></pageTitle>
+    <pageTitle :title="'启用广告'"></pageTitle>
     <div class="flex-1 flex flex-col">
-      <pageSearch :query="query" @update:search="query.nameCn = $event" @search="getList" @add="handleAdd">
+      <pageSearch
+        :query="query"
+        @update:search="query.nameCn = $event"
+        @search="getList"
+        @add="handleAdd"
+        >
       </pageSearch>
-      <!-- 表格内容 -->
-      <el-table class="" ref="multipleTable" :data="advertList" tooltip-effect="dark" style="width: 100%"
-        @selection-change="handleSelectionChange">
-        <!-- <el-table-column type="selection" width="55" align="center"></el-table-column> -->
-        <el-table-column prop="nameCn" label="广告名称" width="300" align="center">
-          <template #default="scope">
-            <span class="text-overflow page-title" :title="scope.row.nameCn">
-              {{ scope.row.nameCn }}
-            </span>
-          </template>
-        </el-table-column>
-        <el-table-column prop="pageType" label="状态" align="center">
-          <template #default="scope">
-            <el-switch
-              v-model="scope.row.isState"
-              :active-value="1"
-              :inactive-value="0"
-              @change="changeStatus(scope.row)"></el-switch>
-          </template>
-        </el-table-column>
-        <el-table-column prop="createTime" label="创建时间" align="center"></el-table-column>
-        <el-table-column prop="updateTime" label="更新时间" align="center"></el-table-column>
-        <el-table-column label="操作" align="center">
-          <template #default="scope">
-            <el-button size="small" type="primary" @click="handleEdit(scope.row)">编辑</el-button>
-            <el-button size="small" type="danger" @click="handleDelete(scope.row)">删除</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-      <el-pagination
-        style="margin-top: 30px;text-align: center;"
-        background
-        layout="prev, pager, next"
-        @current-change="selectPage"
-        :current-page="query.pageNum"
-        :page-size="query.pageSize"
-        :total="total"/>
+      <moduleList :datas="pagesList" @update="getList" ></moduleList>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useRouter } from 'vue-router'
-import { ElMessageBox } from 'element-plus'
-
+import { useRouter } from 'vue-router';
 import pageTitle from '@/components/pageTitle.vue';
 import pageSearch from './components/pageSearch.vue';
+import moduleList from './components/moduleList.vue';
 
-import { deleteDiyAdvert, getDiyAdvertList, editAdvertStatus } from '@/api/diyAdvert'
-import { useCommonStore } from '@/stores/common'
-const { appCode } = useCommonStore()
-const router = useRouter()
+import { getModuleList } from '@/api'
 
-const advertList = ref([])
-const total = ref(0)
+const router = new useRouter()
+const pagesList = ref([])
 const query = ref({
-  nameCn: '',
-  pageNum: 1,
-  pageSize: 10,
-  mallCode: appCode
-})
+    pageNum: 1,
+    pageSize: 10,
+    searchKey: '',
+    category: 'HOME_ADVERT', // 页面分类(首页:HOME,惠生活:HSH,会员中心:MEMBER_CENTER,自定义页面:CUSTOM_PAGE,底部菜单:BOTTOM_MENU,启动广告:HOME_ADVERT)
+    sourceType: 'MARKET_APPLETS'
+  })
 
 const handleAdd = () => {
-  router.push({ name: 'edit', query: { type: 'advert', id: '' } })
-}
-
-const changeStatus = async (item) => {
-  await editAdvertStatus(item.numberCode, item.isState)
-  getList()
-}
-
-const selectPage = page => {
-  query.value.pageNum = page
-  getList()
+  router.push({ name: 'edit', query: { type: 'HOME_ADVERT', id: '' } })
 }
 
 const getList = async () => {
-  let { rows, total: totalCount } = await getDiyAdvertList(query.value)
-  advertList.value = rows
-  total.value = totalCount
-}
-
-const handleSelectionChange = (val) => { }
-
-const handleEdit = (item) => {
-  router.push({ name: 'edit', query: { type: 'advert', id: item.id } })
-}
-
-const handleDelete = async (item) => {
-  let res = await ElMessageBox.confirm(`确定要删除广告【${item.nameCn}】?`, '提示', { confirmButtonText: '确定', cancelButtonText: '取消', type: 'warning', } )
-  if (res === 'confirm') {
-    await deleteDiyAdvert(item.id)
-    getList()
-  }
+  let { dataList } = await getModuleList(query.value)
+  pagesList.value = dataList
+  console.log(pagesList.value)
 }
 
 onMounted(() => {

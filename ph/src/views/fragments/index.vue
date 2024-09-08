@@ -131,6 +131,7 @@ const handleSubmit = () => {
 
 onMounted(() => {
   let { type, id = '' } = route.query
+  console.log('type, id', type, id)
   setTimeout(() => {
     initData(type, id)
     // let initMethods = {

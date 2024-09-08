@@ -19,25 +19,28 @@ import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import pageTitle from '@/components/pageTitle.vue';
 import pageSearch from './components/pageSearch.vue';
-import moduleList from './components/menuList.vue';
+import moduleList from './components/moduleList.vue';
 
-import { useCommonStore } from '@/stores/common'
-const { appCode } = useCommonStore()
+import { getModuleList } from '@/api'
 
 const router = new useRouter()
 const pagesList = ref([])
 const query = ref({
-  nameCn: '',
-  mallCode: appCode
-})
+    pageNum: 1,
+    pageSize: 10,
+    searchKey: '',
+    category: 'BOTTOM_MENU', // 页面分类(首页:HOME,惠生活:HSH,会员中心:MEMBER_CENTER,自定义页面:CUSTOM_PAGE,底部菜单:BOTTOM_MENU,启动广告:HOME_ADVERT)
+    sourceType: 'MARKET_APPLETS'
+  })
 
 const handleAdd = () => {
-  router.push({ name: 'edit', query: { type: 'menu', id: '' } })
+  router.push({ name: 'edit', query: { type: 'BOTTOM_MENU', id: '' } })
 }
 
 const getList = async () => {
-  // let { code, data } = await getDiyMenuList(query.value)
-  // pagesList.value = data
+  let { dataList } = await getModuleList(query.value)
+  pagesList.value = dataList
+  console.log(pagesList.value)
 }
 
 onMounted(() => {
