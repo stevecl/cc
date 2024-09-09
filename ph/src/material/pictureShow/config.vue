@@ -54,10 +54,17 @@
     <draggable v-model="config.datas" item-key="index">
       <template #item="{ element: item, index }">
         <div>
-          <listBox class="cus-picture-style">
+          <listBox>
             <template #left>
-              <div class="left-icon" slot="left">
-                <img :src="item.icon" :data-default="item.defaultIcon">
+              <div class="left-icon">
+                <el-image :src="item.icon || getDefaultImage(item.defaultIcon)" fit="contain">
+                  <template #error>
+                    <div class="image-slot">
+                      <el-icon><Picture /></el-icon>
+                    </div>
+                  </template>
+                </el-image>
+                <p @click="selectImage(item)">选择图片</p>
               </div>
             </template>
             <template #default>
@@ -68,35 +75,59 @@
                 <span class="label-text">下标题</span>
                 <input class="cus-input" type="text" v-model="item.subTitle" placeholder="请输入下标题">
               </p>
-              <p class="mb10">
+              <!-- <p class="mb10">
                 <input class="cus-input" type="text" v-model="item.icon" placeholder="请选择图片或输入图片地址">
                 <span class="cus-btn" @click="selectImage(item)">选择图片</span>
-              </p>
+              </p> -->
               <p>
                 <input class="cus-input" type="text" v-model="item.link" placeholder="请选择链接或输入链接地址">
                 <span class="cus-btn" @click="selectLink(item)">选择链接</span>
               </p>
             </div>
-            <span class="close" title="删除" @click="deleteHandle(index)"><i class="el-icon-error"></i></span>
+            <span class="close" title="删除" @click="handleDelete(item)"><i class="el-icon-error"></i></span>
             </template>
           </listBox>
         </div>
       </template>
     </draggable>
-    <div class="cus-list-btn" @click="addBtnHandle">添加一个</div>
+    <div class="cus-list-btn" @click="handleAdd">添加一个</div>
   </div>
 </template>
 
 <script setup>
 import draggable from 'vuedraggable'
+import useDefaultSource from '@/hooks/useDefaultSource'
 import useStyle from '@/hooks/useStyle'
-
 
 const props = defineProps({
   config: Object
 })
+
+let { getDefaultImage } = useDefaultSource()
 let { marginTop, marginLeft, paddingTop, paddingLeft, paddingBottom } = useStyle(props)
 
+const selectImage = item => Bus.emit('selectImage', res => item.icon = res.picUrl)
+const selectLink = item => Bus.emit('selectLink', link => item.link = link, item.link)
+
+const handleAdd = () => {
+  let _obj = {
+    defaultIcon: 'img.jpg',
+    supTitle: '上标题',
+    subTitle: '下标题',
+    icon: '',
+    link: ''
+  }
+  props.config.datas.push( _obj )
+}
+
+const handleDelete = async item => {
+  if (props.config.datas.length === 1) return ElMessage({ message: '至少保留一个', type: 'warning' })
+  let res = await ElMessageBox.confirm(`确定删除吗?`, '提示', { confirmButtonText: '确定', cancelButtonText: '取消', type: 'warning' })
+  if (res === 'confirm') {
+    let index = props.config.datas.indexOf(item)
+    props.config.datas.splice(index, 1)
+  }
+}
 </script>
 
 <style lang="scss" scoped>

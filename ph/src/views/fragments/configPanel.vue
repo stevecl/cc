@@ -4,7 +4,7 @@
     <div class="edit-config-box">
       <div class="header-info">
         <p class="title">{{ activeItem.title }}</p>
-        <template  v-if="baseInfo.type !== 'menu'">
+        <template  v-if="baseInfo.category !== 'BOTTOM_MENU'">
           <p class="pointer btn" @click="emit('copy')">
             <span class="iconfont icon-fuzhi1"></span>
             <span>复制</span>
@@ -18,7 +18,6 @@
       <component
         class="custom-scroll-bar edit-config-module"
         :config="activeItem.config"
-        :globalConfig="globalConfig"
         :is="activeItem.configComponent || pageSet">
       </component>
     </div>
@@ -35,7 +34,6 @@ import pageSet from './pageSet.vue';
 const emit = defineEmits(['copy', 'delete', 'submit'])
 const props = defineProps({
   activeItem: Object,
-  globalConfig: Object,
 })
 
 const baseInfo = inject('baseInfo')

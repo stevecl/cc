@@ -46,6 +46,7 @@ const getSubStyle = computed(() => props.config.subStyle)
 
 .edit-module-picture-show {
   display: flex;
+  overflow: hidden;
   &_item {
     &:not(:last-of-type) {
       margin-right: 12px;

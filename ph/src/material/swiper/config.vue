@@ -106,13 +106,13 @@ const props = defineProps({
 
 const { marginTop, marginLeft, paddingTop, paddingLeft, paddingBottom, borderRadius } = useStyle(props)
 
-const selectBgImg = () => Bus.emit('selectImage', res => props.config.bgStyle.bgImageUrl = res.url)
-const selectImg = item => Bus.emit('selectImage', res => item.url = res.url)
+const selectBgImg = () => Bus.emit('selectImage', res => props.config.bgStyle.bgImageUrl = res.picUrl)
+const selectImg = item => Bus.emit('selectImage', res => item.url = res.picUrl)
 const selectLink = item => Bus.emit('selectLink', link => item.link = link)
 
 const handleAdd = () => {
   let _obj = {
-    defaultIcon: 'cube-1.jpg',
+    defaultIcon: 'banner.png',
     url: '',
     link: ''
   }

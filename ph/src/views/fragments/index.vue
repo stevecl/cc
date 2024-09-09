@@ -5,7 +5,7 @@
       <materialPanel :activeIndex="activeIndex" @add="handleAddModule" @global="activeIndex = -1"></materialPanel>
       <engine :pageConfig="baseInfo" @select="selectCurrentModule(-1)">
         <draggable
-          :style="{ height: baseInfo.type === 'advert' ? '100%' : 'unset' }"
+          :style="{ height: baseInfo.category === 'advert' ? '100%' : 'unset' }"
           v-model="setting"
           :move="handleMove"
           @update="handleMoveModule"
@@ -26,7 +26,6 @@
       <div class="c_line"></div>
       <configPanel
         :activeItem="activeItem"
-        :globalConfig="globalConfig"
         @copy="handleCopy"
         @delete="handleDelete"
         @submit="handleSubmit"
@@ -65,11 +64,7 @@ const baseInfo = ref({
   templateConfigParams: '[]', // 配置信息
   componentIds: '', // 组件id
 })
-const globalConfig = ref({
-
-})
 provide('baseInfo', baseInfo.value)
-provide('globalConfig', globalConfig.value)
 
 const setting = ref([])
 const activeIndex = ref(-1) // -1 全局设置 0-~ 高亮模块序列号
@@ -81,7 +76,7 @@ const activeItem = computed(() => {
   }
 })
 
-const { initData, submitData } = useEditHook(baseInfo, globalConfig, setting, activeIndex)
+const { initData, submitData } = useEditHook(baseInfo, setting, activeIndex)
 
 // 添加模块
 const handleAddModule = item => {

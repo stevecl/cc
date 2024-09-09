@@ -103,9 +103,9 @@ const selectLink = item => Bus.emit('selectLink', link => item.link = link, item
 
 const handleAdd = () => {
   let _obj = {
-    defaultIcon: 'icon-4.png',
+    defaultIcon: 'btn1.png',
     icon: '',
-    text: `按钮文字${props.config.datas.length + 1}`,
+    text: `按钮文字`,
     color: '#666',
     link: ''
   }

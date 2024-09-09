@@ -1,13 +1,12 @@
 // 模块选择框   页面
 <template>
   <div class="module-select-box">
-    <div class="module-list" v-if="!['menu', 'advert'].includes(baseInfo.type)">
+    <div class="module-list" v-if="!['BOTTOM_MENU', 'HOME_ADVERT'].includes(baseInfo.category)">
       <div class="title">基础</div>
       <div class="flex base-module-box">
         <template v-for="(key, index) in selectMaterialList">
           <p
             :class="{'btn-item': true, selected: false}"
-            
             @click="emit('add', materialDatas[key])">
             {{ materialDatas[key].title }}
           </p>
@@ -33,18 +32,9 @@ const emit = defineEmits(['add', 'global'])
 const baseInfo = inject('baseInfo')
 
 const selectMaterialList = computed(() => {
-  let arr = Object.keys(materialDatas).filter(key => !['advert', 'tabbar', 'productList', 'memberInfo'].includes(key))
-  // 类型(mallHomePage商城首页、memberCenter会员中心、customPage自定义)
-  if (['mallHomePage', 'customPage'].includes(baseInfo.type)) {
-    arr.push('productList')
-  }
-  if (['memberCenter'].includes(baseInfo.type)) {
-    arr.push('memberInfo')
-  }
+  let arr = Object.keys(materialDatas).filter(key => !['advert', 'tabbar'].includes(key))
   return arr
 })
-
-
 
 onMounted(async () => {
   if (Object.keys(materialDatas).some(key => !materialDatas[key].title)) {

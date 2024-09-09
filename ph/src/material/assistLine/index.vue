@@ -13,7 +13,7 @@ const props = defineProps({
 
 const styleObj = computed(() => {
   let res = props.config?.style || {}
-  res.background = `${res.backgroundColor} url(${props.config.bgImageUrl}) center / 100% 100% repeat`
+  // res.background = `${res.background} url(${props.config.bgImageUrl}) center / 100% 100% repeat`
   return res
 })
 

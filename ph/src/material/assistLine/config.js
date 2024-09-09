@@ -4,7 +4,7 @@ let config = {
   lineColor: '#000',
   type: 'solid', // solid dashed dotted double
   style: {
-    backgroundColor: '#ededed',
+    background: '#ededed',
     padding: '5px 5px 5px 5px',
     margin: '0 0 0 0',
   }

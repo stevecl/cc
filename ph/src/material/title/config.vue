@@ -69,7 +69,7 @@ const props = defineProps({
 
 let { fontSize, marginTop, marginLeft, paddingTop, paddingLeft, paddingBottom } = useStyle(props)
 
-const selectImage = () => Bus.emit('selectImage', res => props.config.bgImageUrl = res.url)
+const selectBgImg = () => Bus.emit('selectImage', res => props.config.bgStyle.bgImageUrl = res.picUrl)
 const selectLink = () => Bus.emit('selectLink', link => props.config.link = link)
 
 </script>

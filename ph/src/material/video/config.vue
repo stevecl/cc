@@ -59,7 +59,7 @@ const props = defineProps({
 const { marginTop, marginLeft, paddingTop, paddingLeft, paddingBottom } = useStyle(props)
 
 const selectPoster = () => {
-  Bus.emit('selectImage', res => props.config.poster = res.url)
+  Bus.emit('selectImage', res => props.config.poster = res.picUrl)
 }
 
 // 上传视频

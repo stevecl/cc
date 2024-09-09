@@ -43,6 +43,7 @@ export default defineConfig({
     }
   },
   server: {
+    port: 8888,
     proxy: {
       // '/dev-api': {
       //   target: 'http://192.168.50.44:8180',

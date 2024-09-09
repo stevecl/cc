@@ -1,0 +1,48 @@
+{
+	"easycom": {
+		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue",
+		"^uni-(.*)": "@/components/$1/index.vue", // 匹配components目录内的vue文件
+		"^diy-(.*)": "@/components/diy/$1/index.vue" // 匹配components目录内的vue文件\
+	},
+	"mp-weixin": {
+		"optimization": {
+			"subPackages": true
+		}
+	},
+	"pages": [{
+			"path": "pages/main/home/index",
+			"style": {
+				"navigationStyle": "custom", // 隐藏系统导航栏
+				"navigationBarTitleText": "首页",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/main/base/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"enablePullDownRefresh": false,
+				"mp-weixin": {
+					"usingComponents": {
+						"ne-captcha": "plugin://captcha/ne-captcha"
+					}
+				}
+			}
+		},
+		{
+			"path" : "pages/diy/index/index",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
+		}
+	],
+	"subPackages": [],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uView",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"backgroundColor": "#FFFFFF",
+		"autoscan": true
+	}
+}

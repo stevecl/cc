@@ -18,7 +18,7 @@
 
     <div class="module-edit-title">组件设置</div>
     <configItem :label="'背景颜色'">
-      <selectColor v-model="config.style.backgroundColor" :resetColor="'#ededed'"></selectColor>
+      <selectColor v-model="config.style.background" :resetColor="'#ededed'"></selectColor>
     </configItem>
     <div class="module-edit-title">线条元素</div>
     <configItem :label="'高度'">
