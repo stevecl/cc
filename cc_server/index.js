@@ -9,8 +9,8 @@ const app = new Koa();
 const router = new Router()
 app.use(serve('./web'))
 
-app.use(koaConnect(createProxyMiddleware('/prod-api', { 
-  target: 'https://pet-pre.maytek.cn', // 目标服务器地址
+app.use(koaConnect(createProxyMiddleware('/custom', { 
+  target: 'http://test-boss.beixiaoji.cn', // 目标服务器地址
   changeOrigin: true,
 })));
 
@@ -57,4 +57,4 @@ app.use(async (ctx, next) => {
 app.use(router.routes())
    .use(router.allowedMethods())
 
-app.listen(80);
+app.listen(3000);

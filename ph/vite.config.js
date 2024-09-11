@@ -26,7 +26,7 @@ export default defineConfig({
     }
   },
   build: {
-    outDir: '../../public/maytek-diy',
+    outDir: '../cc_server/web',
     rollupOptions: {
       input: './index.html',
       output: {

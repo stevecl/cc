@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="module-edit-title">模块设置</div>
-    {{baseInfo}}
     <configItem :label="'背景颜色'">
       <selectColor v-model="config.bgColor" :resetColor="'#fff'"></selectColor>
     </configItem>

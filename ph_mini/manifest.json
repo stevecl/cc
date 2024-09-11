@@ -93,7 +93,7 @@
     "quickapp" : {},
     "mp-weixin" : {
         "appid" : "wxb00be1d5b469a54a",
-				"libVersion": "latest",
+        "libVersion" : "latest",
         "plugins" : {
             "captcha" : {
                 "version" : "1.1.2",
@@ -152,6 +152,9 @@
                 "enable" : false
             }
         },
-        "title" : "uView UI"
+        "title" : "uView UI",
+        "sdkConfigs" : {
+            "maps" : {}
+        }
     }
 }

@@ -8,10 +8,10 @@ import globalConfig from '@/config'
 export let isRelogin = { show: false };
 
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
-
+console.log('222222222', import.meta.env.MODE === 'development')
 // 创建axios实例
 const service = axios.create({
-  baseURL: globalConfig.baseURL,
+  baseURL: import.meta.env.MODE === 'development' ? globalConfig.baseURL : '',
   timeout: 100000,
 })
 
@@ -19,7 +19,7 @@ const service = axios.create({
 service.interceptors.request.use(config => {
   // 是否需要防止数据重复提交
   const isRepeatSubmit = (config.headers || {}).repeatSubmit === false
-  config.headers['token'] = 'eyJhbGciOiJIUzI1NiIsIlR5cGUiOiJKd3QiLCJ0eXAiOiJKV1QifQ.eyJkZXB0TmFtZSI6IuaKgOacr-mDqCIsImFncnRTdGFydFRpbWUiOiIyMDE4LTA5LTE3IDE2OjMzOjI2IiwiYWdydEVuZFRpbWUiOiIyMDMwLTA4LTAxIDE2OjMyOjUzIiwiYWRtaW5UeXBlIjoiMCIsImNvbXBhbnlOYW1lIjoi6LSd5bCP6ZuGIiwic2V4IjoiMSIsImFjY291bnRUeXBlIjoiUExBVCIsImRlcHRJZCI6IjIyMTI2NjYzOTMyNDAzMzYiLCJyZW1hcmsiOiIiLCJ0eXBlIjoiRElSRUNUIiwiY29tcGFueUlkIjoiMSIsImlzRmluYW5jaWFsIjoiMCIsImxvZ2luTmFtZSI6IjE1MDIzMTcyOTk0Iiwic3lzdGVtVHlwZSI6IlBMQVQiLCJsb2dpblVzZXJJZCI6IjIyMTMyNjM3NTA1ODcyNjkiLCJ0ZWwiOiIxNTAyMzE3Mjk5NCIsInBvc2l0aW9uIjoi5rWL6K-VIiwic3RhdGUiOiIxIiwiZW1wbE5hbWUiOiLlsYjmmJ_lu7ciLCJleHAiOjE3MjYwMjAyMDEsImVtcGxDb2RlIjoiMDA3In0.RvnutYr_0AemtKt1N9roY0u2u5NxOXbrebm0wDm7Hm8' // 让每个请求携带自定义token 请根据实际情况自行修改
+  config.headers['token'] = localStorage.getItem('token')
   // get请求映射params参数
   if (config.method === 'get' && config.params) {
     let url = config.url + '?' + tansParams(config.params);

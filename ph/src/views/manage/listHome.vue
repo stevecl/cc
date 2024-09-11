@@ -11,6 +11,7 @@
       </pageSearch>
       <moduleList :datas="pagesList" @update="getList" ></moduleList>
     </div>
+    <a href="https://beian.miit.gov.cn" style="text-align: center;">渝ICP备2022004944号-1</a>
   </div>
 </template>
 
