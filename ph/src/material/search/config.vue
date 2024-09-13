@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <div class="module-edit-title">边距设置</div>
+  <div class="module-edit-title">边距设置</div>
     <configItem :label="'顶部间距'">
       <el-slider style="width: 250px;" v-model="marginTop" :min="-100" :max="100" :step="1" :show-tooltip="false"></el-slider>
       <span class="slide-span--unit">{{ marginTop }}<span>px</span></span>
@@ -19,8 +18,6 @@
     <div class="module-edit-title">组件设置</div>
     <configItem :label="'背景颜色'">
       <selectColor v-model="config.style.bgColor" :resetColor="'#ededed'"></selectColor>
-      <div class="label2 wid70">不透明度</div>
-      <inputNumber v-model="config.style.bgOpacity" :config="{max: 1, step: 0.1, unit: ''}"></inputNumber>
     </configItem>
     <configItem :label="'背景图片'">
       <input type="text" class="cus-input" v-model="config.style.bgImageUrl">
@@ -35,8 +32,6 @@
     </configItem>
     <configItem :label="'背景颜色'">
       <selectColor v-model="config.input.bgColor"></selectColor>
-      <div class="label2">不透明度</div>
-      <inputNumber v-model="config.input.bgOpacity" :config="{max: 1, step: 0.1, unit: ''}"></inputNumber>
     </configItem>
     <configItem :label="'文字颜色'" style="margin-bottom: 20px;">
       <selectColor v-model="config.input.color" :resetColor="'#000'"></selectColor>
@@ -54,7 +49,7 @@
         <el-radio :value="1">搜索框外</el-radio>
         <el-radio :value="2">搜索框内</el-radio>
       </el-radio-group>
-    </configItem>
+    </configItem>    
     <configItem :label="'图标'">
       <div class="diy-button no-pointer"><span class="iconfont" :class="config.left.icon"></span></div>
       <div class="diy-button" @click="selectLeftIcon">选择图标</div>
@@ -70,7 +65,7 @@
     </configItem>
 
     <!-- 右侧按钮 -->
-    <!-- <div class="module-edit-title">右侧按钮</div>
+    <div class="module-edit-title">右侧按钮</div>
     <configItem :label="'位置'">
       <el-radio-group v-model="config.right.type">
         <el-radio :value="0">不显示</el-radio>
@@ -96,8 +91,7 @@
           <el-button @click="selectRightLink">选择链接</el-button>
         </template>
       </el-input>
-    </configItem> -->
-  </div>
+    </configItem>
 </template>
 
 <script setup>

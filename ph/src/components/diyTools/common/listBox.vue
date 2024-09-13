@@ -19,7 +19,7 @@ const props = defineProps({
 .config-list-box {
   position: relative;
   display: flex;
-  width: 94%;
+  width: 100%;
   height: auto;
   background: #F8FAFB;
   border: 1px solid #e7eaec;

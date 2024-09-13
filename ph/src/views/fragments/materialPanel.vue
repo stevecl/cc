@@ -14,31 +14,6 @@
         </div>
       </div>
     </div>
-
-    <!-- <div class="module-list">
-      <div class="module-list_type">图文类(7)</div>
-      <div class="module-list_data">
-        <div class="module-list_data_item" :style="{backgroundImage: new URL('../../assets/images/default/goods.png)')}">
-          <p class="title">搜索框</p>
-        </div>
-      </div>
-    </div> -->
-    <!-- <div class="module-list" v-if="!['BOTTOM_MENU', 'HOME_ADVERT'].includes(baseInfo.category)">
-      <div class="title">基础</div>
-      <div class="flex base-module-box">
-        <template v-for="(key, index) in selectMaterialList">
-          <p
-            :class="{'btn-item': true, selected: false}"
-            @click="emit('add', materialDatas[key])">
-            {{ materialDatas[key].title }}
-          </p>
-        </template>
-      </div>
-      <div class="title">全局</div>
-      <div class="flex global-module-box">
-        <p :class="{'btn-item': true, selected: false}" @click="emit('global')">全局设置</p>
-      </div>
-    </div> -->
   </div>
 </template>
 

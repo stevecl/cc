@@ -25,16 +25,16 @@ const props = defineProps({
 })
 
 const styleObj = computed(() => {
-  let { bgColor, bgOpacity, bgImageUrl } = props.config?.style || {}
-  let background = `rgba(${bgColor.colorRgb()}, ${bgOpacity}) url(${bgImageUrl}) center / 100% 100% repeat`
+  let { bgColor, bgImageUrl } = props.config?.style || {}
+  let background = `${bgColor} url(${bgImageUrl}) center / 100% 100% repeat`
   return {
     ...props.config.style,
     background
   }
 })
 const inputStyle = computed(() => {
-  let { bgColor, bgOpacity, bgImageUrl, borderRadius } = props.config?.input || {}
-  let background = `rgba(${bgColor.colorRgb()}, ${bgOpacity}) url(${bgImageUrl}) center / 100% 100% repeat`
+  let { bgColor, bgImageUrl, borderRadius } = props.config?.input || {}
+  let background = `${bgColor} url(${bgImageUrl}) center / 100% 100% repeat`
   return {
     ...props.config.input,
     paddingLeft: props.config.left.type === 2 ? '36px' : '12px',

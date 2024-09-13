@@ -5,7 +5,7 @@ import { getUrlParams } from '@/utils'
 export const useCommonStore = defineStore('common', () => {
   const materialDatas = ref({})
   const datas = import.meta.glob('../material/*/config.js')
-  console.log('Object.keys(datas)', Object.keys(datas))
+  // console.log('Object.keys(datas)', Object.keys(datas))
   Object.keys(datas).forEach(async key => {
     let _key = key.replace(/\/config.js/, '').replace(/.*\//, '')
     materialDatas.value[_key] = {
@@ -16,11 +16,7 @@ export const useCommonStore = defineStore('common', () => {
     }
   })
 
-  const appCode = ref(getUrlParams().appCode || sessionStorage.getItem('appCode') || '')
-  sessionStorage.setItem('appCode', appCode.value)
-
   return {
-    appCode,
     materialDatas
   }
 })

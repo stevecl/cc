@@ -1,7 +1,6 @@
 <template>
   <div class="diy-edit-colorpick">
-    <!-- <colorPicker class="color-pick-custom" v-model="value" @change="handleChangeColor"></colorPicker> -->
-    <color-picker v-model:hex="currentColor" :btnStyle="{ width: '80px', height: '30px' }" defaultColor="'#ededed'" :show-opacity="false"></color-picker>
+    <el-color-picker v-model="currentColor" show-alpha/>
     <span class="diy-button" @click="reset">重置</span>
   </div>
 </template>
@@ -34,35 +33,27 @@ const reset = () => {
 
 <style lang="scss">
 .diy-edit-colorpick {
-  width: 130px;
+  // width: 130px;
   display: flex;
-  // style1  按钮组
-  &.style1 .color-pick-custom.m-colorPicker {
-    border-left: none;
-    border-radius: 0!important;;
-  }
-  // colorPicker style
-  .color-pick-custom.m-colorPicker {
-    width: 80px;
-    height: 30px;
-    padding: 5px;
-    border: 1px solid #dcdfe6;
-    border-radius: 5px 0 0 5px;
-    cursor: pointer;
-    .colorBtn {
-      width: 100% !important;
-      height: 100% !important;
-      border: 1px solid #eee;
-      border-radius: 3px;
-    }
-    .box{
-      z-index: 1111;
-      box-sizing: content-box;
+  .el-color-picker {
+    margin-right: 10px;
+    .el-color-picker__trigger {
+      width: 70px;
+      height: 30px;
+      border-color: #ededed;
+      .el-icon {
+        display: none;
+      }
     }
     & + .diy-button {
-      border-color: #dcdfe6;
-      border-left: none;
-      border-radius: 0 5px 5px 0;
+      // border-left: none;
+      // border-top-right-radius: 4px;
+      // border-bottom-right-radius: 4px;
+      border-radius: 4px;
+      &:hover {
+        // border-left: ;
+        border-color: #c0c4cc
+      }
     }
   }
 }

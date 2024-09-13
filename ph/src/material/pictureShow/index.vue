@@ -29,7 +29,7 @@ const props = defineProps({
 
 const boxStyle = computed(() => {
   let { bgStyle, style } = props.config
-  bgStyle.background = `rgba(${bgStyle.bgColor.colorRgb()}, ${bgStyle.bgOpacity}) url(${bgStyle.bgImageUrl}) center / 100% 100% repeat`
+  bgStyle.background = `${bgStyle.bgColor} url(${bgStyle.bgImageUrl}) center / 100% 100% repeat`
   bgStyle.backgroundSize = '100% 100%'
   return {
     ...bgStyle,

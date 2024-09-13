@@ -3,7 +3,6 @@ let config = {
   bgStyle: {
     bgColor: '#ffffff',
     bgImageUrl: '',
-    bgOpacity: 1,
   },
 
   style: {

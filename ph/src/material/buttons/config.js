@@ -6,7 +6,6 @@ let config = {
   style: {
     bgColor: '#ffffff',
     bgImageUrl: '',
-    bgOpacity: 1,
     fontSize: '14px',
     padding: '0 0 0 0',
     margin: '0 0 0 0'

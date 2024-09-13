@@ -19,8 +19,6 @@
     <div class="module-edit-title">组件设置</div>
     <configItem :label="'背景颜色'">
       <selectColor v-model="config.style.bgColor" :resetColor="'#ededed'"></selectColor>
-      <div class="label2">不透明度</div>
-      <inputNumber v-model="config.style.bgOpacity" :config="{max: 1, step: .1, unit: ''}"></inputNumber>
     </configItem>
     <configItem :label="'背景图片'">
       <input type="text" class="cus-input" v-model="config.style.bgImageUrl">

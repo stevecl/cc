@@ -6,7 +6,6 @@ export default {
   bgStyle: {
     bgColor: '#ffffff',
     bgImageUrl: '',
-    bgOpacity: 1,
   },
   style: {
     fontSize: '16px',

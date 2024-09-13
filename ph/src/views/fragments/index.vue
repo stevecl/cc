@@ -7,7 +7,7 @@
       <div class="flex-1"></div>
       <el-button type="primary" @click="submitData">保存</el-button>
     </div>
-    <materialPanel :activeIndex="activeIndex" @add="handleAddModule" @global="activeIndex = -1"></materialPanel>
+    <materialPanel :activeIndex="activeIndex" @add="handleAddModule"></materialPanel>
     <engine :pageConfig="baseInfo" @select="selectCurrentModule(-1)">
       <draggable
         :style="{ height: baseInfo.category === 'advert' ? '100%' : 'unset' }"

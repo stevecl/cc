@@ -61,9 +61,14 @@ const { marginTop, marginLeft, paddingTop, paddingLeft, paddingBottom } = useSty
 
 <style lang="scss" scoped>
 .content {
+  width: 100%;
   display: flex;
   flex-direction: column;
+  border: 1px solid red;
+  box-sizing: border-box;
+  overflow: hidden;
   &_item {
+    width: 100%;
     display: flex;
     align-items: center;
     margin-bottom: 10px;

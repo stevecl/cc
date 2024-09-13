@@ -3,7 +3,6 @@ let config = {
   style: {
     bgColor: '#ededed',
     bgImageUrl: '',
-    bgOpacity: 1,
     padding: '0 0 0 0',
     margin: '0 0 0 0'
   },
@@ -11,7 +10,6 @@ let config = {
   input: {
     color: '#000',
     bgColor: '#fff',
-    bgOpacity: 1,
     placeholder: '请输入关键字进行搜索',
     borderRadius: 20,
   },

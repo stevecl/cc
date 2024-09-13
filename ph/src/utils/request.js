@@ -8,7 +8,7 @@ import globalConfig from '@/config'
 export let isRelogin = { show: false };
 
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
-console.log('222222222', import.meta.env.MODE === 'development')
+// console.log('222222222', import.meta.env.MODE === 'development')
 // 创建axios实例
 const service = axios.create({
   baseURL: import.meta.env.MODE === 'development' ? globalConfig.baseURL : '',
