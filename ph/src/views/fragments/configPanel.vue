@@ -21,9 +21,6 @@
         :is="activeItem.configComponent || pageSet">
       </component>
     </div>
-    <div class="edit-config-done">
-      <el-button type="primary" @click="emit('submit')">保存</el-button>
-    </div>
   </div>
 </template>
 
@@ -31,7 +28,7 @@
 import { inject } from 'vue'
 import pageSet from './pageSet.vue';
 
-const emit = defineEmits(['copy', 'delete', 'submit'])
+const emit = defineEmits(['copy', 'delete'])
 const props = defineProps({
   activeItem: Object,
 })
@@ -42,20 +39,18 @@ const baseInfo = inject('baseInfo')
 <style lang="scss" scoped>
 .diy-edit-box {
   position: relative;
-  // width: 630px;
-  width: 700px;
-  height: 700px;
+  width: 500px;
   font-size: 12px;
   background-color: #ffffff;
-  border-radius: 20px;
   transition: all 0.5s ease 0s;
-  padding: 10px 0 20px 40px;
+  // padding: 10px 0 20px 10px;
+  padding-top: 10px;
+  padding-left: 10px;
+  box-sizing: border-box;
   .edit-config-box {
     display: flex;
     flex-direction: column;
     height: 100%;
-    overflow-y: auto;
-    padding-right: 40px;
     .header-info {
       width: calc(100% - 80px);
       background-color: #fff;
@@ -88,12 +83,8 @@ const baseInfo = inject('baseInfo')
     }
     .edit-config-module {
       flex: 1;
-      overflow: scroll;
-      padding-right: 80px;
+      overflow-y: auto;
     }
-  }
-  .edit-config-done {
-    text-align: right;
   }
 }
 </style>

@@ -43,7 +43,7 @@
       <!-- <p class='tips-info'>提示:搜索框输入的文字颜色，并不是提示文字颜色</p> -->
     </configItem>
     <configItem :label="'提示文字'">
-      <el-input v-model="config.input.placeholder" placeholder="输入关键字进行搜索" style="flex: 1;"></el-input>
+      <el-input v-model="config.input.placeholder" placeholder="输入关键字进行搜索" style="width: 100px;flex: 1;" ></el-input>
     </configItem>
 
     <!-- 左侧按钮 -->
@@ -70,7 +70,7 @@
     </configItem>
 
     <!-- 右侧按钮 -->
-    <div class="module-edit-title">右侧按钮</div>
+    <!-- <div class="module-edit-title">右侧按钮</div>
     <configItem :label="'位置'">
       <el-radio-group v-model="config.right.type">
         <el-radio :value="0">不显示</el-radio>
@@ -96,7 +96,7 @@
           <el-button @click="selectRightLink">选择链接</el-button>
         </template>
       </el-input>
-    </configItem>
+    </configItem> -->
   </div>
 </template>
 

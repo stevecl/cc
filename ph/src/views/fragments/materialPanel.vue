@@ -1,7 +1,29 @@
 // 模块选择框   页面
 <template>
   <div class="module-select-box">
-    <div class="module-list" v-if="!['BOTTOM_MENU', 'HOME_ADVERT'].includes(baseInfo.category)">
+    <div class="module-list" v-for="(item, index) in materialConfig" :key="index">
+      <div class="module-list_type">{{ item.name }}({{ item.data.length }})</div>
+      <div class="module-list_data">
+        <div
+          class="module-list_data_item"
+          :style="bgStyle(com.icon)"
+          v-for="(com, c_index) in item.data"
+          :key="'c_'+c_index"
+          @click="emit('add', materialDatas[com.component])">
+          <p class="title">{{ com.name }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="module-list">
+      <div class="module-list_type">图文类(7)</div>
+      <div class="module-list_data">
+        <div class="module-list_data_item" :style="{backgroundImage: new URL('../../assets/images/default/goods.png)')}">
+          <p class="title">搜索框</p>
+        </div>
+      </div>
+    </div> -->
+    <!-- <div class="module-list" v-if="!['BOTTOM_MENU', 'HOME_ADVERT'].includes(baseInfo.category)">
       <div class="title">基础</div>
       <div class="flex base-module-box">
         <template v-for="(key, index) in selectMaterialList">
@@ -16,20 +38,21 @@
       <div class="flex global-module-box">
         <p :class="{'btn-item': true, selected: false}" @click="emit('global')">全局设置</p>
       </div>
-    </div>
-    <!-- <diy-imageWindow></diy-imageWindow> -->
-    <!-- <diy-video></diy-video> -->
-     <!-- <diy-swiper></diy-swiper> -->
+    </div> -->
   </div>
 </template>
 
 <script setup>
 import { inject, computed, onMounted } from 'vue';
 import { useCommonStore } from '@/stores/common'
+import materialConfig from '@/datas/material'
+
 const { materialDatas } = useCommonStore()
 
 const emit = defineEmits(['add', 'global'])
 const baseInfo = inject('baseInfo')
+
+const bgStyle = file => ({ backgroundImage: `url(${new URL(`../../assets/images/default/${file}`, import.meta.url).href})` })
 
 const selectMaterialList = computed(() => {
   let arr = Object.keys(materialDatas).filter(key => !['advert', 'tabbar'].includes(key))
@@ -55,22 +78,53 @@ onMounted(async () => {
   flex-wrap: wrap;
 }
 .module-select-box{
-  display: flex;
-  flex-direction: column;
-  width: 206px;
-  max-height: 800px;
-  margin-left: 160px;
-  margin-right: 70px;
-  padding-top: 20px;
+  width: 300px;
+  height: 100%;
+  padding: 16px;
   .module-list {
-    flex: 1;
-    .title {
-      color: #909399;
-      padding-left: 14px;
-      margin-bottom: 10px;
+    // flex: 1;
+    border: 1px solid #EEEEEE;
+    &:not(:last-of-type) {
+      margin-bottom: 12px;
     }
-    .base-module-box {
-      margin-bottom: 30px;
+    &_type {
+      display: flex;
+      align-items: center;
+      height: 40px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #666;
+      padding: 0 12px;
+      background-color: #F7F7FA;
+      border-bottom: 1px solid #EEEEEE;
+      cursor: pointer;
+    }
+    &_data {
+      display: flex;
+      flex-wrap: wrap;
+      padding-left: 7px;
+      &_item {
+        position: relative;
+        width: 76px;
+        height: 76px;
+        margin: 7px 7px 7px 0;
+        border: 1px solid #fff;
+        border-radius: 4px;
+        cursor: pointer;
+        &:hover {
+          border-color: #FE6903;
+        }
+        .title {
+          font-size: 12px;
+          text-align: center;
+          line-height: 28px;
+          color: #333;
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          left: 0;
+        }
+      }
     }
   }
 

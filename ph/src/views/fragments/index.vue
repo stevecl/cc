@@ -1,49 +1,50 @@
 <template>
   <div class="wrapper">
-    <pageTitle :title="'编辑'"></pageTitle>
-    <div class="content-box">
-      <materialPanel :activeIndex="activeIndex" @add="handleAddModule" @global="activeIndex = -1"></materialPanel>
-      <engine :pageConfig="baseInfo" @select="selectCurrentModule(-1)">
-        <draggable
-          :style="{ height: baseInfo.category === 'advert' ? '100%' : 'unset' }"
-          v-model="setting"
-          :move="handleMove"
-          @update="handleMoveModule"
-          item-key="index">
-          <template #item="{ element: item, index: index }">
-            <div>
-              <component
-                :item-key="index"
-                :class="{'editing': true, 'selected': index === activeIndex}"
-                :config="item.config"
-                :is="item.componentName"
-                @click="selectCurrentModule(index)">
-              </component>
-            </div>
-          </template>
-        </draggable>
-      </engine>
-      <div class="c_line"></div>
-      <configPanel
-        :activeItem="activeItem"
-        @copy="handleCopy"
-        @delete="handleDelete"
-        @submit="handleSubmit"
-        >
-      </configPanel>
+    <div class="wrapper-header">
+      <div class="left-back" @click="handleBack">
+        <el-icon><ArrowLeft /></el-icon>返回
+      </div>
+      <div class="flex-1"></div>
+      <el-button type="primary" @click="submitData">保存</el-button>
     </div>
+    <materialPanel :activeIndex="activeIndex" @add="handleAddModule" @global="activeIndex = -1"></materialPanel>
+    <engine :pageConfig="baseInfo" @select="selectCurrentModule(-1)">
+      <draggable
+        :style="{ height: baseInfo.category === 'advert' ? '100%' : 'unset' }"
+        v-model="setting"
+        :move="handleMove"
+        @update="handleMoveModule"
+        item-key="index">
+        <template #item="{ element: item, index: index }">
+          <div>
+            <component
+              :item-key="index"
+              :class="{'editing': true, 'selected': index === activeIndex}"
+              :config="item.config"
+              :is="item.componentName"
+              @click="selectCurrentModule(index)">
+            </component>
+          </div>
+        </template>
+      </draggable>
+    </engine>
+    <configPanel
+      :activeItem="activeItem"
+      @copy="handleCopy"
+      @delete="handleDelete"
+      >
+    </configPanel>
   </div>
 </template>
 
 <script setup>
 import draggable from 'vuedraggable'
 import { ref, onMounted, computed, watch, nextTick, provide } from 'vue';
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 import materialPanel from './materialPanel.vue';
 import engine from './renderEngine.vue'
 import configPanel from './configPanel.vue';
-import pageTitle from '@/components/pageTitle.vue';
 import { ElMessageBox } from 'element-plus'
 
 import { deepClone } from '@/utils'
@@ -51,6 +52,7 @@ import { deepClone } from '@/utils'
 import useEditHook from '@/hooks/editHook'
 
 const route = useRoute()
+const router = useRouter()
 
 const baseInfo = ref({
   id: '',
@@ -118,23 +120,15 @@ const handleDelete = async () => {
     if (targetIndex >= setting.value.length - 1) activeIndex.value = setting.value.length - 1
   }
 }
-// 保存
-const handleSubmit = () => {
-  let { type } = baseInfo.value
-  submitData(type)
-}
+
+const handleBack = () => router.back()
 
 onMounted(() => {
   let { type, id = '' } = route.query
-  console.log('type, id', type, id)
+  // console.log('type, id', type, id)
+  // 等待组件数据加载完成
   setTimeout(() => {
     initData(type, id)
-    // let initMethods = {
-    //   menu: initMenuDatas,
-    //   advert: initAdvertDatas,
-    //   page: initPageDatas
-    // }
-    // initMethods[type] ? initMethods[type](id) : initMethods['page'](id)
   }, 500)
 })
 
@@ -152,52 +146,54 @@ onMounted(() => {
 .wrapper {
   flex: 1;
   display: flex;
-  flex-direction: column;
+  position: relative;
   height: 100%;
-  // width: 100%;
-  padding: 20px 20px 0 20px;
   text-align: left;
-
-  .content-box {
-    flex: 1;
+  background-color: #fff;
+  padding-top: 66px;
+  box-sizing: border-box;
+  overflow: hidden;
+  &-header {
     display: flex;
-    padding-top: 50px;
-    background-color: #fff;
-    overflow: auto;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 66px;
+    background: linear-gradient(to right, rgb(247, 248, 250), rgb(254, 243, 234));
+    padding: 0 20px;
+    .left-back {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      line-height: 66px;
+    }
+  }
+  & > div {
+    flex-shrink: 0;
+  }
 
-    &>div {
-      flex-shrink: 0;
+  .editing {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      min-height: 10px;
+      z-index: 22;
+      cursor: move;
     }
 
-    &>.c_line {
-      margin-top: 10px;
-      height: calc(100% - 10px);
-      width: 1px;
-      background-color: #eaedf0;
+    &:hover::after {
+      border: 2px dashed #FE6903;
     }
 
-    .editing {
-      position: relative;
-
-      &::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        min-height: 10px;
-        z-index: 22;
-        cursor: move;
-      }
-
-      &:hover::after {
-        border: 2px dashed #FE6903;
-      }
-
-      &.selected::after {
-        border: 2px dashed #FE6903;
-      }
+    &.selected::after {
+      border: 2px dashed #FE6903;
     }
   }
 }

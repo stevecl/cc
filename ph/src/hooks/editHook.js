@@ -46,7 +46,7 @@ export default function(baseInfo, setting, activeIndex) {
   }
 
   const submitData = async () => {
-    // return console.log('setting', setting)
+    return console.log('setting', setting.value)
     let params = { ...baseInfo.value }
     params.templateConfigParams = JSON.stringify(setting.value)
     await editModule(params)

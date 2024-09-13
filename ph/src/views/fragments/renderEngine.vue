@@ -1,19 +1,18 @@
 // 手机容器
 <template>
-  <div class="diy-phone">
-    <div class="text-overflow phone-title" @click="emit('select')">
-      <div class="phone-head"></div>
-      <div class="phone-icon"></div>
-      {{ pageConfig.templateTitle }}
-    </div>
-    <div class="custom-scroll-bar phone-body" :style="{'background-color': pageConfig.backgroundColor}">
-      <slot></slot>
+  <div class="phone-wrapper">
+    <div class="diy-phone">
+      <div class="text-overflow phone-header" @click="emit('select')">
+        <div class="phone_title">{{ pageConfig.templateTitle }}</div>
+      </div>
+      <div class="custom-scroll-bar phone-body" :style="{'background-color': pageConfig.backgroundColor}">
+        <slot></slot>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
 
 const emit = defineEmits(['select'])
 const props = defineProps({
@@ -23,68 +22,46 @@ const props = defineProps({
 </script>
 
 <style lang="scss" scoped>
+.phone-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  background-color: #F2F4F7;
+}
 .diy-phone{
   position: relative;
-  $width: 382px;
-  $height: 760px;
+  $width: 375px;
+  $height: 738px;
   width: $width;
   height: $height;
-  background: url('@/assets/images/phone.png') no-repeat;
-  background-size: 100% 100%;
-  .phone-title{
+  border: 1px solid #ddd;
+  margin-right: 20px;
+  box-sizing: border-box;
+  .phone-header{
     position: relative;
-    height: 60px;
-    line-height: 80px;
-    font-size: 15px;
-    color: #303133;
-    font-weight: bold;
-    text-align: center;
-    padding: 0 50px;
-    margin: 35px 44px 0 43px;
-    border-top-left-radius: 22px;
-    border-top-right-radius: 20px;
-    cursor: default;
-    .phone-head{
+    height: 88px;
+    background-image: url('../../assets/images/default/home-b.png');
+    cursor: pointer;    
+    .phone_title {
       position: absolute;
-      left: 12px;
-      top: 10px;
-      width: 276px;
-      height: 13px;
-      // background: url('@/assets/images/phone_top.png') no-repeat;
-      background-size: 100% 100%;
-      // margin-top: 30px;
-    }
-    .phone-icon{
-      position: absolute;
-      left: calc(50% - 75px);
-      top: 0px;
-      width: 148px;
-      height: 26px;
-      background: url('@/assets/images/phone_icon.png') no-repeat;
-      background-size: 100% 100%;
-      // margin-top: 30px;
+      width: 160px;
+      height: 30px;
+      left: calc(50% - 80px);
+      top: calc(50% + 7px);
+      font-style: normal;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 30px;
+      text-align: center;
+      mix-blend-mode: normal;
     }
   }
   .phone-body{
     position: relative;
-    left: 3px;
-    top: -90px;
-    // width: $width - 87px;
-    // height: $height - 146px;
-    width: 375px;
-    height: 785px;
+    width: 100%;
+    height: calc(100% - 88px);
     background-color: #F1F1F1;
-    border-bottom-left-radius: 32px;
-    border-bottom-right-radius: 32px;
     overflow: scroll;
-    // border: 1px solid red;
-    transform: scale(.785);
-  }
-  .phone-footer{
-    height: 24px;
-    width: 60px;
-    border: 1px solid #ddd;
-    margin: 15px auto 5px;
   }
 }
 
