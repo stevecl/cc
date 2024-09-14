@@ -49,7 +49,7 @@
         <el-radio :value="1">搜索框外</el-radio>
         <el-radio :value="2">搜索框内</el-radio>
       </el-radio-group>
-    </configItem>    
+    </configItem>
     <configItem :label="'图标'">
       <div class="diy-button no-pointer"><span class="iconfont" :class="config.left.icon"></span></div>
       <div class="diy-button" @click="selectLeftIcon">选择图标</div>

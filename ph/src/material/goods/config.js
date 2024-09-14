@@ -4,7 +4,10 @@ let config = {
     background: '#ffffff', // 底部背景
     padding: '0 0 0 0',
     margin: '0 0 0 0',
+  },
+  itemStyle: {
     goodBgColor: '#fff', // 商品背景
+    goodSpace: 0, // 商品间距
   },
   showType: 1,
   detailConfig: {

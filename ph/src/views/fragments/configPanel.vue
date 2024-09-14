@@ -52,7 +52,7 @@ const getIconUrl = name => {
 <style lang="scss" scoped>
 .diy-edit-box {
   position: relative;
-  width: 500px;
+  width: 520px;
   font-size: 12px;
   background-color: #ffffff;
   transition: all 0.5s ease 0s;
