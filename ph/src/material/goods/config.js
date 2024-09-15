@@ -56,9 +56,22 @@ let config = {
       name: '标题标签',
     }
   },
-  datas: [
-    
-  ]
+  carConfig: {
+    show: true,
+    type: 'btn1',
+    size: 'small', // small middle big
+    text: '购买',
+    color: '#fff',
+    carColor: '#FF5555',
+    bgColor: '#FF5555',
+    borderColor: 'rgba(255,255,255,0)',
+    borderRadius: 0,
+  },
+  dataConfig: {
+    type: 'product', // product: 固定商品 category: 分类商品
+    val: '',
+    list: []
+  }
 }
 
 export default config

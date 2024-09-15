@@ -27,7 +27,9 @@
       <selectColor v-model="config.itemStyle.goodBgColor"></selectColor>
     </configItem>
 
-    <selectType v-model="config.showType" componentName="goods"></selectType>
+    <setGoodsShowType v-model="config.showType" componentName="goods"></setGoodsShowType>
+    <setGoodsData v-model="config.dataConfig"></setGoodsData>
+    <setGoodsBuyCar v-model="config.carConfig" :showType="config.showType"></setGoodsBuyCar>
 
     <div class="module-edit-title">显示内容</div>
     <div class="content">
@@ -40,13 +42,6 @@
       </template>
     </div>
 
-    <div class="module-edit-title">选择商品 </div>
-    <configItem :label="'展示商品'">
-      <el-radio-group v-model="config.showType">
-        <el-radio :value="1">手动选择</el-radio>
-        <el-radio :value="2">商品分类</el-radio>
-      </el-radio-group>
-    </configItem>
   </div>
 </template>
 

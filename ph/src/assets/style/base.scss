@@ -33,8 +33,13 @@
 
 .flex-center {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
 }
 
 .pointer {
@@ -70,7 +75,7 @@
 
 // 滚动条样式
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 6px;
 }
 /* 滑轨 */
 ::-webkit-scrollbar-track {

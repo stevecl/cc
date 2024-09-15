@@ -1,53 +1,93 @@
-<!-- 已弃用 -->
 <template>
   <el-dialog
-    class="diy-select-link-wrapper"
+    class="ph-dialog"
     title="选择链接"
     v-model="state.dialogVisible">
-    <div class="diy-select-link-box">
-      <div class="link-label-box">
-        <span v-for="(item, index) in typeList" :class="{'active': state.activeIndex === index}" @click="switchLabel(index)">{{ item }}</span>
+    <div class="content">
+      <div class="top">
+        <div class="top_item" :class="{ active: state.typeIndex === 0 }" @click="changeType(0)">店铺</div>
+        <div class="top_item" :class="{ active: state.typeIndex === 1 }" @click="changeType(1)">商品</div>
+        <div class="top_item" :class="{ active: state.typeIndex === 2 }" @click="changeType(2)">酒店</div>
       </div>
-      <!-- 商城页面列表 -->
-      <linkBase class="link-content-box" v-if="state.activeIndex === 0" @select="handleSubmit"></linkBase>
-      <!-- 商品详情页 -->
-      <linkProduct class="link-content-box" v-if="state.activeIndex === 1" @select="handleSubmit"></linkProduct>
-      <!-- diy页面 -->
-      <linkPages class="link-content-box" v-if="state.activeIndex === 2" @select="handleSubmit"></linkPages>
+      <div class="category">
+        <div class="category_item" :class="{ active: state.categoryIndex === 0 }" @click="changeCategory(0)">基础页面</div>
+        <div class="category_item" :class="{ active: state.categoryIndex === 1 }" @click="changeCategory(1)">装修页面</div>
+      </div>
+      <div class="main">
+        <div class="main_page">
+          <div class="main_page_title">
+            <span class="iconfont icon-biaodanyemian"></span>
+            基础链接
+          </div>
+          <div class="main_page_list">
+            <div class="main_page_list_item" :class="{active: state.link === '/pages/index/index'}" @click="handleSelect('/pages/index/index')">
+              店铺首页
+              <div class="activeIcon">
+                <span class="iconfont icon-duihao"></span>
+              </div>
+            </div>
+            <div class="main_page_list_item" :class="{active: state.link === '/pages/product/index'}" @click="handleSelect('/pages/product/index')">
+              全部商品
+              <div class="activeIcon">
+                <span class="iconfont icon-duihao"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="main_page">
+          <div class="main_page_title">
+            <span class="iconfont icon-biaodanyemian"></span>
+            会员中心
+          </div>
+          <div class="main_page_list">
+            <div class="main_page_list_item" :class="{active: state.link === '/pages/mine/index'}" @click="handleSelect('/pages/mine/index')">
+              个人中心
+              <div class="activeIcon">
+                <span class="iconfont icon-duihao"></span>
+              </div>
+            </div>
+            <div class="main_page_list_item" :class="{active: state.link === '/pages/order/index'}" @click="handleSelect('/pages/order/index')">
+              我的订单
+              <div class="activeIcon">
+                <span class="iconfont icon-duihao"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <template #footer>
-      <el-button @click="handleClose">关 闭</el-button>
+      <el-button plain @click="handleClose">关 闭</el-button>
+      <el-button type="primary" @click="handleSubmit">确 定</el-button>
     </template>
   </el-dialog>
 </template>
 
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
-import linkBase from './linkBase.vue'
-import linkProduct from './linkProduct.vue'
-import linkPages from './linkPages.vue'
-
-const typeList = ref([
-  '内部链接',
-  '商品',
-  '店铺装修',
-  '打卡活动',
-])
 
 const state = reactive({
+  typeIndex: 0,
+  categoryIndex: 0,
+  link: '',
   dialogVisible: false,
-  activeIndex: 0,
-  callback: null
+  callback: null,
 })
 
-const switchLabel = index => {
-  if (state.activeIndex === index) return
-  state.activeIndex = index
+const changeType = index => {
+  if (state.typeIndex === index) return
+  state.typeIndex = index
 }
 
-const handleSubmit = link => {
-  console.log('link', link)
-  typeof state.callback === 'function' && state.callback(link)
+const changeCategory = index => {
+  if (state.categoryIndex === index) return
+  state.categoryIndex = index
+}
+
+const handleSelect = link => state.link = link
+
+const handleSubmit = () => {
+  typeof state.callback === 'function' && state.callback(state.link)
   handleClose()
 }
 
@@ -57,8 +97,9 @@ const handleClose = () => {
 
 onMounted(() => {
   Bus.on('selectLink', cb => {
-    // 内部selectLink已弃用，统一转用mxlink
-    state.activeIndex = 0
+    state.typeIndex = 0
+    state.categoryIndex = 0
+    state.link = ''
     state.dialogVisible = true
     state.callback = cb
   })
@@ -67,55 +108,121 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.diy-select-link-box {
+.content {
+  position: relative;
   width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  .link-label-box {
-    height: 30px;
-    line-height: 30px;
+  height: 500px;
+  .top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 36px;
     display: flex;
-    span {
-      padding: 0 10px;
-      margin: 0 10px;
+    &_item {
+      border-radius: 4px;
+      margin-right: 10px;
+      width: 88px;
+      height: 36px;
+      line-height: 36px;
+      text-align: center;
+      border: 1px solid #f1f1f1;
+      color: #666;
       cursor: pointer;
       &.active {
-        border-bottom: 2px solid #337ab7;
+        border: none;
+        background-color: var(--primary, #fb6638);
+        color: #fff;
       }
     }
   }
-  .link-content-box {
-    flex: 1;
-    overflow: auto;
-    &.mini {
-      margin-top: 50px;
-      div {
+  .category {
+    position: absolute;
+    left: 0;
+    top: 50px;
+    bottom: 0;
+    width: 160px;
+    border: 1px solid #f1f1f1;
+    border-radius: 4px;
+    padding: 10px 0;
+    &_item {
+      height: 36px;
+      line-height: 36px;
+      width: 100%;
+      border-radius: 4px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding: 0 25px;
+      cursor: pointer;
+      &.active {
+        color: var(--primary, #fb6638) !important;
+        background: var(--primary-tips, #fff3ef) !important;
+      }
+      &:hover {
+        color: var(--primary, #fb6638);
+      }
+    }
+  }
+  .main {
+    position: absolute;
+    top: 50px;
+    left: 170px;
+    right: 0;
+    bottom: 0;
+    border: 1px solid #f1f1f1;
+    border-radius: 4px;
+    padding: 10px;
+    &_page {
+      &_title {
+        height: 43px;
+        line-height: 43px;
+        .iconfont {
+          color: #ffb9a3;
+        }
+      }
+      &_list {
         display: flex;
-        align-items: center;
-        margin-bottom: 40px;
-        &.save {
-          margin-left: 120px;
-        }
-        .label {
-          width: 100px;
-          text-align: right;
-        }
-        .input {
-          width: 300px;
-          margin: 0 20px;
-        }
-        .tip {
-          display: flex;
-          align-items: center;
-          i {
-            margin-right: 3px;
-            position: relative;
-            top: 1px;
+        flex-wrap: wrap;
+        &_item {
+          position: relative;
+          height: 32px;
+          line-height: 32px;
+          padding: 0 16px;
+          border: 1px solid #ededed;
+          border-radius: 4px;
+          margin: 5px 9px 5px 0;
+          cursor: pointer;
+          &.active {
+            border-color: var(--primary, #fb6638);
+            .activeIcon {
+              display: unset;
+            }
           }
         }
       }
     }
+  }
+}
+
+.activeIcon {
+  display: none;
+  width: 14px;
+  height: 14px;
+  text-align: center;
+  border-radius: 50%;
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: var(--primary, #fb6638);
+  color: #fff;
+  .iconfont {
+    display: inline-block;
+    height: 14px;
+    line-height: 14px;
+    position: absolute;
+    left: 0;
+    top: -1px;
   }
 }
 </style>

@@ -1,18 +1,19 @@
 <template>
   <div class="list list4">
-    <div class="list_item" v-for="n in 3">
+    <div class="list_item" v-for="n in 3" :style="itemStyle">
       <div class="wrap">
         <img class="img" :src="getDefaultImage('picture.png')" alt="">
       </div>
-      <div class="detail" :style="{ background: config.style.goodBgColor }">
-        <div class="name">这里是商品标题这里是商品标题这里是商品标题</div>
-        <div class="sale"><span class="unit">￥</span>20</div>
+      <div class="detail" :style="{ background: config.itemStyle.goodBgColor }">
+        <div class="name" :style="config.detailConfig.title.style">这里是商品标题这里是商品标题这里是商品标题</div>
+        <div class="sale" :style="config.detailConfig.price.style"><span class="unit">￥</span>20</div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import { computed } from 'vue';
 import useDefaultSource from '@/hooks/useDefaultSource';
 
 const { getDefaultImage } = useDefaultSource()
@@ -20,6 +21,9 @@ const { getDefaultImage } = useDefaultSource()
 const props = defineProps({
   config: Object
 })
+
+const itemStyle = computed(() => ({ '--space': props.config.itemStyle.goodSpace + 'px' }))
+
 </script>
 
 <style lang="scss" scoped>
@@ -27,8 +31,17 @@ const props = defineProps({
   display: flex;
   flex-wrap: wrap;
   .list_item {
+    --space: 0;
     display: flex;
-    width: 50%;
+    width: calc(50% - var(--space) / 2);
+    box-sizing: border-box;
+    margin-bottom: calc(var(--space) );
+    &:nth-child(2n + 1) {
+      margin-right: calc(var(--space));
+    }
+    // &:nth-last-child(1){
+    //   margin-bottom: 0;
+    // }
     .wrap {
       position: relative;
       width: 80px;

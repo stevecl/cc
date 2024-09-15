@@ -13,7 +13,7 @@
     background-color: lighten($color, 20%)!important;
   }
 }
-.config-edit-item {
+.config-edit-item, .config-wrapper {
   // .el-slider__bar {
   //   background-color: #FE6903!important; /* 红色 */
   // }
@@ -40,5 +40,24 @@
     .el-icon {
       font-size: 30px;
     }
+  }
+}
+
+// dialog style
+.el-dialog.ph-dialog {
+  padding: 0!important;
+  .el-dialog__header {
+    height: 48px;
+    line-height: 48px;
+    padding-left: 20px;
+    border-bottom: 1px solid #F2F2F2;
+  }
+  .el-dialog__body {
+    padding: 20px 20px 0;
+  }
+  .el-dialog__footer {
+    height: 60px;
+    line-height: 60px;
+    padding: 0 20px;
   }
 }

@@ -29,11 +29,6 @@ const baseInfo = inject('baseInfo')
 
 const bgStyle = file => ({ backgroundImage: `url(${new URL(`../../assets/images/default/${file}`, import.meta.url).href})` })
 
-const selectMaterialList = computed(() => {
-  let arr = Object.keys(materialDatas).filter(key => !['advert', 'tabbar'].includes(key))
-  return arr
-})
-
 onMounted(async () => {
   if (Object.keys(materialDatas).some(key => !materialDatas[key].title)) {
     for (const key in materialDatas) {

@@ -6,6 +6,26 @@ const config = [
         name: '商品组',
         icon: 'goods.png',
         component: 'goods',
+      },
+      {
+        name: '选项卡',
+        icon: 'tabbar.png',
+        component: 'goodsTabbar',
+      },
+      {
+        name: '猜你喜欢',
+        icon: 'guess.png',
+        component: 'goodsLikes',
+      },
+      {
+        name: '商品排行',
+        icon: 'goodsRanking.png',
+        component: 'goodsRanking',
+      },
+      {
+        name: '积分商城',
+        icon: 'creditshop.png',
+        component: 'goodsScore',
       }
     ]
   },

@@ -1,3 +1,4 @@
+<!-- 通用  颜色选择器 -->
 <template>
   <div class="diy-edit-colorpick">
     <el-color-picker v-model="currentColor" show-alpha/>

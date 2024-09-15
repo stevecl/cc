@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    class="diy-select-icon-wrapper"
+    class="ph-dialog"
     title="选择图标"
     v-model="state.dialogVisible"
     width="30%">
@@ -13,9 +13,12 @@
         <span class="text-overflow">{{ item.replace('icon-', '') }}</span>
       </div>
     </div>
-    <span slot="footer" class="dialog-footer">
-      <el-button @click="handleClose">取 消</el-button>
-    </span>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button plain @click="handleClose">取 消</el-button>
+        <el-button type="primary" @click="handleClose">确 定</el-button>
+      </span>
+    </template>
   </el-dialog>
 </template>
 
