@@ -82,6 +82,11 @@ const config = [
         icon: 'video.png',
         component: 'video',
       },
+      {
+        name: '浮动按钮',
+        icon: 'float.png',
+        component: 'floatButtons',
+      },
     ]
   }
 ]
