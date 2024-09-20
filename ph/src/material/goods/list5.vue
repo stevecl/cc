@@ -4,17 +4,17 @@
       <div class="wrap">
         <img class="img" :src="getDefaultImage('picture.png')" alt="">
       </div>
-      <div class="detail" :style="{ background: config.itemStyle.goodBgColor }">
-        <div class="name" :style="config.detailConfig.title.style">这里是商品标题</div>
+      <div class="detail" :style="{ background: productConfig.bgColor }">
+        <div class="name" :style="detailConfig.title.style">这里是商品标题</div>
         <div class="sale">
-          <div class="price" :style="config.detailConfig.price.style">
+          <div class="price" :style="detailConfig.price.style">
             <span class="unit">￥</span>20
           </div>
-          <div class="btn" :class="[config.carConfig.type, config.carConfig.size]" :style="btnStyle" v-if="config.carConfig.show">
-            <span :class="{hide: config.carConfig.type !== 'btn1'}" class="txt">{{ config.carConfig.text || '购买' }}</span>
-            <span :class="{hide: config.carConfig.type !== 'btn2'}" class="add">+</span>
-            <span :class="{hide: config.carConfig.type !== 'btn3'}" class="iconfont icon-gouwuche icon"></span>
-            <img :class="{hide: config.carConfig.type !== 'btn4'}" src="../../assets/images/default/car4.png" alt="">
+          <div class="btn" :class="[carConfig.type, carConfig.size]" :style="btnStyle" v-if="carConfig.show">
+            <span :class="{hide: carConfig.type !== 'btn1'}" class="txt">{{ carConfig.text || '购买' }}</span>
+            <span :class="{hide: carConfig.type !== 'btn2'}" class="add">+</span>
+            <span :class="{hide: carConfig.type !== 'btn3'}" class="iconfont icon-gouwuche icon"></span>
+            <img :class="{hide: carConfig.type !== 'btn4'}" src="../../assets/images/default/car4.png" alt="">
           </div>
         </div>
       </div>
@@ -31,10 +31,13 @@ const { getDefaultImage } = useDefaultSource()
 const props = defineProps({
   config: Object
 })
+const productConfig = computed(() => (props.config.productConfig || {}))
+const detailConfig = computed(() => (productConfig.value.detail || {}))
+const carConfig = computed(() => (productConfig.value.car || {}))
 
-const itemStyle = computed(() => ({ '--space': props.config.itemStyle.goodSpace + 'px' }))
+const itemStyle = computed(() => ({ '--space': productConfig.value.goodSpace + 'px' }))
 const btnStyle = computed(() => {
-  let { size, color, carColor, bgColor, borderRadius, borderColor } = props.config.carConfig
+  let { size, color, carColor, bgColor, borderRadius, borderColor } = carConfig.value
   return {
     '--size': size === 'small' ? '22px' : size === 'middle' ? '26px' : '30px',
     '--color': color,

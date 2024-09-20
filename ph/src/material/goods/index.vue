@@ -1,11 +1,11 @@
 <template>
   <div class="edit-module-goods" :style="config?.style">
-    <list1 :config="config" v-if="config.showType === 1"></list1>
-    <list2 :config="config" v-if="config.showType === 2"></list2>
-    <list3 :config="config" v-if="config.showType === 3"></list3>
-    <list4 :config="config" v-if="config.showType === 4"></list4>
-    <list5 :config="config" v-if="config.showType === 5"></list5>
-    <list6 :config="config" v-if="config.showType === 6"></list6>
+    <list1 :config="config" v-if="config.productConfig.showType === 1"></list1>
+    <list2 :config="config" v-if="config.productConfig.showType === 2"></list2>
+    <list3 :config="config" v-if="config.productConfig.showType === 3"></list3>
+    <list4 :config="config" v-if="config.productConfig.showType === 4"></list4>
+    <list5 :config="config" v-if="config.productConfig.showType === 5"></list5>
+    <list6 :config="config" v-if="config.productConfig.showType === 6"></list6>
   </div>
 </template>
 

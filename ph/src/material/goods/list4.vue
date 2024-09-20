@@ -4,9 +4,9 @@
       <div class="wrap">
         <img class="img" :src="getDefaultImage('picture.png')" alt="">
       </div>
-      <div class="detail" :style="{ background: config.itemStyle.goodBgColor }">
-        <div class="name" :style="config.detailConfig.title.style">这里是商品标题这里是商品标题这里是商品标题</div>
-        <div class="sale" :style="config.detailConfig.price.style"><span class="unit">￥</span>20</div>
+      <div class="detail" :style="{ background: productConfig.bgColor }">
+        <div class="name" :style="detailConfig.title.style">这里是商品标题这里是商品标题这里是商品标题</div>
+        <div class="sale" :style="detailConfig.price.style"><span class="unit">￥</span>20</div>
       </div>
     </div>
   </div>
@@ -22,7 +22,10 @@ const props = defineProps({
   config: Object
 })
 
-const itemStyle = computed(() => ({ '--space': props.config.itemStyle.goodSpace + 'px' }))
+const productConfig = computed(() => (props.config.productConfig || {}))
+const detailConfig = computed(() => (productConfig.value.detail || {}))
+
+const itemStyle = computed(() => ({ '--space': productConfig.value.goodSpace + 'px' }))
 
 </script>
 

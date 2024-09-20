@@ -1,7 +1,7 @@
 <template>
   <div class="edit-module-goodsScore" :style="config?.style">
-    <list2 :config="config" v-if="config.showType === 2"></list2>
-    <list3 :config="config" v-if="config.showType === 3"></list3>
+    <list2 :config="config" v-if="config.productConfig.showType === 2"></list2>
+    <list3 :config="config" v-if="config.productConfig.showType === 3"></list3>
   </div>
 </template>
 

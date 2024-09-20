@@ -8,9 +8,9 @@
       </div>
       <div class="line line_right" :style="rightLineStyle"></div>
     </div>
-    <list3 :config="config" v-if="config.showType === 3"></list3>
-    <list4 :config="config" v-if="config.showType === 4"></list4>
-    <list6 :config="config" v-if="config.showType === 6"></list6>
+    <list3 :config="config" v-if="config.productConfig.showType === 3"></list3>
+    <list4 :config="config" v-if="config.productConfig.showType === 4"></list4>
+    <list6 :config="config" v-if="config.productConfig.showType === 6"></list6>
   </div>
 </template>
 

@@ -55,7 +55,7 @@ const config = [
       {
         name: '列表导航',
         icon: 'listmenu.png',
-        component: 'buttons',
+        component: 'listMenu',
       },
       {
         name: '辅助线',

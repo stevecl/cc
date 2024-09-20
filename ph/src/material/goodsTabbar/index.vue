@@ -1,17 +1,17 @@
 <template>
   <div class="edit-module-goodsTabbar" :style="config?.style">
-    <div class="tabbar">
+    <div class="tabbar" :style="tabbarStyle">
       <div class="tabbar_item" :class="{active: true}">选项</div>
       <div class="tabbar_item">选项</div>
       <div class="tabbar_item">选项</div>
       <div class="tabbar_item">选项</div>
     </div>
-    <list1 :config="config" v-if="config.showType === 1"></list1>
-    <list2 :config="config" v-if="config.showType === 2"></list2>
-    <list3 :config="config" v-if="config.showType === 3"></list3>
-    <list4 :config="config" v-if="config.showType === 4"></list4>
-    <list5 :config="config" v-if="config.showType === 5"></list5>
-    <list6 :config="config" v-if="config.showType === 6"></list6>
+    <list1 :config="config" v-if="config.productConfig.showType === 1"></list1>
+    <list2 :config="config" v-if="config.productConfig.showType === 2"></list2>
+    <list3 :config="config" v-if="config.productConfig.showType === 3"></list3>
+    <list4 :config="config" v-if="config.productConfig.showType === 4"></list4>
+    <list5 :config="config" v-if="config.productConfig.showType === 5"></list5>
+    <list6 :config="config" v-if="config.productConfig.showType === 6"></list6>
   </div>
 </template>
 
@@ -28,6 +28,13 @@ const props = defineProps({
   config: Object
 })
 
+const tabbarStyle = computed(() => {
+  let { color, activeColor } = props.config.tabbarConfig
+  return {
+    '--color': color,
+    '--activeColor': activeColor
+  }
+})
 
 </script>
 
@@ -40,6 +47,10 @@ const props = defineProps({
     &_item {
       flex-shrink: 0;
       padding: 0 20px;
+      color: var(--color);
+      &.active {
+        color: var(--activeColor);
+      }
     }
   }
 }

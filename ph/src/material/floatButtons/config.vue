@@ -1,19 +1,37 @@
 <template>
   <div>
     <div class="module-edit-title">边距设置</div>
-    <!-- <configItem :label="'顶部间距'">
-      <el-slider style="width: 250px;" v-model="marginTop" :min="-100" :max="100" :step="1" :show-tooltip="false"></el-slider>
-      <span class="slide-span--unit">{{ marginTop }}<span>px</span></span>
-    </configItem> -->
-    <configItem :label="'距离顶/底部'" :labelWidth="70">
-      <inputNumber v-model="marginTop"></inputNumber>
-      <div class="label2 wid70">距离左/右侧</div>
-      <inputNumber v-model="marginLeft"></inputNumber>
+    <configItem :label="'图标间距'" :labelWidth="70">
+      <el-slider style="width: 250px;" v-model="config.iconSpace" :min="0" :max="50" :step="1" :show-tooltip="false"></el-slider>
+      <span class="slide-span--unit">{{ config.iconSpace }}<span>px</span></span>
     </configItem>
+    <configItem :label="'距顶/底部'" :labelWidth="70">
+      <el-slider style="width: 250px;" v-model="config.marginTop" :min="0" :max="50" :step="1" :show-tooltip="false"></el-slider>
+      <span class="slide-span--unit">{{ config.marginTop }}<span>px</span></span>
+    </configItem>
+    <configItem :label="'距左/右侧'" :labelWidth="70">
+      <el-slider style="width: 250px;" v-model="config.marginLeft" :min="0" :max="50" :step="1" :show-tooltip="false"></el-slider>
+      <span class="slide-span--unit">{{ config.marginLeft }}<span>px</span></span>
+    </configItem>
+
+    <div class="module-edit-title">组件设置</div>
     <configItem :label="'图标样式'">
       <el-radio-group v-model="config.showType">
-        <el-radio :value="1">图标+文字</el-radio>
-        <el-radio :value="2">图片+文字</el-radio>
+        <el-radio :value="1">图标</el-radio>
+        <el-radio :value="2">图片</el-radio>
+      </el-radio-group>
+    </configItem>
+    <configItem :label="'图标颜色'" v-show="config.showType === 1">
+      <selectColor v-model="config.iconColor" :resetColor="'#fff'"></selectColor>
+      <div class="label2">背景颜色</div>
+      <selectColor v-model="config.bgColor" :resetColor="'#FD463E'"></selectColor>
+    </configItem>
+    <configItem :label="'显示位置'">
+      <el-radio-group v-model="config.showPosi">
+        <el-radio :value="1">左上角</el-radio>
+        <el-radio :value="2">右上角</el-radio>
+        <el-radio :value="3">右下角</el-radio>
+        <el-radio :value="4">左下角</el-radio>
       </el-radio-group>
     </configItem>
     
@@ -26,25 +44,12 @@
               <div class="left-icon">
                 <span :class="['iconfont', item.icon]" style="font-size: 26px" v-if="config.showType === 1"></span>
                 <p @click="selectIcon(item)" v-if="config.showType === 1">选择图标</p>
-                <img :src="item.img || 'as'" alt="" v-if="config.showType === 2 && item.img">
+                <img :src="item.img || getDefaultImage('picture.png')" alt="" v-if="config.showType === 2 && item.img">
                 <p @click="selectImage(item)" v-if="config.showType === 2">选择图片</p>
-                <!-- <el-image :src="item.icon || getDefaultImage(item.defaultIcon)" fit="contain">
-                  <template #error>
-                    <div class="image-slot">
-                      <el-icon><Picture /></el-icon>
-                    </div>
-                  </template>
-                </el-image>
-                <p @click="selectImage(item)">选择图片</p> -->
               </div>
             </template>
             <div class="right-icon">
-              <p class="mb10">
-                <span class="label-text">文字</span>
-                <input class="cus-input" type="text" v-model="item.text" placeholder="留空则不展示">
-                <selectColor class="style1" v-model="item.color" :resetColor="'#666'"></selectColor>
-              </p>
-              <p>
+              <p style="margin-top: 20px;">
                 <input class="cus-input" type="text" v-model="item.link" placeholder="请选择链接或输入链接地址">
                 <span class="cus-btn" @click="selectLink(item)">选择链接</span>
               </p>
@@ -55,6 +60,7 @@
       </template>
     </draggable>
     <div class="cus-list-btn" @click="handleAdd">添加一个</div>
+    <div class="cus-list-btn" @click="handleAdd('top')">添加返回顶部</div>
   </div>
 </template>
         
@@ -63,25 +69,22 @@ import draggable from 'vuedraggable'
 import { ElMessage, ElMessageBox } from 'element-plus'
 
 import useDefaultSource from '@/hooks/useDefaultSource'
-import useStyle from '@/hooks/useStyle'
 
 const props = defineProps({
   config: Object
 })
 
 const { getDefaultImage } = useDefaultSource()
-const { fontSize, marginTop, marginLeft, paddingTop, paddingLeft, paddingBottom } = useStyle(props)
 
 const selectIcon = item => Bus.emit('selectIcon', icon => item.icon = icon)
-const selectImage = item => Bus.emit('selectImage', res => item.icon = res.picUrl)
+const selectImage = item => Bus.emit('selectImage', res => item.img = res.picUrl)
 const selectLink = item => Bus.emit('selectLink', link => item.link = link, item.link)
 
-const handleAdd = () => {
+const handleAdd = (type = '') => {
+  if (props.config.datas.length >= 4) return ElMessage({ message: '最多展示4个', type: 'warning' })
   let _obj = {
-    defaultIcon: 'btn1.png',
-    icon: '',
-    text: `按钮文字`,
-    color: '#666',
+    icon: 'icon-shouye',
+    img: '',
     link: ''
   }
   props.config.datas.push( _obj )
@@ -99,4 +102,7 @@ const handleDelete = async item => {
 </script>
 
 <style lang="scss" scoped>
+.cus-list-btn {
+  margin-bottom: 20px;
+}
 </style>

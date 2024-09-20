@@ -4,27 +4,27 @@
       <div class="wrap">
         <img class="img" :src="getDefaultImage('banner.png')" alt="">
       </div>
-      <div class="detail" :style="{ background: config.itemStyle.goodBgColor }">
+      <div class="detail" :style="{ background: productConfig.bgColor }">
         <div class="name">
-          <span class="tag" v-if="config.detailConfig.tag.show">标题标签</span>
-          <span class="txt" :style="config.detailConfig.title.style" v-if="config.detailConfig.title.show">这里是商品标题</span>
+          <span class="tag" v-if="detailConfig.tag.show">标题标签</span>
+          <span class="txt" :style="detailConfig.title.style" v-if="detailConfig.title.show">这里是商品标题</span>
         </div>
-        <div class="subtitle" :style="config.detailConfig.subtitle.style" v-if="config.detailConfig.subtitle.show">这里是副标题</div>
+        <div class="subtitle" :style="detailConfig.subtitle.style" v-if="detailConfig.subtitle.show">这里是副标题</div>
         <div class="sale">
           <div class="info">
-            <div class="sales" :style="config.detailConfig.sales.style" v-if="config.detailConfig.sales.show">已售0</div>
+            <div class="sales" :style="detailConfig.sales.style" v-if="detailConfig.sales.show">已售0</div>
             <div class="price">
-              <div class="sale-price" :style="config.detailConfig.price.style" v-if="config.detailConfig.price.show">
+              <div class="sale-price" :style="detailConfig.price.style" v-if="detailConfig.price.show">
                 <span class="unit">￥</span>20
               </div>
-              <div class="old-price" :style="config.detailConfig.oldPrice.style" v-if="config.detailConfig.oldPrice.show">￥20</div>
+              <div class="old-price" :style="detailConfig.oldPrice.style" v-if="detailConfig.oldPrice.show">￥20</div>
             </div>
           </div>
-          <div class="btn" :class="[config.carConfig.type, config.carConfig.size]" :style="btnStyle" v-if="config.carConfig.show">
-            <span :class="{hide: config.carConfig.type !== 'btn1'}" class="txt">{{ config.carConfig.text || '购买' }}</span>
-            <span :class="{hide: config.carConfig.type !== 'btn2'}" class="add">+</span>
-            <span :class="{hide: config.carConfig.type !== 'btn3'}" class="iconfont icon-gouwuche icon"></span>
-            <img :class="{hide: config.carConfig.type !== 'btn4'}" src="../../assets/images/default/car4.png" alt="">
+          <div class="btn" :class="[carConfig.type, carConfig.size]" :style="btnStyle" v-if="carConfig.show">
+            <span :class="{hide: carConfig.type !== 'btn1'}" class="txt">{{ carConfig.text || '购买' }}</span>
+            <span :class="{hide: carConfig.type !== 'btn2'}" class="add">+</span>
+            <span :class="{hide: carConfig.type !== 'btn3'}" class="iconfont icon-gouwuche icon"></span>
+            <img :class="{hide: carConfig.type !== 'btn4'}" src="../../assets/images/default/car4.png" alt="">
           </div>
         </div>
       </div>
@@ -42,9 +42,13 @@ const props = defineProps({
   config: Object
 })
 
-const itemStyle = computed(() => ({ '--space': props.config.itemStyle.goodSpace + 'px' }))
+const productConfig = computed(() => (props.config.productConfig || {}))
+const detailConfig = computed(() => (productConfig.value.detail || {}))
+const carConfig = computed(() => (productConfig.value.car || {}))
+
+const itemStyle = computed(() => ({ '--space': productConfig.value.goodSpace + 'px' }))
 const btnStyle = computed(() => {
-  let { size, color, carColor, bgColor, borderRadius, borderColor } = props.config.carConfig
+  let { size, color, carColor, bgColor, borderRadius, borderColor } = carConfig.value
   return {
     '--size': size === 'small' ? '22px' : size === 'middle' ? '26px' : '30px',
     '--color': color,

@@ -21,8 +21,8 @@
     <div class="block">
       <div class="label">显示条数</div>
       <div class="flex">
-        <el-slider style="width: 240px;" :min="0" :max="20" :step="1" :show-tooltip="false"></el-slider>
-        <span class="slide-span--unit">33<span>px</span></span>
+        <el-slider v-model="item.showNum" style="width: 240px;" :min="0" :max="20" :step="1" :show-tooltip="false"></el-slider>
+        <span class="slide-span--unit">{{ item.showNum }}<span>个</span></span>
       </div>
     </div>
   </div>

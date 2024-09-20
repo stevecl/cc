@@ -6,6 +6,7 @@ const { materialDatas } = useCommonStore()
 import { getModuleDetail, editModule } from '@/api'
 
 import { ElMessage } from 'element-plus'
+import { deepClone } from '../utils'
 
 export default function(baseInfo, setting, activeIndex) {
   const router = useRouter()
@@ -32,8 +33,13 @@ export default function(baseInfo, setting, activeIndex) {
       }
     }
     let { category, sourceType, templateTitle, templateName, templateImg, backgroundColor, searchKey, templateConfigParams, componentIds } = await getModuleDetail(id)
-
-    setting.value = JSON.parse(templateConfigParams)
+    let testData = JSON.parse(templateConfigParams).map(item => {
+      let _config = deepClone(item.config)
+      let res = materialDatas[item.name]
+      res.config = Object.assign({}, res.defConfig, _config)
+      return res
+    })
+    setting.value = testData
     baseInfo.value.category = category
     baseInfo.value.sourceType = sourceType
     baseInfo.value.templateName = templateName
@@ -46,9 +52,9 @@ export default function(baseInfo, setting, activeIndex) {
   }
 
   const submitData = async () => {
-    // return console.log('setting', setting.value)
+    let templateConfigParams = setting.value.map(({ name, title, config }) => ({ name, title, config }))
     let params = { ...baseInfo.value }
-    params.templateConfigParams = JSON.stringify(setting.value)
+    params.templateConfigParams = JSON.stringify(templateConfigParams)
     await editModule(params)
     ElMessage({ type: 'success', message: '保存成功' })
   }
