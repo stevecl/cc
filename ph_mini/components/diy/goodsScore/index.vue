@@ -1,0 +1,53 @@
+<template>
+  <div class="edit-module-goodsScore" :style="[config.style]">
+		33333333: {{config.productConfig.showType}}
+    <list2 :config="config" saleType="score" v-if="config.productConfig.showType === 2"></list2>
+    <list3 :config="config" saleType="score" v-if="config.productConfig.showType === 3"></list3>
+  </div>
+</template>
+
+<script>
+import list2 from '../goods/list2.vue';
+import list3 from '../goods/list3.vue';
+
+export default {
+	props: {
+		config: Object
+	},
+	components: {
+		list2,
+		list3
+	}
+}
+
+</script>
+
+<style lang="scss" scoped>
+.edit-module-goodsScore {
+  .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    font-size: 20px;
+    margin-bottom: 10px;
+    .line {
+      width: 30px;
+      height: 1px;
+      &:is(.line_left) {
+        margin-right: 10px;
+        
+      }
+      &:is(.line_right) {
+        margin-left: 10px;
+      }
+    }
+    img {
+      width: 16px;
+      height: 16px;
+      margin-right: 6px;
+      margin-top: -1px;
+    }
+  }
+}
+</style>

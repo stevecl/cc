@@ -1,8 +1,8 @@
 <template>
   <view class="list list1">
     <view class="list_item" v-for="(item, index) in showData" :key="index" :style="[itemStyle]">
-      <view class="wrap">
-       <image class="img" :src="item.mainImgUrl || 'error'" @error="dealErrorImg(index, 'banner.png')"></image>
+      <view class="list_wrap">
+       <image class="img" :src="errImgs[index] || item.mainImgUrl || 'error'" @error="dealErrorImg(index, 'banner.png')"></image>
       </view>
       <view class="detail" :style="{ background: productConfig.bgColor }">
         <view class="name">
@@ -24,7 +24,7 @@
             <text :class="{hide: carConfig.type !== 'btn1'}" class="txt">{{ carConfig.text || '购买' }}</text>
             <text :class="{hide: carConfig.type !== 'btn2'}" class="add">+</text>
             <text :class="{hide: carConfig.type !== 'btn3'}" class="iconfont icon-gouwuche icon"></text>
-            <image :class="{hide: carConfig.type !== 'btn4'}" src="./car4.png" alt=""></image>
+            <image class="img" :class="{hide: carConfig.type !== 'btn4'}" src="/static/images/car4.png" alt=""></image>
           </view>
         </view>
       </view>
@@ -62,13 +62,13 @@ export default {
         // btn
         '--size': size === 'small' ? '22px' : size === 'middle' ? '26px' : '30px',
         '--color': color,
-        '--carColor': carColor,
-        '--bg': bgColor,
-        '--borderColor': borderColor,
+        '--carcolor': carColor,
+        '--bgcolor': bgColor,
+        '--bordercolor': borderColor,
         // btn1
         '--fs': size === 'small' ? '12px' : size === 'middle' ? '13px' : '14px',
         '--padding': size === 'small' ? '4px 8px' : size === 'middle' ? '6px 10px' : '7px 12px',
-        '--borderRadius': borderRadius + 'px',
+        '--borderradius': borderRadius + 'px',
       }
     },
     showData() {
@@ -82,7 +82,9 @@ export default {
   },
   methods: {
     dealErrorImg(index, file) {
-      this.config.dataConfig.selectList[index].mainImgUrl = `${this.defDir}/default_${file}`
+      // this.config.dataConfig.selectList[index].mainImgUrl = `${this.defDir}/default_${file}`
+			this.$set(this.errImgs, index, `${this.defDir}/default_${file}`)
+			// this.errImgs[src] = `${this.defDir}/default_${file}`
     }
   }
 }
@@ -97,7 +99,7 @@ export default {
     &:not(:last-of-type) {
       margin-bottom: var(--space);
     }
-    .wrap {
+    .list_wrap {
       position: relative;
       width: 100%;
       padding-top: 56%;
@@ -144,7 +146,7 @@ export default {
       .subtitle {
         font-size: 14px;
         height: 20px;
-        line-height: 20rpx;
+        line-height: 20px;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -189,30 +191,31 @@ export default {
             padding: var(--padding);
             font-size: var(--fs);
             color: var(--color)!important;
-            background-color: var(--bg);
-            border-radius: var(--borderRadius);
+            background-color: var(--bgcolor);
+            border-radius: var(--borderradius);
             border: 1px solid transparent;
-            border-color: var(--borderColor);
+            border-color: var(--bordercolor);
           }
           .add {
             width: var(--size);
             height: var(--size);
-            line-height: calc(var(--size) - 2px);
+            line-height: calc(var(--size) - 4px);
             font-size: 20px;
             // font-weight: 700;
             text-align: center;
             color: var(--color);
-            background: var(--bg);
+            background: var(--bgcolor);
             border-radius: 50%;
             border: 1px solid transparent;
-            border-color: var(--borderColor);
+            border-color: var(--bordercolor);
           }
           .iconfont {
-            color: var(--carColor);
+            color: var(--carcolor);
             font-size: var(--size);
           }
           .img {
             width: var(--size);
+            height: var(--size);
           }
         }
       }

@@ -1,20 +1,20 @@
 <template>
   <div class="list list5">
-    <div class="list_item" v-for="(item, index) in showData" :key="index" :style="itemStyle">
-      <div class="wrap">
-        <image class="img" :src="item.mainImgUrl || 'error'" @error="dealErrorImg(index, 'picture.png')"></image>
+    <div class="list_item" v-for="(item, index) in showData" :key="index" :style="[itemStyle]">
+      <div class="list_wrap">
+        <image class="img" :src="errImgs[index] || item.mainImgUrl || 'error'" @error="dealErrorImg(index, 'picture.png')"></image>
       </div>
       <div class="detail" :style="{ background: productConfig.bgColor }">
-        <div class="name" :style="detailConfig.title.style">{{ item.goodsName }}</div>
+        <div class="name" :style="[detailConfig.title.style]">{{ item.goodsName }}</div>
         <div class="sale">
-          <div class="price" :style="detailConfig.price.style">
+          <div class="price" :style="[detailConfig.price.style]">
             <span class="unit">￥</span>{{ item.salePrice }}
           </div>
-          <div class="btn" :class="[carConfig.type, carConfig.size]" :style="btnStyle" v-if="carConfig.show">
+          <div class="btn" :class="[carConfig.type, carConfig.size]" v-if="carConfig.show">
             <span :class="{hide: carConfig.type !== 'btn1'}" class="txt">{{ carConfig.text || '购买' }}</span>
             <span :class="{hide: carConfig.type !== 'btn2'}" class="add">+</span>
             <span :class="{hide: carConfig.type !== 'btn3'}" class="iconfont icon-gouwuche icon"></span>
-            <img :class="{hide: carConfig.type !== 'btn4'}" src="./car4.png" alt="">
+            <image class="img" :class="{hide: carConfig.type !== 'btn4'}" src="/static/images/car4.png" alt=""></image>
           </div>
         </div>
       </div>
@@ -46,21 +46,20 @@ export default {
       return this.productConfig.car || {}
     },
     itemStyle() {
-      return { '--space': this.productConfig.goodSpace + 'px' }
-    },
-    btnStyle() {
       let { size, color, carColor, bgColor, borderRadius, borderColor } = this.carConfig
       return {
+        '--space': this.productConfig.goodSpace + 'px',
+        // btn
         '--size': size === 'small' ? '22px' : size === 'middle' ? '26px' : '30px',
         '--color': color,
-        '--carColor': carColor,
-        '--bgColor': bgColor,
-        '--borderColor': borderColor,
+        '--carcolor': carColor,
+        '--bgcolor': bgColor,
+        '--bordercolor': borderColor,
         // btn1
         '--fs': size === 'small' ? '12px' : size === 'middle' ? '13px' : '14px',
         '--padding': size === 'small' ? '4px 8px' : size === 'middle' ? '6px 10px' : '7px 12px',
-        '--borderRadius': borderRadius + 'px',
-      }      
+        '--borderradius': borderRadius + 'px',
+      }
     },
     showData() {
       let { type, selectList = [], showNum } = this.config.dataConfig
@@ -73,7 +72,7 @@ export default {
   },
   methods: {
     dealErrorImg(index, file) {
-      this.config.dataConfig.selectList[index].mainImgUrl = `${this.defDir}/default_${file}`
+			this.$set(this.errImgs, index, `${this.defDir}/default_${file}`)
     }
   }
 }
@@ -93,7 +92,7 @@ export default {
       margin-right: var(--space);
       margin-bottom: var(--space);
     }
-    .wrap {
+    .list_wrap {
       position: relative;
       width: 100%;
       padding-top: 100%;
@@ -139,10 +138,10 @@ export default {
             padding: var(--padding);
             font-size: var(--fs);
             color: var(--color);
-            background-color: var(--bgColor);
-            border-radius: var(--borderRadius);
+            background-color: var(--bgcolor);
             border: 1px solid transparent;
-            border-color: var(--borderColor);
+            border-color: var(--bordercolor);
+            border-radius: var(--borderradius);
           }
           .add {
             width: var(--size);
@@ -152,17 +151,18 @@ export default {
             // font-weight: 700;
             text-align: center;
             color: var(--color);
-            background-color: var(--bgColor);
+            background-color: var(--bgcolor);
             border-radius: 50%;
             border: 1px solid transparent;
-            border-color: var(--borderColor);
+            border-color: var(--bordercolor);
           }
           .iconfont {
-            color: var(--carColor);
+            color: var(--carcolor);
             font-size: var(--size);
           }
-          img {
+          .img {
             width: var(--size);
+            height: var(--size);
           }
         }
       }

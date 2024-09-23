@@ -1,6 +1,6 @@
 <template>
   <view>
-    <view v-for="(item, index) in config" :key="item.name + index">
+    <view v-for="(item, index) in config" :key="`${item.name + index}`">
       <diy-assistBlank v-if="judgeShow(item.name, 'assistBlank')" :config="item.config"></diy-assistBlank>
       <diy-assistLine v-if="judgeShow(item.name, 'assistLine')" :config="item.config"></diy-assistLine>
       <diy-buttons v-if="judgeShow(item.name, 'buttons')" :config="item.config"></diy-buttons>
@@ -11,6 +11,9 @@
       <diy-title v-if="judgeShow(item.name, 'title')" :config="item.config"></diy-title>
       <diy-video v-if="judgeShow(item.name, 'video')" :config="item.config"></diy-video>
       <diy-goods v-if="judgeShow(item.name, 'goods')" :config="item.config"></diy-goods>
+      <diy-goodsLikes v-if="judgeShow(item.name, 'goodsLikes')" :config="item.config"></diy-goodsLikes>
+      <diy-goodsRanking v-if="judgeShow(item.name, 'goodsRanking')" :config="item.config"></diy-goodsRanking>
+      <diy-goodsScore v-if="judgeShow(item.name, 'goodsScore')" :config="item.config"></diy-goodsScore>
       
       <!-- <diy-advert v-if="judgeShow(item.componentName, 'advert')" :config="item.config"></diy-advert> -->
       <!-- <diy-editor v-if="judgeShow(item.componentName, 'editor')" :config="item.config"></diy-editor> -->

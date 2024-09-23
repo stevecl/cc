@@ -21,11 +21,16 @@
         <div class="sale">
           <div class="info">
             <div class="sales" :style="detailConfig.sales.style" v-if="detailConfig.sales.show">已售0</div>
-            <div class="price">
+            <div class="price" v-if="saleType === 'cash'">
               <div class="sale-price" :style="detailConfig.price.style" v-if="detailConfig.price.show">
                 <span class="unit">￥</span>{{ item.salePrice }}
               </div>
               <div class="old-price" :style="detailConfig.oldPrice.style" v-if="detailConfig.oldPrice.show">￥{{ item.marketPrice }}</div>
+            </div>
+            <div class="price" v-if="saleType === 'score'">
+              <div class="sale-price" :style="detailConfig.price.style" v-if="detailConfig.price.show">
+                2000<span class="unit" style="font-size: 12px;">积分</span>
+              </div>
             </div>
           </div>
           <div class="btn" :class="[carConfig.type, carConfig.size]" :style="btnStyle" v-if="carConfig.show">
@@ -47,7 +52,11 @@ import useDefaultSource from '@/hooks/useDefaultSource';
 const { getDefaultImage } = useDefaultSource()
 
 const props = defineProps({
-  config: Object
+  config: Object,
+  saleType: {
+    type: String,
+    default: 'cash', // cash 常规支付； score 积分兑换
+  }
 })
 
 const productConfig = computed(() => (props.config.productConfig || {}))

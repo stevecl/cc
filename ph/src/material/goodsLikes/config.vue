@@ -62,6 +62,7 @@
     </div>
 
     <setGoodsShowType v-model="config.productConfig.showType" componentName="goodsLikes"></setGoodsShowType>
+    <setGoodsData v-model="config.dataConfig"></setGoodsData>
     <setGoodsBuyCar v-model="config.productConfig.car" :showType="config.productConfig.showType"></setGoodsBuyCar>
 
     <div class="module-edit-title">显示内容</div>

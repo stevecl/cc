@@ -13,6 +13,10 @@ app.use(koaConnect(createProxyMiddleware('/custom', {
   target: 'http://test-boss.beixiaoji.cn', // 目标服务器地址
   changeOrigin: true,
 })));
+app.use(koaConnect(createProxyMiddleware('/goods', { 
+  target: 'http://test-boss.beixiaoji.cn', // 目标服务器地址
+  changeOrigin: true,
+})));
 
 // 处理跨域
 app.use(async (ctx, next)=> {

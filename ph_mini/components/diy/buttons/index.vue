@@ -2,11 +2,11 @@
   <div class="edit-module-button" :style="[styleObj]">
     <div 
       :style="{'width': 100 / config.lineNum + '%'}"
-      v-for="(item, index) in showData"
+      v-for="(item, index) in config.datas"
       :key="index"
       @click="handleClick(item.link)"
       >
-      <image class="img" :src="item.icon || 'error'" @error="dealErrorImg(index, item.defaultIcon)" :style="{borderRadius: config.imgBorderRadius + 'px'}"></image>
+      <image class="img" :src="errImgs[index] || item.icon || 'error'" @error="dealErrorImg(index, item.defaultIcon)" :style="{borderRadius: config.imgBorderRadius + 'px'}"></image>
       <p class="text-overflow" :style="{'color': item.color }">{{ item.text }}</p>
     </div>
   </div>
@@ -20,7 +20,7 @@
 			config: Object
 		},
 		data() {
-			return { }
+			return {}
 		},
 		computed: {
 			styleObj() {
@@ -29,13 +29,10 @@
 			  style.borderRadius = borderRadius + 'px'
 			  return style
 			},
-      showData() {
-        return this.config.datas
-      }
 		},
 		methods: {
 			dealErrorImg(index, file) {
-			  this.config.datas[index].icon = `${this.defDir}/default_${file}`
+				this.$set(this.errImgs, index, `${this.defDir}/default_${file}`)
 			}
 		}
 	}

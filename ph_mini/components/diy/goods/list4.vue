@@ -1,12 +1,12 @@
 <template>
   <div class="list list4">
-    <div class="list_item" v-for="(item, index) in showData" :key="index" :style="itemStyle">
-      <div class="wrap">
-        <image class="img" :src="item.mainImgUrl || 'error'" @error="dealErrorImg(index, 'picture.png')"></image>
+    <div class="list_item" v-for="(item, index) in showData" :key="index" :style="[itemStyle]">
+      <div class="list_wrap">
+        <image class="img" :src="errImgs[index] || item.mainImgUrl || 'error'" @error="dealErrorImg(index, 'picture.png')"></image>
       </div>
       <div class="detail" :style="{ background: productConfig.bgColor }">
-        <div class="name" :style="detailConfig.title.style">{{ item.goodsName }}</div>
-        <div class="sale" :style="detailConfig.price.style"><span class="unit">￥</span>{{ item.salePrice }}</div>
+        <div class="name" :style="[detailConfig.title.style]">{{ item.goodsName }}</div>
+        <div class="sale" :style="[detailConfig.price.style]"><span class="unit">￥</span>{{ item.salePrice }}</div>
       </div>
     </div>
   </div>
@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     dealErrorImg(index, file) {
-      this.config.dataConfig.selectList[index].mainImgUrl = `${this.defDir}/default_${file}`
+			this.$set(this.errImgs, index, `${this.defDir}/default_${file}`)
     }
   }
 }
@@ -69,7 +69,7 @@ export default {
     // &:nth-last-child(1){
     //   margin-bottom: 0;
     // }
-    .wrap {
+    .list_wrap {
       position: relative;
       width: 80px;
       height: 80px;

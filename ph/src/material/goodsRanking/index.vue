@@ -3,7 +3,7 @@
     <div class="title" v-if="config.titleConfig.show">
       <div class="line line_left" :style="leftLineStyle"></div>
       <div class="txt">
-        <img :src="config.titleConfig.icon || getIcon('title3.png')" alt="">
+        <img :src="config.titleConfig.icon || getIcon('goodsRanking.png')" alt="">
         <span :style="{color: config.titleConfig.color}">{{ config.titleConfig.text }}</span>
       </div>
       <div class="line line_right" :style="rightLineStyle"></div>
