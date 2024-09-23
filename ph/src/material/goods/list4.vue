@@ -1,12 +1,19 @@
 <template>
   <div class="list list4">
-    <div class="list_item" v-for="n in 3" :style="itemStyle">
+    <div class="list_item" v-for="(item, index) in showData" :key="index" :style="itemStyle">
       <div class="wrap">
-        <img class="img" :src="getDefaultImage('picture.png')" alt="">
+        <!-- <img class="img" :src="getDefaultImage('picture.png')" alt=""> -->
+        <el-image class="img" :src="item.mainImgUrl || 't'" fit="contain">
+          <template #error>
+            <div class="image-slot">
+              <img :src="getDefaultImage('picture.png')" alt="">
+            </div>
+          </template>
+        </el-image>
       </div>
       <div class="detail" :style="{ background: productConfig.bgColor }">
-        <div class="name" :style="detailConfig.title.style">这里是商品标题这里是商品标题这里是商品标题</div>
-        <div class="sale" :style="detailConfig.price.style"><span class="unit">￥</span>20</div>
+        <div class="name" :style="detailConfig.title.style">{{ item.goodsName }}</div>
+        <div class="sale" :style="detailConfig.price.style"><span class="unit">￥</span>{{ item.salePrice }}</div>
       </div>
     </div>
   </div>
@@ -26,6 +33,21 @@ const productConfig = computed(() => (props.config.productConfig || {}))
 const detailConfig = computed(() => (productConfig.value.detail || {}))
 
 const itemStyle = computed(() => ({ '--space': productConfig.value.goodSpace + 'px' }))
+
+let defItem = {
+  goodsName: "商品标题",
+  salePrice: '20',
+  marketPrice: '99'
+}
+
+const showData = computed(() => {
+  let { type, selectList = [], showNum } = props.config.dataConfig
+  if (type === 'product') {
+    return selectList.length ? selectList : [ defItem ]
+  } else {
+    return new Array(showNum).fill(defItem)
+  }
+})
 
 </script>
 

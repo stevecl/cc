@@ -6,7 +6,7 @@ const { materialDatas } = useCommonStore()
 import { getModuleDetail, editModule } from '@/api'
 
 import { ElMessage } from 'element-plus'
-import { deepClone } from '../utils'
+import { deepClone, deepMerge } from '../utils'
 
 export default function(baseInfo, setting, activeIndex) {
   const router = useRouter()
@@ -36,9 +36,12 @@ export default function(baseInfo, setting, activeIndex) {
     let testData = JSON.parse(templateConfigParams).map(item => {
       let _config = deepClone(item.config)
       let res = materialDatas[item.name]
-      res.config = Object.assign({}, res.defConfig, _config)
+      let defaultConfig = deepClone(res.defConfig)
+      deepMerge(defaultConfig, _config)
+      res.config = defaultConfig
       return res
     })
+    console.log('testData', testData)
     setting.value = testData
     baseInfo.value.category = category
     baseInfo.value.sourceType = sourceType

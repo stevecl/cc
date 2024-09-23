@@ -1,13 +1,20 @@
 <template>
   <div class="list list2">
-    <div class="list_item" v-for="n in 3" :style="itemStyle">
+    <div class="list_item" v-for="(item, index) in showData" :key="index" :style="itemStyle">
       <div class="wrap">
-        <img class="img" :src="getDefaultImage('picture.png')" alt="">
+        <!-- <img class="img" :src="getDefaultImage('picture.png')" alt=""> -->
+        <el-image class="img" :src="item.mainImgUrl || 't'" fit="contain">
+          <template #error>
+            <div class="image-slot">
+              <img :src="getDefaultImage('picture.png')" alt="">
+            </div>
+          </template>
+        </el-image>
       </div>
       <div class="detail" :style="{ background: productConfig.bgColor }">
         <div class="name">
           <span class="tag" v-if="detailConfig.tag.show">标题标签</span>
-          <span class="txt" :style="detailConfig.title.style" v-if="detailConfig.title.show">这里是商品标题</span>
+          <span class="txt" :style="detailConfig.title.style" v-if="detailConfig.title.show">{{ item.goodsName }}</span>
         </div>
         <div class="subtitle" :style="detailConfig.subtitle.style" v-if="detailConfig.subtitle.show">这里是副标题</div>
         <div class="flex-1"></div>
@@ -16,9 +23,9 @@
             <div class="sales" :style="detailConfig.sales.style" v-if="detailConfig.sales.show">已售0</div>
             <div class="price">
               <div class="sale-price" :style="detailConfig.price.style" v-if="detailConfig.price.show">
-                <span class="unit">￥</span>20
+                <span class="unit">￥</span>{{ item.salePrice }}
               </div>
-              <div class="old-price" :style="detailConfig.oldPrice.style" v-if="detailConfig.oldPrice.show">￥20</div>
+              <div class="old-price" :style="detailConfig.oldPrice.style" v-if="detailConfig.oldPrice.show">￥{{ item.marketPrice }}</div>
             </div>
           </div>
           <div class="btn" :class="[carConfig.type, carConfig.size]" :style="btnStyle" v-if="carConfig.show">
@@ -63,6 +70,21 @@ const btnStyle = computed(() => {
   }
 })
 
+let defItem = {
+  goodsName: "商品标题",
+  salePrice: '20',
+  marketPrice: '99'
+}
+
+const showData = computed(() => {
+  let { type, selectList = [], showNum } = props.config.dataConfig
+  if (type === 'product') {
+    return selectList.length ? selectList : [ defItem ]
+  } else {
+    return new Array(showNum).fill(defItem)
+  }
+})
+
 </script>
 
 <style lang="scss" scoped>
@@ -78,7 +100,7 @@ const btnStyle = computed(() => {
       width: 130px;
       height: 130px;
       padding: 0;
-
+      flex-shrink: 0;
       .img {
         position: absolute;
         left: 0;
@@ -94,11 +116,12 @@ const btnStyle = computed(() => {
       padding: 8px 12px;
       flex-direction: column;
       padding: 10px 12px;
-
+      overflow: hidden;
       .name {
         display: flex;
         align-items: center;
         margin-bottom: 6px;
+        overflow: hidden;
 
         .tag {
           padding: 0 4px;

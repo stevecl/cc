@@ -6,9 +6,15 @@
   </el-radio-group>
   <div class="cus-list-btn" @click="handleSelect">选择</div>
   <div class="config-wrapper" v-if="item.type === 'product'">
-    <div class="item" v-for="n in 20">
-      <img src="https://img0.baidu.com/it/u=2702166526,4183416255&fm=253&app=120&size=w931&n=0&f=JPEG&fmt=auto?sec=1726506000&t=a9244d2a7c010d5d915d11fad4ecb9b8" alt="">
-      <div class="close" @click="handleDelete">
+    <div class="item" v-for="(product, index) in item.selectList" :key="index">
+      <el-image :src="product.mainImgUrl || 't'" fit="contain">
+        <template #error>
+          <div class="image-slot">
+            <img :src="getDefaultImage('picture.png')" alt="">
+          </div>
+        </template>
+      </el-image>
+      <div class="close" @click="handleDelete(index)">
         <el-icon><Close /></el-icon>
       </div>
     </div>
@@ -16,12 +22,12 @@
   <div class="config-wrapper" v-if="item.type === 'category'">
     <div class="block">
       <div class="label">分类</div>
-      <el-input disabled style="width: 240px;"></el-input>
+      <el-input v-model="item.categoryName" disabled style="width: 240px;"></el-input>
     </div>
     <div class="block">
       <div class="label">显示条数</div>
       <div class="flex">
-        <el-slider v-model="item.showNum" style="width: 240px;" :min="0" :max="20" :step="1" :show-tooltip="false"></el-slider>
+        <el-slider v-model="item.showNum" style="width: 240px;" :min="1" :max="20" :step="1" :show-tooltip="false"></el-slider>
         <span class="slide-span--unit">{{ item.showNum }}<span>个</span></span>
       </div>
     </div>
@@ -30,6 +36,9 @@
 
 <script setup>
 import { computed, ref, watch } from 'vue'
+import useDefaultSource from '@/hooks/useDefaultSource'
+
+let { getDefaultImage } = useDefaultSource()
 
 const emit = defineEmits(['update:modelValue'])
 const props = defineProps({
@@ -46,12 +55,18 @@ const item = computed({
 })
 
 const handleSelect = () => {
-  Bus.emit('selectDatas', item.value.type, () => {
-
+  Bus.emit('selectDatas', item.value, (data) => {
+    if (item.value.type === 'product') {
+      item.value.selectList = data
+    } else {
+      item.value.categoryId = data.id // 所选 商品分类
+      item.value.categoryName = data.categoryName // 分类名称
+    }
   })
 }
 
-const handleDelete = () => {
+const handleDelete = (index) => {
+  item.value.selectList.splice(index, 1)
   console.log('handleDelete')
 }
 

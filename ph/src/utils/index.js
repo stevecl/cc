@@ -31,6 +31,8 @@ export const getCookies = (key) => {
   return result[key] || null;
 }
 
+export const isObject = obj => Object.prototype.toString.call(obj) === '[object Object]'
+
 // 深度拷贝
 export const deepClone = obj => {
   // let isArr = Object.prototype.toString.call(obj) === '[object Array]';
@@ -50,6 +52,23 @@ export const deepClone = obj => {
     return newObj;
   }
   return obj;
+}
+
+export const deepMerge = (target, source) => {
+  if (isObject(target) && isObject(source)) {
+    for (const key in source) {
+      if (!target.hasOwnProperty(key)) target[key] = source[key]
+    }
+    for (const key in target) {
+      if (source.hasOwnProperty(key)) {
+        if (!isObject(source[key])) {
+          target[key] = source[key]
+        } else {
+          deepMerge(target[key], source[key])
+        }
+      }
+    }
+  }
 }
 
 /**
