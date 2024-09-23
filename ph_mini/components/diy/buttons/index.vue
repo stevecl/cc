@@ -2,17 +2,20 @@
   <div class="edit-module-button" :style="[styleObj]">
     <div 
       :style="{'width': 100 / config.lineNum + '%'}"
-      v-for="(item, index) in config.datas"
+      v-for="(item, index) in showData"
       :key="index"
+      @click="handleClick(item.link)"
       >
-      <img :src="item.icon || getDefaultImage(item.defaultIcon)" :style="{borderRadius: config.imgBorderRadius + 'px'}">
+      <image class="img" :src="item.icon || 'error'" @error="dealErrorImg(index, item.defaultIcon)" :style="{borderRadius: config.imgBorderRadius + 'px'}"></image>
       <p class="text-overflow" :style="{'color': item.color }">{{ item.text }}</p>
     </div>
   </div>
 </template>
 
 <script>
+  import { mixins } from '@/common/diyMixins'
 	export default {
+    mixins: [ mixins ],
 		props: {
 			config: Object
 		},
@@ -22,13 +25,18 @@
 		computed: {
 			styleObj() {
 			  let { style = {}, borderRadius } = this.config
-			  // style.background = `rgba(${style.bgColor.colorRgb()}, ${style.bgOpacity}) url(${style.bgImageUrl}) center / 100% 100% repeat`
+			  style.background = `${style.bgColor} url(${style.bgImageUrl}) center / 100% 100% repeat`
 			  style.borderRadius = borderRadius + 'px'
 			  return style
-			}
+			},
+      showData() {
+        return this.config.datas
+      }
 		},
 		methods: {
-			
+			dealErrorImg(index, file) {
+			  this.config.datas[index].icon = `${this.defDir}/default_${file}`
+			}
 		}
 	}
 </script>
@@ -43,7 +51,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    img {
+    .img {
       width: 40px;
       height: 40px;
     }

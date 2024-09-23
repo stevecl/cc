@@ -23,9 +23,10 @@ const props = defineProps({
 
 const styleObj = computed(() => {
   let { style = {}, borderRadius } = props.config
-  style.background = `${style.bgColor} url(${style.bgImageUrl}) center / 100% 100% repeat`
-  style.borderRadius = borderRadius + 'px'
-  return style
+  let res = { ...style }
+  res.background = `${style.bgColor} url(${style.bgImageUrl}) center / 100% 100% repeat`
+  res.borderRadius = borderRadius + 'px'
+  return res
 })
 
 </script>

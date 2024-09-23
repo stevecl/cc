@@ -20,7 +20,7 @@
     computed: {
       pageStyle() {
         return {
-          background: this.pageConfig.config?.bgColor
+          background: this.pageConfig.backgroundColor
         }
       }
     },
@@ -33,7 +33,7 @@
           this.pageConfig.pageTitle = templateTitle
           this.pageConfig.datas = JSON.parse(templateConfigParams)
           uni.setNavigationBarTitle({ title: templateTitle })
-          console.log('this.pageConfig', this.pageConfig)
+          console.log('this.pageConfig', this.pageConfig.datas)
         }
         let res1 = await this.$u.api.getDiy({ category: 'BOTTOM_MENU' })
         this.tabbarConfig = JSON.parse(res1.templateConfigParams)[0].config

@@ -2,7 +2,7 @@ import Vue from 'vue';
 import App from './App';
 // import './common/appPlugin'
 
-import '@/common/iconfont/iconfont.css'
+import '@/static/iconfont/iconfont.css'
 
 Vue.config.productionTip = false;
 

@@ -48,7 +48,7 @@ export default {
       let pages = getCurrentPages();
       let currentPage = pages[pages.length - 1];
       let currentRoute = currentPage.route
-      console.log('currentRoute', currentRoute)
+      // console.log('currentRoute', currentRoute)
       if (['pages/index/preview'].includes(currentRoute)) {
         currentRoute = currentRoute + '?numberCode=' + currentPage.options.numberCode
       }
