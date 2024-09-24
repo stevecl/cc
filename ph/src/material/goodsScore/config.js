@@ -8,6 +8,7 @@ let config = {
   productConfig: {
     showType: 2, // 风格样式
     goodSpace: 0, // 商品间距
+    goodRadius: 0, // 商品圆角
     bgColor: '#fff', // 商品背景
     detail: {
       title: {

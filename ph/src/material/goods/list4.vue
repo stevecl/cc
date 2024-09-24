@@ -32,7 +32,10 @@ const props = defineProps({
 const productConfig = computed(() => (props.config.productConfig || {}))
 const detailConfig = computed(() => (productConfig.value.detail || {}))
 
-const itemStyle = computed(() => ({ '--space': productConfig.value.goodSpace + 'px' }))
+const itemStyle = computed(() => ({
+  '--space': productConfig.value.goodSpace + 'px',
+  borderRadius: productConfig.value.goodRadius + 'px'
+}))
 
 let defItem = {
   goodsName: "商品标题",
@@ -43,7 +46,7 @@ let defItem = {
 const showData = computed(() => {
   let { type, selectList = [], showNum } = props.config.dataConfig
   if (type === 'product') {
-    return selectList.length ? selectList : [ defItem ]
+    return selectList.length ? selectList : [ defItem, defItem ]
   } else {
     return new Array(showNum).fill(defItem)
   }
@@ -55,18 +58,18 @@ const showData = computed(() => {
 .list {
   display: flex;
   flex-wrap: wrap;
+  // justify-content: flex-start;
+  // align-items: flex-start;
   .list_item {
     --space: 0;
     display: flex;
     width: calc(50% - var(--space) / 2);
     box-sizing: border-box;
     margin-bottom: calc(var(--space) );
+    overflow: hidden;
     &:nth-child(2n + 1) {
       margin-right: calc(var(--space));
     }
-    // &:nth-last-child(1){
-    //   margin-bottom: 0;
-    // }
     .wrap {
       position: relative;
       width: 80px;
@@ -82,6 +85,7 @@ const showData = computed(() => {
     }
 
     .detail {
+      flex: 1;
       display: flex;
       flex-direction: column;
       padding: 4px;

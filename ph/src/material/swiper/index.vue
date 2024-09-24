@@ -1,6 +1,5 @@
 <template>
-  
-  <div class="edit-module-swiper">
+  <div class="edit-module-swiper" :style="boxStyle">
     <swiper
       :modules="modules"
       :pagination="paginationSet"
@@ -9,15 +8,12 @@
       :speed="1000"
       @swiper="onSwiper"
     >
-      <swiper-slide class="swiper-slide" :style="boxStyle" v-for="(item, index) in config.datas">
-        <el-image
-          class="img"
-          :src="item.url || getDefaultImage(item.defaultIcon)"
-          :style="{ borderRadius: config.imgRadius + '%' }">
+      <swiper-slide class="swiper-slide" :style="itemStyle" v-for="(item, index) in config.datas">
+        <el-image class="img" :src="item.url || 't'" fit="contain">
           <template #error>
             <div class="image-slot">
-                <el-icon><Picture /></el-icon>
-              </div>
+              <img :src="getDefaultImage(config.imgRatio === '1/1' ? 'picture.png' : 'banner.png')" alt="">
+            </div>
           </template>
         </el-image>
       </swiper-slide>
@@ -40,13 +36,19 @@ const props = defineProps({
 
 const boxStyle = computed(() => {
   let { bgStyle, style } = props.config
-  let { imgRadius, imgRatio } = props.config
   bgStyle.background = `${bgStyle.bgColor} url(${bgStyle.bgImageUrl}) center / 100% 100% repeat`
   bgStyle.backgroundSize = '100% 100%'
   return {
     ...bgStyle,
     ...style,
-    paddingTop: 100 / (imgRatio.split('/')[0] / imgRatio.split('/')[1] )+ '%'
+  }
+})
+
+const itemStyle = computed(() => {
+  let { imgRadius, imgRatio } = props.config
+  return {
+    paddingTop: 100 / (imgRatio.split('/')[0] / imgRatio.split('/')[1] )+ '%',
+    borderRadius: imgRadius + '%'
   }
 })
 
@@ -94,11 +96,14 @@ onMounted(() => {
   flex-wrap: wrap;
   align-items: center;
   box-sizing: border-box;
+  overflow: hidden;
   .swiper-slide {
+    display: flex;
     position: relative;
     font-size: 0;
-    border: 1px solid red;
     overflow: hidden;
+    min-height: 100px;
+    border: 1px solid transparent;
     .img {
       position: absolute;
       left: 0;

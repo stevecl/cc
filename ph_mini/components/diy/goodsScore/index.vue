@@ -1,6 +1,5 @@
 <template>
   <div class="edit-module-goodsScore" :style="[config.style]">
-		33333333: {{config.productConfig.showType}}
     <list2 :config="config" saleType="score" v-if="config.productConfig.showType === 2"></list2>
     <list3 :config="config" saleType="score" v-if="config.productConfig.showType === 3"></list3>
   </div>

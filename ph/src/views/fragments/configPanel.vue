@@ -6,7 +6,7 @@
         <img :src="getIconUrl(activeItem.name)" alt="">
         {{ activeItem.title }}
       </p>
-      <!-- <template  v-if="baseInfo.category !== 'BOTTOM_MENU'">
+      <template  v-if="baseInfo.category !== 'BOTTOM_MENU'">
         <p class="pointer btn" @click="emit('copy')">
           <span class="iconfont icon-fuzhi1"></span>
           <span>复制</span>
@@ -15,7 +15,7 @@
           <span class="iconfont icon-shanchu2"></span>
           <span>删除</span>
         </p>
-      </template> -->
+      </template>
     </div>
     <div class="custom-scroll-bar edit-config-module">
       <component

@@ -1,18 +1,29 @@
-.el-button.el-button--primary {
-  $color: #FE6903;
-  background-color: $color;
-  color: #fff;
-  border-color: $color;
-  &:hover {
-    color: #fff;
-    border-color: lighten($color, 20%)!important;
-    background-color: lighten($color, 20%)!important;
-  }
-  &.is-disabled {
-    border-color: lighten($color, 20%)!important;
-    background-color: lighten($color, 20%)!important;
-  }
+// .el-button.el-button--primary {
+//   $color: #FE6903;
+//   background-color: $color;
+//   color: #fff;
+//   border-color: $color;
+//   &:hover {
+//     color: #fff;
+//     border-color: lighten($color, 20%)!important;
+//     background-color: lighten($color, 20%)!important;
+//   }
+//   &.is-disabled {
+//     border-color: lighten($color, 20%)!important;
+//     background-color: lighten($color, 20%)!important;
+//   }
+// }
+
+.el-button {
+  --el-color-primary: rgba(252,104,1, 1);
+  --el-color-primary-light-3: rgba(252,104,1, .8);
+  --el-color-primary-light-5: rgba(252,104,1, .6);
+  --el-color-primary-light-7: rgba(252,104,1, .4);
+  --el-color-primary-light-8: rgba(252,104,1, .2);
+  --el-color-primary-light-9: rgba(252,104,1, .1);
+  --el-color-primary-dark-2: rgba(252,104,1, 1);
 }
+
 .config-edit-item, .config-wrapper {
   // .el-slider__bar {
   //   background-color: #FE6903!important; /* 红色 */

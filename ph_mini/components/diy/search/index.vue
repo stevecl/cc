@@ -1,6 +1,6 @@
 <template>
   <div class="edit-module-search" :style="[styleObj]">
-    <span :class="['iconfont', config.left.icon]" :style="[leftStyle]" v-show="config.left.type"></span>
+    <span :class="['iconfont', config.left.icon]" :style="[leftStyle]" v-show="config.left.type" @click="handleClick(config.left.link)"></span>
     <div class="search-input">
       <input
         type="text"
@@ -15,7 +15,10 @@
 </template>
 
 <script>
+import { mixins } from '@/common/diyMixins'
+
 export default {
+  mixins: [mixins],
   props: {
     config: Object
   },
@@ -26,16 +29,16 @@ export default {
   },
   computed: {
     styleObj() {
-      let { bgColor, bgOpacity, bgImageUrl } = this.config?.style || {}
-      let background = `rgba(${bgColor.colorRgb()}, ${bgOpacity}) url(${bgImageUrl}) center / 100% 100% repeat`
+      let { bgColor, bgImageUrl } = this.config?.style || {}
+      let background = `${bgColor} url(${bgImageUrl}) center / 100% 100% repeat`
       return {
         ...this.config.style,
         background
       }
     },
     inputStyle(){
-      let { bgColor, bgOpacity, borderRadius } = this.config?.input || {}
-      let background = `rgba(${bgColor.colorRgb()}, ${bgOpacity})`
+      let { bgColor, borderRadius } = this.config?.input || {}
+      let background = `${bgColor}`
       return {
         ...this.config.input,
         paddingLeft: this.config.left.type === 2 ? '36px' : '12px',
@@ -66,7 +69,7 @@ export default {
     },
     linkPage() {
       // 跳转类型 btnType: default link
-      let { btnType, link } = props.config.right
+      let { btnType, link } = this.config.right
       
     }
   }

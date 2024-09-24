@@ -23,7 +23,7 @@ export default {
   computed: {
     styleObj() {
       let res = this.config?.style || {}
-      res.background = `rgba(${res.bgColor.colorRgb()}, ${res.bgOpacity}) url(${res.bgImageUrl}) center / 100% 100% repeat`
+      res.background = `${res.bgColor} url(${res.bgImageUrl}) center / 100% 100% repeat`
       return res
     }
   },

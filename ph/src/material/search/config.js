@@ -15,14 +15,14 @@ let config = {
   },
   left: {
     type: 1,
-    icon: 'icon-sousuo',
+    icon: 'icon-shouye',
     color: '#fff',
     btnType: 'link',
     link: ''
   },
   right: {
     type: 1,
-    icon: 'icon-help',
+    icon: 'icon-shangpin',
     color: '#fff',
     btnType: 'link',
     link: ''

@@ -22,7 +22,9 @@
 </template>
 
 <script>
+import { mixins } from '@/common/diyMixins'
 export default {
+  mixins: [mixins],
   props: {
     config: Object
   },
@@ -31,7 +33,7 @@ export default {
       imgWidth: 200,
       state: {
         indicatorDots: this.config.indicator.show,
-        indicatorColor: `rgba(${this.config.indicator.color.colorRgb()}, .3)`,
+        indicatorColor: `${this.config.indicator.color}`,
         indicatorActiveColor: this.config.indicator.color,
         autoplay: true,
         interval: 2000,
@@ -42,7 +44,7 @@ export default {
   computed: {
     boxStyle() {
       let { bgStyle, style } = this.config
-      bgStyle.background = `rgba(${bgStyle.bgColor.colorRgb()}, ${bgStyle.bgOpacity}) url(${bgStyle.bgImageUrl}) center / 100% 100% repeat`
+      bgStyle.background = `${bgStyle.bgColor} url(${bgStyle.bgImageUrl}) center / 100% 100% repeat`
       bgStyle.backgroundSize = '100% 100%'
       return {
         ...bgStyle,

@@ -33,12 +33,16 @@ export default {
       return this.productConfig.detail || {}
     },
     itemStyle() {
-      return { '--space': this.productConfig.goodSpace + 'px' }
+      let { goodSpace, goodRadius } = this.productConfig
+      return {
+        '--space': goodSpace + 'px',
+        borderRadius: goodRadius + 'px',
+      }
     },
     showData() {
       let { type, selectList = [], showNum } = this.config.dataConfig
       if (type === 'product') {
-        return selectList.length ? selectList : [ defItem ]
+        return selectList.length ? selectList : [ defItem, defItem ]
       } else {
         return new Array(showNum).fill(defItem)
       }
@@ -63,12 +67,10 @@ export default {
     width: calc(50% - var(--space) / 2);
     box-sizing: border-box;
     margin-bottom: calc(var(--space) );
+    overflow: hidden;
     &:nth-child(2n + 1) {
       margin-right: calc(var(--space));
     }
-    // &:nth-last-child(1){
-    //   margin-bottom: 0;
-    // }
     .list_wrap {
       position: relative;
       width: 80px;
@@ -84,6 +86,7 @@ export default {
     }
 
     .detail {
+      flex: 1;
       display: flex;
       flex-direction: column;
       padding: 4px;

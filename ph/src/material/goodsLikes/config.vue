@@ -9,6 +9,10 @@
       <el-slider style="width: 250px;" v-model="config.productConfig.goodSpace" :min="0" :max="20" :step="1" :show-tooltip="false"></el-slider>
       <span class="slide-span--unit">{{ config.productConfig.goodSpace }}<span>px</span></span>
     </configItem>
+    <configItem :label="'商品圆角'">
+      <el-slider style="width: 250px;" v-model="config.productConfig.goodRadius" :min="0" :max="30" :step="1" :show-tooltip="false"></el-slider>
+      <span class="slide-span--unit">{{ config.productConfig.goodRadius }}<span>px</span></span>
+    </configItem>
     <configItem :label="'上边距'" :labelWidth="70">
       <inputNumber v-model="paddingTop"></inputNumber>
       <div class="label2 wid70">左右边距(内)</div>

@@ -65,9 +65,11 @@ export default {
       return this.productConfig.car || {}
     },
     itemStyle() {
+      let { goodSpace, goodRadius } = this.productConfig
       let { size, color, carColor, bgColor, borderRadius, borderColor } = this.carConfig
       return {
-        '--space': this.productConfig.goodSpace + 'px',
+        '--space': goodSpace + 'px',
+        borderRadius: goodRadius + 'px',
         // btn
         '--size': size === 'small' ? '22px' : size === 'middle' ? '26px' : '30px',
         '--color': color,
@@ -83,7 +85,7 @@ export default {
     showData() {
       let { type, selectList = [], showNum } = this.config.dataConfig
       if (type === 'product') {
-        return selectList.length ? selectList : [ defItem ]
+        return selectList.length ? selectList : [ defItem, defItem ]
       } else {
         return new Array(showNum).fill(defItem)
       }
@@ -107,6 +109,7 @@ export default {
     width: calc(50% - var(--space) / 2);
     margin-bottom: calc(var(--space) );
     box-sizing: border-box;
+    overflow: hidden;
     &:nth-child(2n + 1) {
       margin-right: calc(var(--space));
     }

@@ -17,7 +17,7 @@
           <div class="price" :style="detailConfig.price.style">
             <span class="unit">￥</span>{{ item.salePrice }}
           </div>
-          <div class="btn" :class="[carConfig.type, carConfig.size]" :style="btnStyle" v-if="carConfig.show">
+          <div class="btn" :class="[carConfig.type, carConfig.size]" v-if="carConfig.show">
             <span :class="{hide: carConfig.type !== 'btn1'}" class="txt">{{ carConfig.text || '购买' }}</span>
             <span :class="{hide: carConfig.type !== 'btn2'}" class="add">+</span>
             <span :class="{hide: carConfig.type !== 'btn3'}" class="iconfont icon-gouwuche icon"></span>
@@ -42,10 +42,13 @@ const productConfig = computed(() => (props.config.productConfig || {}))
 const detailConfig = computed(() => (productConfig.value.detail || {}))
 const carConfig = computed(() => (productConfig.value.car || {}))
 
-const itemStyle = computed(() => ({ '--space': productConfig.value.goodSpace + 'px' }))
-const btnStyle = computed(() => {
+const itemStyle = computed(() => {
+  let { goodSpace, goodRadius } = productConfig.value
   let { size, color, carColor, bgColor, borderRadius, borderColor } = carConfig.value
   return {
+    '--space': goodSpace + 'px',
+    borderRadius: goodRadius + 'px',
+    // btn
     '--size': size === 'small' ? '22px' : size === 'middle' ? '26px' : '30px',
     '--color': color,
     '--carColor': carColor,
@@ -67,7 +70,7 @@ let defItem = {
 const showData = computed(() => {
   let { type, selectList = [], showNum } = props.config.dataConfig
   if (type === 'product') {
-    return selectList.length ? selectList : [ defItem ]
+    return selectList.length ? selectList : [ defItem, defItem ]
   } else {
     return new Array(showNum).fill(defItem)
   }
@@ -84,6 +87,7 @@ const showData = computed(() => {
     flex-direction: column;
     width: 100px;
     flex-shrink: 0;
+    overflow: hidden;
     &:not(:last-of-type) {
       margin-right: var(--space);
     }
