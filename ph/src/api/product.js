@@ -38,6 +38,8 @@ export function getDataItem(type) {
     url: '/custom/new/getDataItem',
     method: 'post',
     data: {
+      pageSize: 100,
+      pageNum: 1,
       type,
       sourceType: 'MARKET_APPLETS'
     }

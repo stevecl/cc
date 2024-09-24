@@ -29,7 +29,7 @@
           <div class="text-overflow image-title">{{ item.picName }}</div>
           <div class="delete-box"><span class="iconfont icon-shanchu2" @click="handleDeleteImage(item.picId)"></span></div>
           <div class="image-mask" v-show="selectImgList.includes(item.picId)">
-            <span class="iconfont icon-xuanzhong"></span>
+            <span class="fs42 iconfont icon-gou1"></span>
           </div>
         </div>
       </div>

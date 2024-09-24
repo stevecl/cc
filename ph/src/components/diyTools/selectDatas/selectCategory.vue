@@ -1,57 +1,39 @@
 <template>
   <div class="content">
     <div class="top">
-      <div class="top_item" :class="{active: searchQuery.type === 'ONLINE'}" @click="handleType('ONLINE')">线上商品</div>
-      <div class="top_item" :class="{active: searchQuery.type === 'CITY'}" @click="handleType('CITY')">同城商品</div>
+      <div class="top_item" :class="{active: state.type === 'CATEGORY_ONLINE'}" @click="handleType('CATEGORY_ONLINE')">线上商品</div>
+      <div class="top_item" :class="{active: state.type === 'CATEGORY_CITY'}" @click="handleType('CATEGORY_CITY')">同城商品</div>
     </div>
-    <div class="main">
-      <el-tree
-        style="max-width: 600px"
-        :data="categoryListDatas"
-        :props="defaultProps"
-        current-node-key="1929642608787330"
-        accordion
-        @node-click="handleNodeClick"
-        />
-    </div>
+    <categodyBox ref="childDom" :datas="state.datas"></categodyBox>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { Search } from '@element-plus/icons-vue'
-import { getProductList, getDataItem, getProductList2, getBrandList, getProductStateList } from '@/api'
+import { ref, reactive, onMounted } from 'vue'
+import { getDataItem } from '@/api'
 import { deepClone } from '@/utils'
+import categodyBox from '../common/categoryBox.vue'
 
-const defaultProps = {
-  label: 'categoryName',
-  children: 'list',
-  class: 'test'
-}
-const searchQuery = ref({
-  type: 'ONLINE', // 同城:CITY 线上：ONLINE
+const state = reactive({
+  type: 'CATEGORY_ONLINE', // CATEGORY_ONLINE 线上；CATEGORY_CITY 同城
+  datas: [],
 })
 
-let selectObj = null
-const categoryListDatas = ref([])
-
-const handleNodeClick = data => selectObj = data
 const handleType = type => {
-  if (searchQuery.value.type === type) return
-  searchQuery.value.type = type
+  if (state.type === type) return
+  state.type = type
   getDatas()
 }
 
 const getDatas = async () => {
-  let { type } = searchQuery.value
-  // 获取分类数据
-  let categoryTypeParams = type === 'ONLINE' ? 'CATEGORY_ONLINE' : 'CATEGORY_CITY'
-  let { dataList } = await getDataItem(categoryTypeParams)
-  categoryListDatas.value = dataList
+  let { dataList } = await getDataItem(state.type)
+  state.datas = dataList
 }
 
+const childDom = ref(null)
 const initData = ({ selectList: data }) => selectList.value = deepClone(data)
-const getSelectData = () => selectObj
+// const getSelectData = () => ({ id: state.selectId, categoryName: state.selectName })
+const getSelectData = () => childDom.value.submit()
 
 defineExpose({
   initData,
@@ -66,9 +48,13 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .content {
+  display: flex;
+  flex-direction: column;
   position: relative;
   width: 100%;
   height: 500px;
+
+  padding-top: 50px;
   .top {
     position: absolute;
     top: 0;
@@ -93,44 +79,6 @@ onMounted(() => {
       }
     }
   }
-  .main {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 50px;
-    left: 0px;
-    right: 0;
-    bottom: 0;
-    border: 1px solid #f1f1f1;
-    border-radius: 4px;
-    padding: 10px;
-    overflow-y: auto;
-    :deep() {
-      .test {
-      }
-    }
-    
-  }
 }
 
-.activeIcon {
-  display: none;
-  width: 14px;
-  height: 14px;
-  text-align: center;
-  border-radius: 50%;
-  position: absolute;
-  top: -6px;
-  right: -6px;
-  background: var(--primary, #fb6638);
-  color: #fff;
-  .iconfont {
-    display: inline-block;
-    height: 14px;
-    line-height: 14px;
-    position: absolute;
-    left: 0;
-    top: -1px;
-  }
-}
 </style>

@@ -3,8 +3,8 @@
     class="ph-dialog"
     title="选择商品"
     v-model="state.dialogVisible">
-    <selectProduct ref="childProduct" v-if="state.selectType === 'product'"></selectProduct>
-    <selectCategory ref="childCategory" v-if="state.selectType === 'category'"></selectCategory>
+    <selectProduct ref="childDom" v-if="state.selectType === 'product'"></selectProduct>
+    <selectCategory ref="childDom" v-if="state.selectType === 'category'"></selectCategory>
     <template #footer>
       <el-button plain @click="handleClose">关 闭</el-button>
       <el-button type="primary" @click="handleSubmit">确 定</el-button>
@@ -23,12 +23,14 @@ const state = reactive({
   callback: null,
 })
 
-const childProduct = ref(null)
-const childCategory = ref(null)
+const childDom = ref(null)
 
-const handleClose = () => state.dialogVisible = false
+const handleClose = () => {
+  state.selectType = ''
+  state.dialogVisible = false
+}
 const handleSubmit = () => {
-  let data = state.selectType === 'product' ? childProduct.value.getSelectData() : childCategory.value.getSelectData()
+  let data = childDom.value.getSelectData()
   console.log('data', data)
   typeof state.callback === 'function' && state.callback(data)
   handleClose()
@@ -42,7 +44,7 @@ onMounted(() => {
     state.dialogVisible = true
     state.callback = cb
     nextTick(() => {
-      type === 'product' && childProduct.value.initData(opt)
+      type === 'product' && childDom.value.initData(opt)
     })
   })
 })

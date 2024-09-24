@@ -1,8 +1,8 @@
 <template>
-  <div class="content">
-    <div class="top">
-      <div class="top_item" :class="{active: searchQuery.type === 'ONLINE'}" @click="handleType('ONLINE')">线上商品</div>
-      <div class="top_item" :class="{active: searchQuery.type === 'CITY'}" @click="handleType('CITY')">同城商品</div>
+  <div class="goods-link">
+    <div class="category">
+      <div class="category_item" :class="{active: searchQuery.type === 'ONLINE'}" @click="handleType('ONLINE')">线上商品</div>
+      <div class="category_item" :class="{active: searchQuery.type === 'CITY'}" @click="handleType('CITY')">同城商品</div>
     </div>
     <div class="main">
       <div class="main_search">
@@ -81,7 +81,6 @@ import { ref, onMounted } from 'vue'
 import { Search } from '@element-plus/icons-vue'
 import { getProductList, getDataItem, getProductList2, getBrandList, getProductStateList } from '@/api'
 import useDefaultSource from '@/hooks/useDefaultSource'
-import { deepClone } from '@/utils'
 
 let { getDefaultImage } = useDefaultSource()
 
@@ -125,7 +124,8 @@ const handleSelect = (item) => {
   if (index > -1) {
     selectList.value.splice(index, 1)
   } else {
-    selectList.value.push(item)
+    // selectList.value.push(item)
+    selectList.value = [ item ]
   }
 }
 
@@ -160,12 +160,10 @@ const handlePage = page => {
   getProductData()
 }
 
-const initData = ({ selectList: data }) => selectList.value = deepClone(data)
-const getSelectData = () => deepClone(selectList.value)
+const submit = () => selectList.value.length ? selectList.value[0].id : ''
 
 defineExpose({
-  initData,
-  getSelectData
+  submit
 })
 
 onMounted(async () => {
@@ -182,42 +180,39 @@ onMounted(async () => {
 .mr10 {
   margin-right: 10px;
 }
-.content {
-  position: relative;
-  width: 100%;
-  height: 500px;
-  .top {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 36px;
-    display: flex;
+.goods-link {
+  display: flex;
+  height: 100%;
+  .category {
+    width: 160px;
+    flex-shrink: 0;
+    border: 1px solid #f1f1f1;
+    border-radius: 4px;
+    padding: 10px 0;
+    margin-right: 10px;
     &_item {
-      border-radius: 4px;
-      margin-right: 10px;
-      width: 88px;
       height: 36px;
       line-height: 36px;
-      text-align: center;
-      border: 1px solid #f1f1f1;
-      color: #666;
+      width: 100%;
+      border-radius: 4px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding: 0 25px;
       cursor: pointer;
       &.active {
-        border: none;
-        background-color: var(--primary, #fb6638);
-        color: #fff;
+        color: var(--primary, #fb6638) !important;
+        background: var(--primary-tips, #fff3ef) !important;
+      }
+      &:hover {
+        color: var(--primary, #fb6638);
       }
     }
   }
   .main {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    position: absolute;
-    top: 50px;
-    left: 0px;
-    right: 0;
-    bottom: 0;
     border: 1px solid #f1f1f1;
     border-radius: 4px;
     padding: 10px;
