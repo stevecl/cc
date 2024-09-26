@@ -29,7 +29,7 @@
     <div class="module-edit-title">显示模式</div>
     <configItem :label="'上标题颜色'" :labelWidth="70">
       <selectColor v-model="config.supStyle.color" :resetColor="'#666'"></selectColor>
-      <div class="label2 wid70">下标题颜色</div>
+      <div class="label2 wid70" style="margin-left: 40px;">下标题颜色</div>
       <selectColor v-model="config.subStyle.color" :resetColor="'#666'"></selectColor>
     </configItem>
     <configItem :label="'上标题对齐'" :labelWidth="70">

@@ -12,7 +12,7 @@
 import { ref, reactive, onMounted } from 'vue'
 import { getDataItem } from '@/api'
 import { deepClone } from '@/utils'
-import categodyBox from '../common/categoryBox.vue'
+import categodyBox from '../selectLink/commonList.vue'
 
 const state = reactive({
   type: 'CATEGORY_ONLINE', // CATEGORY_ONLINE 线上；CATEGORY_CITY 同城
@@ -26,7 +26,7 @@ const handleType = type => {
 }
 
 const getDatas = async () => {
-  let { dataList } = await getDataItem(state.type)
+  let { dataList } = await getDataItem({ type: state.type })
   state.datas = dataList
 }
 

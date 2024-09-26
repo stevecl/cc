@@ -45,7 +45,7 @@ import { useRoute, useRouter } from 'vue-router'
 import materialPanel from './materialPanel.vue';
 import engine from './renderEngine.vue'
 import configPanel from './configPanel.vue';
-import { ElMessageBox } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
 
 import { deepClone } from '@/utils'
 
@@ -82,6 +82,7 @@ const { initData, submitData } = useEditHook(baseInfo, setting, activeIndex)
 
 // 添加模块
 const handleAddModule = item => {
+  if (item.name === 'floatButtons' && setting.value.some(obj => obj.name === 'floatButtons')) return ElMessage ({ message: `${item.title}组件只能添加一个`, type: 'warning' })
   let newItem = deepClone(item)
   newItem.config = deepClone(newItem.defConfig)
   if (activeIndex.value === -1) {

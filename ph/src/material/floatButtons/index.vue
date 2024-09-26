@@ -82,6 +82,9 @@ onMounted(() => {
     }
     .iconfont {
       font-size: 22px;
+      &.icon-fanhuidingbunew {
+        font-size: 28px;
+      }
     }
   }
 }

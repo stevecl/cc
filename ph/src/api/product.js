@@ -17,11 +17,19 @@ export function getProductList(data) {
   })
 }
 
+export function getItemAll() {
+  return request({
+    url: '/custom/itemType/getItemAll',
+    method: 'post',
+  })
+}
+
 
 /**
  * @function 商品分类(线上/同城)，不分页
  * @param { String } searchKey 搜索关键字 
  * @param { String } type 
+ * @value BASICS_PAGE_CODE 基础页面
  * @value CUSTOM_ITEM_TYPE 自定义链接跳转分类;
  * @value CATEGORY_ONLINE 商品分类[线上];
  * @value CATEGORY_CITY 商品分类[同城]
@@ -30,16 +38,18 @@ export function getProductList(data) {
  * @value STRATEGY_CLASS 攻略分类  分页
  * @value PROMOTION_ACTIVITY_CLASS 促销活动分类
  * @value BRAND_CLASS 品牌分类 分页
- * @value BASICS_PAGE_CODE 基础页面
+ * @value COUPON_PAGE_CODE 代金券页面
+ * @value RED_PACKET_PAGE_CODE 红包雨页面
+ * @value COUPON_LIST 红包雨页面 分页
  * @returns
  */
-export function getDataItem(type) {
+export function getDataItem({ type, pageNum = null, pageSize = null }) {
   return request({
     url: '/custom/new/getDataItem',
     method: 'post',
     data: {
-      pageSize: 100,
-      pageNum: 1,
+      pageSize,
+      pageNum,
       type,
       sourceType: 'MARKET_APPLETS'
     }

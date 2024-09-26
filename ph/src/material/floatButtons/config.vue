@@ -50,8 +50,8 @@
             </template>
             <div class="right-icon">
               <p style="margin-top: 20px;">
-                <input class="cus-input" type="text" v-model="item.link" placeholder="请选择链接或输入链接地址">
-                <span class="cus-btn" @click="selectLink(item)">选择链接</span>
+                <input class="cus-input" type="text" disabled v-model="item.link" placeholder="请选择链接或输入链接地址">
+                <span class="pointer cus-btn" @click="selectLink(item)">选择链接</span>
               </p>
             </div>
             <span class="close" title="删除" @click="handleDelete(item)"><el-icon><Close /></el-icon></span>
@@ -78,14 +78,15 @@ const { getDefaultImage } = useDefaultSource()
 
 const selectIcon = item => Bus.emit('selectIcon', icon => item.icon = icon)
 const selectImage = item => Bus.emit('selectImage', res => item.img = res.picUrl)
-const selectLink = item => Bus.emit('selectLink', link => item.link = link, item.link)
+const selectLink = item => item.link !== '返回顶部' && Bus.emit('selectLink', link => item.link = link, item.link)
 
 const handleAdd = (type = '') => {
   if (props.config.datas.length >= 4) return ElMessage({ message: '最多展示4个', type: 'warning' })
+  let isTop = type === 'top'
   let _obj = {
-    icon: 'icon-shouye',
+    icon: isTop ? 'icon-fanhuidingbunew' : 'icon-shouye',
     img: '',
-    link: ''
+    link: isTop ? '返回顶部' : ''
   }
   props.config.datas.push( _obj )
 }

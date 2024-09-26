@@ -50,7 +50,9 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'; 
+import { reactive, onMounted } from 'vue'; 
+import { getDataItem, getItemAll } from '@/api'
+
 const state = reactive({
   categoryIndex: 0,
   link: '',
@@ -65,6 +67,12 @@ const changeCategory = index => {
 
 const handleSelect = link => state.link = link
 const submit = () => state.link
+
+onMounted(() => {
+  getDataItem({ type: 'BASICS_PAGE_CODE' })
+  getDataItem({ type: 'CUSTOM_ITEM_TYPE' })
+  getItemAll()
+})
 
 defineExpose({
   submit

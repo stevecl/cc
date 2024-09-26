@@ -27,11 +27,11 @@
           />
         </el-select>
         <el-cascader
-          v-model="searchQuery.categoryId"
+          v-model="categorySelectList"
           :options="categoryListDatas"
           :props="propsOptions"
           placeholder="选择分类"
-          value-on-clear=""
+          :value-on-clear="[]"
           clearable />
         <span class="flex-1"></span>
         <el-button type="primary" @click="handleSearch">查 询</el-button>
@@ -63,7 +63,7 @@
             </div>
           </div>
         </div>
-        <div class="gray" v-if="!productDatas.length" style="margin-top: 150px;text-align: center;width: 100%;">暂无商品数据</div>
+        <div class="gray" v-if="!productDatas.length" style="margin: 150px 0;text-align: center;width: 100%;">暂无商品数据</div>
       </div>
       <el-pagination
         :current-page="searchQuery.pageNum"
@@ -90,6 +90,8 @@ const propsOptions = {
   children: 'list', //
   checkStrictly: true, //	是否严格的遵守父子节点不互相关联
 }
+
+const categorySelectList = ref([])
 const searchQuery = ref({
   type: 'ONLINE', // 同城:CITY 线上：ONLINE
   goodsName: '', // 商品名称/品牌名称/货号
@@ -116,6 +118,7 @@ const resetSearch = () => {
   searchQuery.value.goodsName = ''
   searchQuery.value.brandId = ''
   searchQuery.value.categoryId = ''
+  categorySelectList.value = []
   searchQuery.value.pageNum = 1
 }
 
@@ -130,12 +133,8 @@ const handleSelect = (item) => {
 }
 
 const handleSearch = () => {
-  let params = { ...searchQuery.value }
-  if (params.categoryId.length) {
-    params.categoryId = params.categoryId.pop()
-  }
+  searchQuery.value.categoryId = categorySelectList.value[categorySelectList.value.length - 1] || ''
   getProductData()
-  console.log(params, params.categoryId.length)
 }
 
 const getDatas = async () => {
@@ -145,7 +144,7 @@ const getDatas = async () => {
   brandListDatas.value = res
   // 获取分类数据
   let categoryTypeParams = type === 'ONLINE' ? 'CATEGORY_ONLINE' : 'CATEGORY_CITY'
-  let { dataList } = await getDataItem(categoryTypeParams)
+  let { dataList } = await getDataItem({ type: categoryTypeParams })
   categoryListDatas.value = dataList
   getProductData()
 }
@@ -167,7 +166,6 @@ defineExpose({
 })
 
 onMounted(async () => {
-  console.log('ssssssss', searchQuery.value)
   getDatas()
 })
 
@@ -221,10 +219,13 @@ onMounted(async () => {
       display: flex;
     }
     .product-list {
+      flex: 1;
       display: flex;
       flex-wrap: wrap;
-      flex: 1;
+      align-items: flex-start;
       margin-top: 20px;
+      // overflow: hidden;
+      flex-grow: 0;
       &_item {
         cursor: pointer;
         width: 280px;
