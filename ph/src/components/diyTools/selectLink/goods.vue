@@ -79,7 +79,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { Search } from '@element-plus/icons-vue'
-import { getProductList, getDataItem, getProductList2, getBrandList, getProductStateList } from '@/api'
+import { getProductList, getDataItem, getBrandList } from '@/api'
 import useDefaultSource from '@/hooks/useDefaultSource'
 
 let { getDefaultImage } = useDefaultSource()
@@ -260,29 +260,6 @@ onMounted(async () => {
           .activeIcon {
             display: unset;
           }
-        }
-      }
-    }
-    .list_item {
-      position: relative;
-      display: flex;
-      justify-content: space-between;
-      height: 42px;
-      color: #333;
-      cursor: pointer;
-      line-height: 40px;
-      border-radius: 4px;
-      border: 1px solid #ededed;
-      margin-bottom: 10px;
-      padding: 0 12px;
-      &.header {
-        cursor: auto;
-        background-color: #f7f7f7;
-      }
-      &.active {
-        border-color: var(--primary, #fb6638);
-        .activeIcon {
-          display: unset;
         }
       }
     }

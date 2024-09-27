@@ -61,6 +61,17 @@ export function getBrandList(brandName) {
 }
 
 /**
+ * @function 获取自定义链接跳转列表类型-所有
+ * @returns 
+ */
+export function getItemAll() {
+  return request({
+    url: '/custom/itemType/getItemAll',
+    method: 'post',
+  })
+}
+
+/**
  * @function 获取商品状态
  * @returns 
  */
