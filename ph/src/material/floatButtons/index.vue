@@ -2,7 +2,7 @@
   <div class="edit-module-floatButtons" :style="boxStyle">
     <div class="item" v-for="(item, index) in config.datas">
       <span class="iconfont" :class="[item.icon]" v-if="config.showType === 1"></span>
-      <img :src="item.img || getDefaultImage('picture.png')" alt="" v-if="config.showType === 2">
+      <img :src="item.img || getDefaultImage('default_picture.png')" alt="" v-if="config.showType === 2">
     </div>
   </div>
 </template>
@@ -82,6 +82,9 @@ onMounted(() => {
     }
     .iconfont {
       font-size: 22px;
+      &.icon-fanhuidingbunew {
+        font-size: 28px;
+      }
     }
   }
 }

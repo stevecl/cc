@@ -6,7 +6,7 @@
         <el-image class="img" :src="item.mainImgUrl || 't'" fit="contain">
           <template #error>
             <div class="image-slot">
-              <img :src="getDefaultImage('banner.png')" alt="">
+              <img :src="getDefaultImage('default_banner.png')" alt="">
             </div>
           </template>
         </el-image>
@@ -79,7 +79,7 @@ let defItem = {
 }
 
 const showData = computed(() => {
-  let { type, selectList = [], showNum } = props.config.dataConfig
+  let { type, selectList = [], showNum } = props.config.dataConfig || props.config.tabbarConfig.datas[props.config.tabbarIndex]
   if (type === 'product') {
     return selectList.length ? selectList : [ defItem, defItem ]
   } else {

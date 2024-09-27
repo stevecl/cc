@@ -47,7 +47,7 @@
             <el-image :src="item.mainImgUrl || 't'" fit="contain">
               <template #error>
                 <div class="image-slot">
-                  <img :src="getDefaultImage('picture.png')" alt="">
+                  <img :src="getDefaultImage('default_picture.png')" alt="">
                 </div>
               </template>
             </el-image>
@@ -145,7 +145,7 @@ const getDatas = async () => {
   brandListDatas.value = res
   // 获取分类数据
   let categoryTypeParams = type === 'ONLINE' ? 'CATEGORY_ONLINE' : 'CATEGORY_CITY'
-  let { dataList } = await getDataItem(categoryTypeParams)
+  let { dataList } = await getDataItem({ type: categoryTypeParams })
   categoryListDatas.value = dataList
   getProductData()
 }

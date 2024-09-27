@@ -83,7 +83,7 @@ const selectLink = item => Bus.emit('selectLink', link => item.link = link)
 
 const handleAdd = () => {
   let _obj = {
-    defaultIcon: 'banner.png',
+    defaultIcon: 'default_banner.png',
     url: '',
     link: ''
   }

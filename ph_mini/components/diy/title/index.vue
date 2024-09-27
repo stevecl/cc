@@ -11,9 +11,12 @@ export default {
   },
   computed: {
     styleObj() {
-      let res = this.config?.style || {}
-      res.background = `${res.backgroundColor} url(${this.config.bgImageUrl}) center / 100% 100% repeat`
-      return res      
+      let { style, bgStyle } = this.config
+      let background = `${bgStyle.bgColor} url(${bgStyle.bgImageUrl}) center / 100% 100% repeat`
+      return {
+        ...style,
+        background
+      }
     }
   }
 }

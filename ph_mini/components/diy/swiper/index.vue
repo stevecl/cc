@@ -15,7 +15,7 @@
         v-for="(item, index) in config.datas"
         :key="index"
         @click="handleClick(item.link)">
-        <image class="image" :src="item.url" :style="{ borderRadius: config.imgRadius + '%' }"></image>
+        <image class="image" :src="item.url || getImgByName(config.imgRatio === '1/1' ? 'default_picture.png' : 'default_banner.png')" :style="{ borderRadius: config.imgRadius + '%' }"></image>
       </swiper-item>
     </swiper>
   </view>

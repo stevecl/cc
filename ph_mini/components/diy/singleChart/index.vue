@@ -3,7 +3,7 @@
     <image
       class="img"
       :style="{ height: imgSizeList[index]}"
-      :src="item.url || getDefaultImage(item.defaultIcon)"
+      :src="item.url || getImgByName(item.defaultIcon)"
       v-for="(item, index) in config.datas"
       :key="index">
     </image>
@@ -11,7 +11,9 @@
 </template>
 
 <script>
+import { mixins } from '@/common/diyMixins'
 export default {
+  mixins: [mixins],
   props: {
     config: Object
   },
@@ -30,11 +32,16 @@ export default {
   methods: {
     getImgSize(url) {
       return new Promise((resolve, reject) => {
+        if (!url) return resolve(null)
         uni.getImageInfo({
           src: url,
           success(image) {
             resolve(image)
           },
+          fail(image) {
+            console.log('errr')
+            resolve(null)
+          }
         });
       })
     }
@@ -46,7 +53,7 @@ export default {
     query.select(`.edit-module-single-chart`).boundingClientRect(async (data) => {
       let result = await Promise.all(this.config.datas.map(obj => this.getImgSize(obj.url)))
       result.forEach((item, index) => {
-        that.$set(that.imgSizeList, index, (item.height / item.width) * data.width + 'px')
+        that.$set(that.imgSizeList, index, item ? (item.height / item.width) * data.width + 'px' : '240px')
       })
     }).exec();
   }

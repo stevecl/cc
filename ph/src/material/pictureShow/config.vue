@@ -29,7 +29,7 @@
     <div class="module-edit-title">显示模式</div>
     <configItem :label="'上标题颜色'" :labelWidth="70">
       <selectColor v-model="config.supStyle.color" :resetColor="'#666'"></selectColor>
-      <div class="label2 wid70">下标题颜色</div>
+      <div class="label2 wid70" style="margin-left: 40px;">下标题颜色</div>
       <selectColor v-model="config.subStyle.color" :resetColor="'#666'"></selectColor>
     </configItem>
     <configItem :label="'上标题对齐'" :labelWidth="70">
@@ -82,7 +82,9 @@
                 <span class="cus-btn" @click="selectLink(item)">选择链接</span>
               </p>
             </div>
-            <span class="close" title="删除" @click="handleDelete(item)"><i class="el-icon-error"></i></span>
+            <span class="close" title="删除" @click="handleDelete(item)">
+              <el-icon><Close /></el-icon>
+            </span>
             </template>
           </listBox>
         </div>
@@ -110,7 +112,7 @@ const selectLink = item => Bus.emit('selectLink', link => item.link = link, item
 
 const handleAdd = () => {
   let _obj = {
-    defaultIcon: 'img.jpg',
+    defaultIcon: 'default_picture.png',
     supTitle: '上标题',
     subTitle: '下标题',
     icon: '',

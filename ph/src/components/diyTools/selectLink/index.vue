@@ -5,13 +5,17 @@
     v-model="state.dialogVisible">
     <div class="content">
       <div class="top">
-        <div class="top_item" :class="{ active: state.typeIndex === 0 }" @click="changeType(0)">店铺</div>
-        <div class="top_item" :class="{ active: state.typeIndex === 1 }" @click="changeType(1)">商品</div>
-        <div class="top_item" :class="{ active: state.typeIndex === 2 }" @click="changeType(2)">分类</div>
+        <div
+          class="top_item"
+          :class="{ active: state.typeIndex === item.value }"
+          v-for="(item, index) in typeDatas"
+          :key="index"
+          @click="changeType(item.value)">{{ item.text }}</div>
       </div>
-      <pagesVue ref="childDom" v-if="state.typeIndex === 0"></pagesVue>
-      <goodsVue ref="childDom" v-if="state.typeIndex === 1"></goodsVue>
-      <categoryVue ref="childDom" v-if="state.typeIndex === 2"></categoryVue>
+      <pagesVue ref="childDom" v-if="state.typeIndex === 1"></pagesVue>
+      <goodsVue ref="childDom" v-if="state.typeIndex === 2"></goodsVue>
+      <categoryVue ref="childDom" v-if="state.typeIndex === 3"></categoryVue>
+      <marketVue ref="childDom" v-if="state.typeIndex === 4"></marketVue>
     </div>
     <template #footer>
       <el-button plain @click="handleClose">关 闭</el-button>
@@ -25,9 +29,18 @@ import { ref, reactive, onMounted } from 'vue'
 import pagesVue from './pages.vue';
 import goodsVue from './goods.vue';
 import categoryVue from './category.vue';
+import marketVue from './market.vue'
+
+const typeDatas = [
+  { text: '店铺', value: 1 },
+  { text: '商品', value: 2 },
+  { text: '分类', value: 3 },
+  { text: '营销中心', value: 4 },
+  // { text: '其他', value: 5 },
+]
 
 const state = reactive({
-  typeIndex: 0,
+  typeIndex: 1,
   dialogVisible: false,
   callback: null,
 })
@@ -49,7 +62,7 @@ const handleClose = () => state.dialogVisible = false
 
 onMounted(() => {
   Bus.on('selectLink', cb => {
-    state.typeIndex = 0
+    state.typeIndex = 1
     state.dialogVisible = true
     state.callback = cb
   })

@@ -27,6 +27,29 @@
       <selectColor v-model="config.productConfig.bgColor"></selectColor>
     </configItem>
 
+    <div class="module-edit-title">选项设置{{ config.tabbarIndex }}</div>
+    <draggable v-model="config.tabbarConfig.datas" item-key="index">
+      <template #item="{ element: item, index }">
+        <div>
+          <listBox :left="false">
+            <template #default>
+              <div class="right-icon">
+              <p class="" @click="config.tabbarIndex = index">
+                <span class="label-text">选项文字</span>
+                <input class="cus-input" type="text" v-model="item.text" placeholder="请输入上标题">
+              </p>
+            </div>
+            <span class="close" title="删除" @click="handleDelete(item)">
+              <el-icon><Close /></el-icon>
+            </span>
+            </template>
+          </listBox>
+        </div>
+      </template>
+    </draggable>
+    <div class="cus-list-btn" @click="handleAdd">添加一个</div>
+
+
     <div class="module-edit-title">选项卡样式</div>
     <configItem :label="'标题未选'">
       <selectColor v-model="config.tabbarConfig.color" :resetColor="'#666'"></selectColor>
@@ -34,6 +57,7 @@
       <selectColor v-model="config.tabbarConfig.activeColor" :resetColor="'#EF4F4F'"></selectColor>
     </configItem>
 
+    <setGoodsData v-model="config.tabbarConfig.datas[config.tabbarIndex]" v-if="config.tabbarIndex !== -1"></setGoodsData>
     <setGoodsShowType v-model="config.productConfig.showType" componentName="goodsTabbar"></setGoodsShowType>
     <setGoodsBuyCar v-model="config.productConfig.car" :showType="config.productConfig.showType"></setGoodsBuyCar>
 
@@ -51,6 +75,8 @@
 </template>
 
 <script setup>
+import draggable from 'vuedraggable'
+import { ElMessageBox } from 'element-plus'
 import useStyle from '@/hooks/useStyle';
 
 const props = defineProps({
@@ -59,7 +85,26 @@ const props = defineProps({
 
 const { marginTop, marginLeft, paddingTop, paddingLeft, paddingBottom } = useStyle(props)
 
-const selectTitleImg = item => Bus.emit('selectImage', res => props.config.titleConfig.icon = res.picUrl)
+const handleAdd = () => {
+  let _obj = {
+    text: '选项',
+    type: 'product', // product: 固定商品 category: 分类商品
+    selectList: [], // 固定商品 所选商品列表
+    category: '', // 所选 商品分类
+    showNum: 1, // 商品分类 显示商品个数
+  }
+  props.config.tabbarConfig.datas.push(_obj)
+}
+
+const handleDelete = async item => {
+  if (props.config.tabbarConfig.datas.length === 1) return ElMessage({ message: '至少保留一个', type: 'warning' })
+  let res = await ElMessageBox.confirm(`确定删除吗?`, '提示', { confirmButtonText: '确定', cancelButtonText: '取消', type: 'warning', } )
+  if (res === 'confirm') {
+    let index = props.config.tabbarConfig.datas.indexOf(item)
+    if (props.config.tabbarIndex === index) props.config.tabbarIndex = 0
+    props.config.tabbarConfig.datas.splice(index, 1)
+  }
+}
 
 </script>
 

@@ -1,6 +1,6 @@
 export default function() {
-  const getDefaultImage = (name) => {
-    return new URL(`../assets/images/default/default_${name}`, import.meta.url).href
+  const getDefaultImage = file => {
+    return new URL(`../assets/images/default/${file}`, import.meta.url).href
   }
 
   const getImgRatio = (str, def = 1) => {

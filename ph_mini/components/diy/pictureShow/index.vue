@@ -8,7 +8,7 @@
         v-for="(item, index) in config.datas"
         :key="index">
         <view class="box">
-          <img class="img" :src="item.icon || getDefaultImage(item.defaultIcon)">
+          <img class="img" :src="item.icon || getImgByName(item.defaultIcon)">
           <view class="text-overflow sup-title" :style="[config.supStyle]">{{item.supTitle}}</view>
         </view>
         <view class="text-overflow sub-title" :style="[config.subStyle]">{{item.subTitle}}</view>
@@ -17,7 +17,9 @@
 </template>
 
 <script>
+import { mixins } from '@/common/diyMixins'
 export default {
+  mixins: [ mixins ],
   props: {
     config: Object
   },

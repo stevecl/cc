@@ -84,7 +84,7 @@ export default {
       }
     },
     showData() {
-      let { type, selectList = [], showNum } = this.config.dataConfig
+      let { type, selectList = [], showNum } = this.config.dataConfig || this.config.tabbarConfig.datas[this.config.tabbarIndex]
       if (type === 'product') {
         return selectList.length ? selectList : [ defItem, defItem ]
       } else {

@@ -1,10 +1,7 @@
 <template>
   <div class="edit-module-goodsTabbar" :style="config?.style">
     <div class="tabbar" :style="tabbarStyle">
-      <div class="tabbar_item" :class="{active: true}">选项</div>
-      <div class="tabbar_item">选项</div>
-      <div class="tabbar_item">选项</div>
-      <div class="tabbar_item">选项</div>
+      <div class="tabbar_item" :class="{active: config.tabbarIndex === index}" v-for="(item, index) in config.tabbarConfig.datas">{{ item.text }}</div>
     </div>
     <list1 :config="config" v-if="config.productConfig.showType === 1"></list1>
     <list2 :config="config" v-if="config.productConfig.showType === 2"></list2>
@@ -49,7 +46,17 @@ const tabbarStyle = computed(() => {
       padding: 0 20px;
       color: var(--color);
       &.active {
+        position: relative;
         color: var(--activeColor);
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -10px;
+          left: calc(50% - 10px);
+          width: 20px;
+          height: 4px;
+          background-color: var(--activeColor);
+        }
       }
     }
   }
