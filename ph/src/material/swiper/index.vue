@@ -9,10 +9,10 @@
       @swiper="onSwiper"
     >
       <swiper-slide class="swiper-slide" :style="itemStyle" v-for="(item, index) in config.datas">
-        <el-image class="img" :src="item.url || 't'" fit="contain">
+        <el-image class="img" :src="item.url || 't'">
           <template #error>
             <div class="image-slot">
-              <img :src="getDefaultImage(config.imgRatio === '1/1' ? 'picture.png' : 'banner.png')" alt="">
+              <img :src="getDefaultImage(item.defaultIcon)" alt="">
             </div>
           </template>
         </el-image>

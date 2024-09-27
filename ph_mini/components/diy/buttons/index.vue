@@ -32,7 +32,7 @@
 		},
 		methods: {
 			dealErrorImg(index, file) {
-				this.$set(this.errImgs, index, `${this.defDir}/default_${file}`)
+				this.$set(this.errImgs, index, `${this.defDir}/${file}`)
 			}
 		}
 	}

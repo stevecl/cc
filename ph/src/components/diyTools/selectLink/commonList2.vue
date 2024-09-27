@@ -7,7 +7,7 @@
           <el-image :src="item.imgUrl || 't'" fit="contain">
             <template #error>
               <div class="image-slot">
-                <img :src="getDefaultImage('picture.png')" alt="">
+                <img :src="getDefaultImage('default_picture.png')" alt="">
               </div>
             </template>
           </el-image>

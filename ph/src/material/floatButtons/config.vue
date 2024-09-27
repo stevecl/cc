@@ -44,7 +44,7 @@
               <div class="left-icon">
                 <span :class="['iconfont', item.icon]" style="font-size: 26px" v-if="config.showType === 1"></span>
                 <p @click="selectIcon(item)" v-if="config.showType === 1">选择图标</p>
-                <img :src="item.img || getDefaultImage('picture.png')" alt="" v-if="config.showType === 2 && item.img">
+                <img :src="item.img || getDefaultImage('default_picture.png')" alt="" v-if="config.showType === 2 && item.img">
                 <p @click="selectImage(item)" v-if="config.showType === 2">选择图片</p>
               </div>
             </template>

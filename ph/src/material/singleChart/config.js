@@ -9,13 +9,13 @@ let config = {
   datas: [
     {
       id: 0,
-      defaultIcon: 'banner.png',
+      defaultIcon: 'default_banner.png',
       url: '',
       link: ''
     },
     {
       id: 1,
-      defaultIcon: 'banner.png',
+      defaultIcon: 'default_banner.png',
       url: '',
       link: ''
     }

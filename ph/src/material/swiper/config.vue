@@ -45,7 +45,7 @@
       <selectColor v-model="config.indicator.color" :resetColor="'#ffffff'"></selectColor>
     </configItem>
     <configItem :label="'图片比列'">
-      <el-radio-group v-model="config.imgRatio">
+      <el-radio-group v-model="config.imgRatio" @change="ratioChange">
         <el-radio value="1/1">1:1</el-radio>
         <el-radio value="3/4">3:4</el-radio>
         <el-radio value="4/3">4:3</el-radio>
@@ -102,6 +102,11 @@ const props = defineProps({
   config: Object
 })
 
+const ratioChange = e => {
+  props.config.datas.forEach(item => {
+    item.defaultIcon = e === '1/1' ? 'default_picture.png' : 'default_banner.png'
+  })
+}
 const { marginTop, marginLeft, paddingTop, paddingLeft, paddingBottom, borderRadius } = useStyle(props)
 
 const selectBgImg = () => Bus.emit('selectImage', res => props.config.bgStyle.bgImageUrl = res.picUrl)
@@ -110,7 +115,7 @@ const selectLink = item => Bus.emit('selectLink', link => item.link = link)
 
 const handleAdd = () => {
   let _obj = {
-    defaultIcon: 'banner.png',
+    defaultIcon: props.config.imgRatio === '1/1' ? 'default_picture' : 'default_banner.png',
     url: '',
     link: ''
   }

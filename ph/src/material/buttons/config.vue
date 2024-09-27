@@ -101,7 +101,7 @@ const selectLink = item => Bus.emit('selectLink', link => item.link = link, item
 
 const handleAdd = () => {
   let _obj = {
-    defaultIcon: 'btn1.png',
+    defaultIcon: 'default_btn1.png',
     icon: '',
     text: `按钮文字`,
     color: '#666',

@@ -6,9 +6,26 @@ let config = {
     margin: '0 0 0 0',
   },
 
+  tabbarIndex: 0,
   tabbarConfig: {
     color: '#666',
     activeColor: '#EF4F4F',
+    datas: [
+      {
+        text: '选项',
+        type: 'product', // product: 固定商品 category: 分类商品
+        selectList: [], // 固定商品 所选商品列表
+        category: '', // 所选 商品分类
+        showNum: 1, // 商品分类 显示商品个数
+      },
+      {
+        text: '选项',
+        type: 'product', // product: 固定商品 category: 分类商品
+        selectList: [], // 固定商品 所选商品列表
+        category: '', // 所选 商品分类
+        showNum: 1, // 商品分类 显示商品个数
+      },
+    ]
   },
 
   productConfig: {
@@ -73,12 +90,6 @@ let config = {
       borderRadius: 0,
     },
   },
-  dataConfig: {
-    type: 'product', // product: 固定商品 category: 分类商品
-    selectList: [], // 固定商品 所选商品列表
-    category: '', // 所选 商品分类
-    showNum: 1, // 商品分类 显示商品个数
-  }
 }
 
 export default config

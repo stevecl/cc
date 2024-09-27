@@ -1,7 +1,14 @@
 <template>
-  <scroll-view class="wrap" scroll-y="true" :style="[pageStyle]" :class="{'has-tabbar': true}">
-    <uni-diy-preview :config="pageConfig.datas"></uni-diy-preview>
-    <diy-tabbar :menuConfig="tabbarConfig"></diy-tabbar>
+  <scroll-view
+    class="wrap"
+    :style="[pageStyle]"
+    :class="{'has-tabbar': hasTabbar}"
+    scroll-y="true"
+    :scroll-top="scrollTop"
+    @scroll="scroll"
+    >
+    <uni-diy-preview :config="pageConfig.datas" :hasTabbar="hasTabbar"></uni-diy-preview>
+    <diy-tabbar :menuConfig="tabbarConfig" v-if="hasTabbar"></diy-tabbar>
 	</scroll-view>
 </template>
 
@@ -9,11 +16,13 @@
 	export default {
 		data() {
 			return {
+        scrollTop: 0,
 				pageConfig: {
           backgroundColor: '#fff',
           templateTitle: '',
           datas: []
         },
+        hasTabbar: false,
         tabbarConfig: {}
 			}
 		},
@@ -33,15 +42,22 @@
           this.pageConfig.pageTitle = templateTitle
           this.pageConfig.datas = JSON.parse(templateConfigParams)
           uni.setNavigationBarTitle({ title: templateTitle })
-          console.log('this.pageConfig', this.pageConfig.datas)
         }
         let res1 = await this.$u.api.getDiy({ category: 'BOTTOM_MENU' })
         this.tabbarConfig = JSON.parse(res1.templateConfigParams)[0].config
-        console.log('this.tabbarConfig', this.tabbarConfig)
-      }
+        let pages = getCurrentPages();
+        let currentPage = pages[pages.length - 1];
+        this.hasTabbar = this.tabbarConfig.datas.some(obj => obj.link === `/${currentPage.route}`)
+      },
+      scroll: function(e) {
+        this.scrollTop = e.detail.scrollTop
+      },
 		},
 		mounted() {
       this.$on('onLoginBack', this.init)
+      uni.$on('toTop', () => {
+        this.scrollTop = 0
+      })
       this.init()
 		},
 	}

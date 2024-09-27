@@ -1,6 +1,6 @@
 <template>
   <view>
-    <view v-for="(item, index) in config" :key="`${item.name + index}`">
+    <view v-for="(item, index) in config" :key="index">
       <diy-assistBlank v-if="judgeShow(item.name, 'assistBlank')" :config="item.config"></diy-assistBlank>
       <diy-assistLine v-if="judgeShow(item.name, 'assistLine')" :config="item.config"></diy-assistLine>
       <diy-buttons v-if="judgeShow(item.name, 'buttons')" :config="item.config"></diy-buttons>
@@ -14,14 +14,9 @@
       <diy-goodsLikes v-if="judgeShow(item.name, 'goodsLikes')" :config="item.config"></diy-goodsLikes>
       <diy-goodsRanking v-if="judgeShow(item.name, 'goodsRanking')" :config="item.config"></diy-goodsRanking>
       <diy-goodsScore v-if="judgeShow(item.name, 'goodsScore')" :config="item.config"></diy-goodsScore>
-      
-      <!-- <diy-advert v-if="judgeShow(item.componentName, 'advert')" :config="item.config"></diy-advert> -->
-      <!-- <diy-editor v-if="judgeShow(item.componentName, 'editor')" :config="item.config"></diy-editor> -->
-      <!-- <diy-imageWindow v-if="judgeShow(item.componentName, 'imageWindow')" :config="item.config"></diy-imageWindow> -->
-      <!-- <diy-listNav v-if="judgeShow(item.componentName, 'listNav')" :config="item.config"></diy-listNav> -->
-      <!-- <diy-memberInfo v-if="judgeShow(item.componentName, 'memberInfo')" :config="item.config"></diy-memberInfo> -->
-      <!-- <diy-productList v-if="judgeShow(item.componentName, 'productList')" :config="item.config"></diy-productList> -->
-      <!-- <diy-tabbar v-if="judgeShow(item.componentName, 'tabbar')" :config="item.config"></diy-tabbar> -->
+      <diy-goodsTabbar v-if="judgeShow(item.name, 'goodsTabbar')" :config="item.config"></diy-goodsTabbar>
+      <diy-listMenu v-if="judgeShow(item.name, 'listMenu')" :config="item.config"></diy-listMenu>
+      <diy-floatButtons v-if="judgeShow(item.name, 'floatButtons')" :config="item.config" :hasTabbar="hasTabbar"></diy-floatButtons>
     </view>
   </view>
 </template>
@@ -30,8 +25,14 @@
 
 export default {
   props: {
-    config: Array,
-    default: () => []
+    config: {
+      type: Array,
+      default: () => []
+    },
+    hasTabbar: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {};

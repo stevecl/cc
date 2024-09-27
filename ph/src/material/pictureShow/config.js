@@ -21,19 +21,19 @@ let config = {
   },
   
   datas: [{
-    defaultIcon: 'img.jpg',
+    defaultIcon: 'default_picture.png',
     supTitle: '上标题',
     subTitle: '下标题',
     icon: '',
     link: ''
   },{
-    defaultIcon: 'img.jpg',
+    defaultIcon: 'default_picture.png',
     supTitle: '上标题',
     subTitle: '下标题',
     icon: '',
     link: ''
   },{
-    defaultIcon: 'img.jpg',
+    defaultIcon: 'default_picture.png',
     supTitle: '上标题',
     subTitle: '下标题',
     icon: '',

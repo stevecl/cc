@@ -74,7 +74,7 @@ export default {
       }
     },
     showData() {
-      let { type, selectList = [], showNum } = this.config.dataConfig
+      let { type, selectList = [], showNum } = this.config.dataConfig || this.config.tabbarConfig.datas[this.config.tabbarIndex]
       if (type === 'product') {
         return selectList.length ? selectList : [ defItem, defItem ]
       } else {
@@ -84,9 +84,7 @@ export default {
   },
   methods: {
     dealErrorImg(index, file) {
-      // this.config.dataConfig.selectList[index].mainImgUrl = `${this.defDir}/default_${file}`
 			this.$set(this.errImgs, index, `${this.defDir}/default_${file}`)
-			// this.errImgs[src] = `${this.defDir}/default_${file}`
     }
   }
 }

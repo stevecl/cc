@@ -82,7 +82,9 @@
                 <span class="cus-btn" @click="selectLink(item)">选择链接</span>
               </p>
             </div>
-            <span class="close" title="删除" @click="handleDelete(item)"><i class="el-icon-error"></i></span>
+            <span class="close" title="删除" @click="handleDelete(item)">
+              <el-icon><Close /></el-icon>
+            </span>
             </template>
           </listBox>
         </div>
@@ -110,7 +112,7 @@ const selectLink = item => Bus.emit('selectLink', link => item.link = link, item
 
 const handleAdd = () => {
   let _obj = {
-    defaultIcon: 'img.jpg',
+    defaultIcon: 'default_picture.png',
     supTitle: '上标题',
     subTitle: '下标题',
     icon: '',

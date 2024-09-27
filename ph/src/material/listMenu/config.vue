@@ -29,33 +29,20 @@
       <el-slider style="width: 250px;" v-model="config.height" :min="20" :max="60" :step="1" :show-tooltip="false"></el-slider>
       <span class="slide-span--unit">{{config.height}}<span>px</span></span>
     </configItem>
-    <!-- <configItem :label="'顶部边距'">
-      <el-slider style="width: 250px;" v-model="config.marginTop" :min="-100" :max="100" :step="1" :show-tooltip="false"></el-slider>
-      <span class="slide-span--unit">{{config.marginTop}}<span>px</span></span>
-    </configItem> -->
-    <!-- <configItem :label="'左右边距(内)'" :labelWidth="70">
-      <inputNumber v-model="paddingLeft"></inputNumber>
-      <div class="label2">圆角大小</div>
-      <inputNumber v-model="config.borderRadius"></inputNumber>
-    </configItem>
-    <configItem :label="'左右边距(外)'" :labelWidth="70">
-      <inputNumber v-model="marginLeft"></inputNumber>
-      <div class="label2">顶部间距</div>
-      <inputNumber v-model="marginTop"></inputNumber>
-    </configItem> -->
     <div class="diy-edit-line"></div>
 
     <div class="module-edit-title">文字图标元素</div>
-    <configItem :label="'图标大小'">
-      <inputNumber v-model="config.iconFontSize"></inputNumber>
-      <div class="label2" >图标颜色</div>
-      <selectColor v-model="config.iconColor" :resetColor="'#666'"></selectColor>
-    </configItem>
-    <configItem :label="'字体大小'">
-      <inputNumber v-model="fontSize"></inputNumber>
-      <div class="label2">字体颜色</div>
+    <configItem :label="'文字颜色'">
       <selectColor v-model="config.style.color" :resetColor="'#000'"></selectColor>
+      <div class="label2" style="margin-left: 45px;">文字大小</div>
+      <inputNumber v-model="fontSize"></inputNumber>
     </configItem>
+    <configItem :label="'图标颜色'">
+      <selectColor v-model="config.iconColor" :resetColor="'#666'"></selectColor>
+      <div class="label2" style="margin-left: 45px;">图标大小</div>
+      <inputNumber v-model="config.iconFontSize"></inputNumber>
+    </configItem>
+
     <configItem :label="'文字对齐'">
       <el-radio-group v-model="config.textAlign">
         <el-radio :value="'left'">居左</el-radio>
