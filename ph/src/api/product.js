@@ -17,14 +17,6 @@ export function getProductList(data) {
   })
 }
 
-export function getItemAll() {
-  return request({
-    url: '/custom/itemType/getItemAll',
-    method: 'post',
-  })
-}
-
-
 /**
  * @function 商品分类(线上/同城)，不分页
  * @param { String } searchKey 搜索关键字 
