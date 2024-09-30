@@ -28,14 +28,16 @@ export function getProductList(data) {
  * @value SHOP_ONLINE 店铺列表[线上]  分页
  * @value SHOP_CITY 店铺列表[同城]  分页
  * @value STRATEGY_CLASS 攻略分类  分页
- * @value PROMOTION_ACTIVITY_CLASS 促销活动分类
+ * @value STRATEGY 具体攻略分类  分页
+ * @value PROMOTION_ACTIVITY_CLASS 促销活动分类  不分页
+ * @value PROMOTION_ACTIVITY 促销活动分类  分页
  * @value BRAND_CLASS 品牌分类 分页
  * @value COUPON_PAGE_CODE 代金券页面
  * @value RED_PACKET_PAGE_CODE 红包雨页面
  * @value COUPON_LIST 红包雨页面 分页
  * @returns
  */
-export function getDataItem({ type, pageNum = null, pageSize = null }) {
+export function getDataItem({ type, searchPrimaryKey = null, pageNum = null, pageSize = null }) {
   return request({
     url: '/custom/new/getDataItem',
     method: 'post',
@@ -43,6 +45,7 @@ export function getDataItem({ type, pageNum = null, pageSize = null }) {
       pageSize,
       pageNum,
       type,
+      searchPrimaryKey,
       sourceType: 'MARKET_APPLETS'
     }
   })

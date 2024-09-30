@@ -2,14 +2,14 @@
   <div class="classify">
     <div class="classify_item" :class="{active: item.value === state.type}" v-for="(item, index) in classifyList" :key="index" @click="handleSwitchClassify(item.value)">{{ item.text }}</div>
   </div>
-  <commonList ref="childDom" :datas="state.datas" v-if="['CATEGORY_ONLINE', 'CATEGORY_CITY'].includes(state.type)"></commonList>
-  <commonList2 ref="childDom" :datas="state.datas" v-else></commonList2>
+  <categodyBox ref="childDom" :datas="state.datas" v-if="['CATEGORY_ONLINE', 'CATEGORY_CITY'].includes(state.type)"></categodyBox>
+  <commonList2 ref="childDom" :datas="state.datas" :type="state.type" v-else></commonList2>
 </template>
 
 <script setup>
 import { ref, reactive, onMounted } from 'vue';
 import { getDataItem } from '@/api'
-import commonList from './commonList.vue'
+import categodyBox from './categodyBox.vue'
 import commonList2 from './commonList2.vue'
 
 const classifyList = [
@@ -34,7 +34,14 @@ const handleSwitchClassify = val => {
 }
 
 const getDatas = async () => {
-  let { dataList } = await getDataItem({ type: state.type })
+  let params = {
+    type: state.type
+  }
+  if (state.type === 'STRATEGY_CLASS') {
+    params.pageSize = 100
+    params.pageNum = 1
+  }
+  let { dataList } = await getDataItem(params)
   // 攻略
   if (state.type === 'STRATEGY_CLASS') {
     dataList.forEach(obj => obj.categoryName = obj.className)
@@ -56,8 +63,8 @@ const getDatas = async () => {
   // 店铺
   if (['SHOP_ONLINE', 'SHOP_CITY'].includes(state.type)) {
     dataList.forEach(obj => {
-      obj.categoryName = obj.merchantName
-      obj.id = obj.merchantId
+      obj.categoryName = obj.shopName
+      obj.id = obj.shopId
     })
   }
 

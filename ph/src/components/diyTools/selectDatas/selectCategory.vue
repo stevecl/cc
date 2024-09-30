@@ -12,7 +12,7 @@
 import { ref, reactive, onMounted } from 'vue'
 import { getDataItem } from '@/api'
 import { deepClone } from '@/utils'
-import categodyBox from '../selectLink/commonList.vue'
+import categodyBox from '../selectLink/categodyBox.vue'
 
 const state = reactive({
   type: 'CATEGORY_ONLINE', // CATEGORY_ONLINE 线上；CATEGORY_CITY 同城
