@@ -69,18 +69,15 @@ const handleSelect = link => state.link = link
 const submit = () => state.link
 
 onMounted(() => {
-  getDataItem({ type: 'BASICS_PAGE_CODE' })
-  getDataItem({ type: 'CUSTOM_ITEM_TYPE' })
-  getItemAll()
+  // getDataItem({ type: 'BASICS_PAGE_CODE' })
+  // getDataItem({ type: 'CUSTOM_ITEM_TYPE' })
+  // getItemAll()
+  // // getDataItem({ type: 'PROMOTION_ACTIVITY_CLASS' })
+  // getDataItem({ type: 'STRATEGY', searchPrimaryKey: 1929655436143210 })
 })
 
 defineExpose({
   submit
-})
-
-onMounted(() => {
-  getItemAll()
-  getDataItem('CUSTOM_ITEM_TYPE')
 })
 
 </script>
