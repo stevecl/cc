@@ -37,7 +37,7 @@ export function getProductList(data) {
  * @value COUPON_LIST 红包雨页面 分页
  * @returns
  */
-export function getDataItem({ type, searchPrimaryKey = null, pageNum = null, pageSize = null }) {
+export function getDataItem({ type, searchKey = null, searchPrimaryKey = null, pageNum = null, pageSize = null }) {
   return request({
     url: '/custom/new/getDataItem',
     method: 'post',
@@ -45,6 +45,7 @@ export function getDataItem({ type, searchPrimaryKey = null, pageNum = null, pag
       pageSize,
       pageNum,
       type,
+      searchKey,
       searchPrimaryKey,
       sourceType: 'MARKET_APPLETS'
     }

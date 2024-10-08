@@ -69,7 +69,7 @@ const handleSelect = link => state.link = link
 const submit = () => state.link
 
 onMounted(() => {
-  // getDataItem({ type: 'BASICS_PAGE_CODE' })
+  getDataItem({ type: 'BASICS_PAGE_CODE' })
   // getDataItem({ type: 'CUSTOM_ITEM_TYPE' })
   // getItemAll()
   // // getDataItem({ type: 'PROMOTION_ACTIVITY_CLASS' })

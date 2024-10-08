@@ -4,7 +4,7 @@
   </div>
   <div class="goods-link">
     <div class="category">
-      <div class="category_item" :class="{active: searchQuery.type === item.code}" v-for="(item, index) in state.typeList" @click="handleType(item.code)">{{ item.value }}</div>
+      <div class="category_item" :class="{active: searchQuery.searchPrimaryKey === item.code}" v-for="(item, index) in state.typeList" @click="handleType(item.code)">{{ item.value }}</div>
     </div>
     <div class="main">
       <div class="product-list">
@@ -24,17 +24,17 @@
             </el-image>
           </div>
           <div class="goods-detail">
-            <div class="text-overflow">{{ item.goodsName }}</div>
-            <div class="flex-between">
+            <div class="text-overflow">{{ item.couponName }}</div>
+            <!-- <div class="flex-between">
               <span class="light">￥{{ item.salePrice }}</span>
               <span class="gray">库存：{{ item.inventoryQuantity }}</span>
-            </div>
+            </div> -->
             <div class="activeIcon">
               <span class="iconfont icon-duihao"></span>
             </div>
           </div>
         </div>
-        <div class="gray" v-if="!productDatas.length" style="margin: 150px 0;text-align: center;width: 100%;">暂无数据</div>
+        <div class="gray" v-if="!state.datas.length" style="margin: 150px 0;text-align: center;width: 100%;">暂无数据</div>
       </div>
     </div>
   </div>
@@ -57,13 +57,12 @@ const state = reactive({
   datas: []
 })
 const searchQuery = reactive({
+  searchPrimaryKey: '',
   type: '',
-  name: '', // 搜索名称
   pageNum: 1,
   pageSize: 20
 })
 
-const productDatas = ref([]) // 商品列表
 const selectList = ref([]) // 已选商品列表
 // 二级分类
 const handleSwitchClassify = val => {
@@ -72,9 +71,9 @@ const handleSwitchClassify = val => {
     getTypeDatas()
   }
 }
-const handleType = type => {
-  if (searchQuery.type === type) return
-  searchQuery.type = type
+const handleType = searchPrimaryKey => {
+  if (searchQuery.searchPrimaryKey === searchPrimaryKey) return
+  searchQuery.searchPrimaryKey = searchPrimaryKey
   // resetSearch()
   // getTypeDatas()
   getAllDatas()
@@ -93,7 +92,17 @@ const getTypeDatas = async () => {
 }
 
 const getAllDatas = async () => {
+  let _ = {
+    COUPON_PAGE_CODE: 'COUPON_LIST',
+    RED_PACKET_PAGE_CODE: 'RED_PACKET_ACTIVITY'
+  }
+  searchQuery.type = _[state.type]
   let { dataList } = await getDataItem(searchQuery)
+  if (state.type === 'RED_PACKET_PAGE_CODE') {
+    dataList.forEach(obj => {
+      obj.couponName = obj.activityName
+    })
+  }
   state.datas = dataList
 }
 
@@ -153,7 +162,9 @@ onMounted(async () => {
 
 .goods-link {
   display: flex;
-  height: 100%;
+  // height: 100%;
+  flex: 1;
+  overflow: hidden;
   .category {
     width: 160px;
     flex-shrink: 0;
@@ -194,7 +205,7 @@ onMounted(async () => {
     .product-list {
       display: flex;
       flex-wrap: wrap;
-      flex: 1;
+      flex: 0 1;
       margin-top: 20px;
       &_item {
         cursor: pointer;

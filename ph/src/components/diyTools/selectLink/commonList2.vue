@@ -21,11 +21,11 @@
             </el-image>
           </div>
           <div class="goods-detail">
-            <div class="text-overflow">{{ item.title }}</div>
-            <!-- <div class="flex-between">
+            <div class="">{{ item.title }}</div>
+            <div class="flex-between" v-if="type === 'BRAND_CLASS'">
               <span class="light">￥{{ item.salePrice }}</span>
               <span class="gray">库存：{{ item.inventoryQuantity }}</span>
-            </div> -->
+            </div>
             <div class="activeIcon">
               <span class="iconfont icon-duihao"></span>
             </div>
@@ -79,13 +79,19 @@ const getAllDatas = async () => {
   let _ = {
     STRATEGY_CLASS: 'STRATEGY',
     PROMOTION_ACTIVITY_CLASS: 'PROMOTION_ACTIVITY',
-    BRAND_CLASS: 'PROMOTION_ACTIVITY',
+    BRAND_CLASS: 'GOODS',
   }
   searchQuery.type = _[props.type]
   let { dataList: data } = await getDataItem(searchQuery)
   if (props.type === 'PROMOTION_ACTIVITY_CLASS') {
     data.forEach(obj => {
       obj.title = obj.activityTitle
+    })
+  }
+  if (props.type === 'BRAND_CLASS') {
+    data.forEach(obj => {
+      obj.title = obj.goodsName
+      obj.imgUrl = obj.mainImgUrl
     })
   }
   dataList.value = data
