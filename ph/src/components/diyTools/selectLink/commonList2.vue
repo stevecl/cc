@@ -38,7 +38,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, onMounted, watch } from 'vue'
 import { getDataItem } from '@/api'
 import useDefaultSource from '@/hooks/useDefaultSource'
 import { computed } from 'vue';
@@ -50,6 +50,8 @@ const props = defineProps({
   type: String
 })
 
+watch(() => props.type, () => dataList.value = [])
+
 const dataList = ref([])
 const selectList = ref([]) // 已选商品列表
 const searchQuery = reactive({
@@ -59,9 +61,7 @@ const searchQuery = reactive({
   pageSize: 20
 })
 
-const leftDatas = computed(() => {
-  return props.datas
-})
+const leftDatas = computed(() => props.datas)
 const mainDatas = computed(() => {
   return ['SHOP_ONLINE', 'SHOP_CITY'].includes(props.type) ? props.datas.map(obj => {
     obj.title = obj.categoryName
