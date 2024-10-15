@@ -1,9 +1,9 @@
 <template>
   <div class="wrap">
-    <div class="group-item add" @click="handleAdd">
+    <!-- <div class="group-item add" @click="handleAdd">
       <el-icon><Plus /></el-icon>
       <span class="ml10 name">添加分组</span>
-    </div>
+    </div> -->
     <div class="group-item" :class="{'active': !currentGroup}" @click="emit('select', '')">
       <span class="flex-1 name">全部</span>
     </div>

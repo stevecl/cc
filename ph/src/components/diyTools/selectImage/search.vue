@@ -1,7 +1,7 @@
 <template>
   <div class="diy-select-image-box">
-    <div class="image-search-box">
-      <el-date-picker
+    <div class="flex">
+      <!-- <el-date-picker
         v-model="query.startDate"
         style="width: 140px;"
         type="date"
@@ -16,10 +16,11 @@
         value-format="YYYY-MM-DD"
         placeholder="选择日期">
       </el-date-picker>
-      <el-input v-model="query.nameCn" placeholder="请输入图片名称" style="width: 120px;margin-right: 20px;"></el-input>
-      <el-button type="primary" @click="emit('search')">查询</el-button>
-      <el-button class="fr" type="primary" @click="upload.click()">上传图片</el-button>
-      <el-button class="fr" type="danger" @click="emit('deleteSelected')" :disabled="!selectImgList.length">删除</el-button>
+      <el-input v-model="query.nameCn" placeholder="请输入图片名称" style="width: 120px;margin-right: 20px;"></el-input> -->
+      <!-- <el-button type="primary" @click="emit('search')">查询</el-button> -->
+      <span class="flex-1"></span>
+      <el-button type="danger" @click="emit('deleteSelected')" :disabled="!selectImgList.length">删除</el-button>
+      <el-button type="primary" @click="upload.click()">上传图片</el-button>
       <input type="file" style="display: none;" @change="uploadImage" ref="upload" multiple="true" accept="image/jpg,image/jpeg,image/png,image/gif,image/bmp">
     </div>
   </div>
