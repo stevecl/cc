@@ -21,7 +21,7 @@
             </el-image>
           </div>
           <div class="goods-detail">
-            <div class="">{{ item.title }}</div>
+            <div class="" :title="item.title">{{ item.title }}</div>
             <div class="flex-between" v-if="type === 'BRAND_CLASS'">
               <span class="light">￥{{ item.salePrice }}</span>
               <span class="gray">库存：{{ item.inventoryQuantity }}</span>
