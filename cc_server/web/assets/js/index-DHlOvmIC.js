@@ -1,1 +1,0 @@
-import{f as t,Q as s,e as a}from"./index-BdoJKyZb.js";const o={__name:"index",props:{config:Object},setup(e){return(l,n)=>(a(),t("div",{class:"edit-module-assist-blank",style:s(e.config.style)},null,4))}};export{o as default};

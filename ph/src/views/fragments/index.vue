@@ -45,7 +45,7 @@ import { useRoute, useRouter } from 'vue-router'
 import materialPanel from './materialPanel.vue';
 import engine from './renderEngine.vue'
 import configPanel from './configPanel.vue';
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { ElMessage, ElMessageBox, ElLoading } from 'element-plus'
 
 import { deepClone } from '@/utils'
 
@@ -128,9 +128,15 @@ onMounted(() => {
   let { type, id = '' } = route.query
   // console.log('type, id', type, id)
   // 等待组件数据加载完成
+  const loading = ElLoading.service({
+    lock: true,
+    text: 'Loading',
+    background: 'rgba(0, 0, 0, 0.7)',
+  })
   setTimeout(() => {
     initData(type, id)
-  }, 500)
+    loading.close()
+  }, 1000)
 })
 
 </script>
