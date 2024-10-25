@@ -1,73 +1,56 @@
-import { getCookies } from '@/utils'
 import slConfig from '@/config'
 
 /**
- * 
+ * @function 单文件上传
  * @param {*} file 
- * @param {*} callback 
- * @param {*} type 
- * @param {*} mimeLimit 文件类型
- * @returns 
  */
-export async function uploadFile(file, callback) {
-  var qiniuUrl = `${slConfig.baseURL}/common/ossUpload`;
-  var errCodeMsg = {
-    'code400': '报文构造不正确或者没有完整发送。',
-    'code401': '上传凭证无效。',
-    'code403': '上传文件格式不正确。',
-    'code413': '上传文件过大。',
-    'code579': '回调业务服务器失败。',
-    'code599': '服务端操作失败。',
-    'code614': '目标资源已存在。'
-  };
-  var _token = "Bearer " + getCookies('Admin-Token')
-
-  //构建xhr上传表单参数
+export async function uploadFile(file) {
   var form = new FormData();
-  //优化自定义文件名模式
-
   form.append('file', file);
-  // form.append('token', _token);
+  form.append('token', await getToken());
+  form.append('fname', file.name);
+  form.append('key', createUuid());
+  console.log('form', form)
+  let res = await fetch(slConfig.uploadUrl, {
+    method: 'post',
+    body: form
+  })
+  let data = await res.json()
+  console.log(222222, data.key)
 
-  //构建xhr对象
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', qiniuUrl, true);
-  // xhr.setRequestHeader('Accept', 'application/json, text/javascript, */*; q=0.01');
-  xhr.setRequestHeader('Authorization', "Bearer " + getCookies('Admin-Token'));
-  //上传进度回调
-  xhr.upload.onprogress = function (event) {
-    //console.log();
-  };
-  if (xhr.ontimeout) {//暂时不用
-    xhr.ontimeout = function (event) {
-      //console.log('上传已超时');
-    };
-  }
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState == 4) {
-      if (xhr.status == 200) {
-        var resultData = xhr.responseText;
-        console.log('resultData', resultData.fileName)
-        try {
-          resultData = eval('(' + xhr.responseText + ')');
-        } catch (e) {
-          resultData = {
-            status: 0,
-            msg: '上传失败，返回数据异常'
-          };
-        }
-        if (resultData.content && resultData.content.suffix) {//qiniu处理
-          resultData.content.suffix = resultData.content.suffix.replace('.', '');
-        }
-        callback(resultData);
-      } else {
-        var resultData = {
-          status: 0,
-          msg: errCodeMsg['code' + xhr.status] ? errCodeMsg['code' + xhr.status] : xhr.statusText
-        };
-        callback(resultData);
-      }
+  let res1 = await fetch(`${slConfig.domain}/api/qiniu/getUrl/${data.key}`, {
+    method: 'post',
+    headers: {
+      token: localStorage.getItem('token')
     }
-  };
-  xhr.send(form);
+  })
+  let t = await res1.json()
+  console.log(333333333, t.result)
+  return t.result
+}
+
+
+let getToken = async function () {
+  let res = await fetch(`${slConfig.domain}/api/qiniu/uploadImgToken`, {
+    method: 'post',
+    headers: {
+      token: localStorage.getItem('token')
+    }
+  })
+  let data = await res.json()
+  return data.result
+}
+
+// 生成UUID唯一值函数
+const createUuid = () => {
+  var s = [];
+  var hexDigits = '0123456789abcdef';
+  for (var i = 0; i < 36; i++) {
+    s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+  }
+  s[14] = '4'; // bits 12-15 of the time_hi_and_version field to 0010
+  s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
+  s[8] = s[13] = s[18] = s[23] = '-';
+  var uuid = s.join('');
+  return uuid;
 }

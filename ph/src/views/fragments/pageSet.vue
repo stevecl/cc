@@ -14,9 +14,10 @@
       <selectColor v-model="config.backgroundColor" :resetColor="'#ededed'"></selectColor>
     </configItem>
     <configItem :label="'封面图'" :isRequire="true">
-      <div class="upload-image" @click="selectBgImg">
+      <div class="upload-image" @click="$refs.upload.click()">
         <el-image :src="config.templateImg" v-show="config.templateImg"></el-image>
         <span v-show="!config.templateImg">+</span>
+        <input type="file" style="display: none;" @change="uploadImage" ref="upload" multiple="true" accept="image/jpg,image/jpeg,image/png,image/gif,image/bmp">
       </div>
     </configItem>
     <div class="tips-info" style="margin: -10px 0 10px 78px;">建议尺寸256 * 414 (大小建议不超过800k，以免影响加载速度)</div>
@@ -25,13 +26,20 @@
 </template>
 
 <script setup>
+import { uploadFile } from '@/utils/upload'
 
 const props = defineProps({
   config: Object
 })
 
-const selectBgImg = () => Bus.emit('selectImage', res => props.config.images = res.url)
-const selectImage = () => Bus.emit('selectImage', res => props.config.titleBgImg = res.url)
+// 上传图片
+const uploadImage = async e => {
+  let files = e.target.files
+  for (var i = 0; i < files.length; i++) {
+    let re = await uploadFile(files[i]);
+    console.log('商城？？？', re)
+  }
+}
 
 </script>
 

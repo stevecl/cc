@@ -27,7 +27,7 @@
       <selectColor v-model="config.productConfig.bgColor"></selectColor>
     </configItem>
 
-    <div class="module-edit-title">选项设置{{ config.tabbarIndex }}</div>
+    <div class="module-edit-title">选项设置</div>
     <draggable v-model="config.tabbarConfig.datas" item-key="index">
       <template #item="{ element: item, index }">
         <div>

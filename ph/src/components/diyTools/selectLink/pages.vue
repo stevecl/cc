@@ -5,40 +5,18 @@
       <div class="category_item" :class="{ active: state.categoryIndex === 1 }" @click="changeCategory(1)">装修页面</div>
     </div>
     <div class="main">
-      <div class="main_page">
+      <div class="main_page" v-for="item in datas">
         <div class="main_page_title">
           <span class="iconfont icon-biaodanyemian"></span>
-          基础链接
+          {{ item.groupName }}
         </div>
         <div class="main_page_list">
-          <div class="main_page_list_item" :class="{active: state.link === '/pages/index/index'}" @click="handleSelect('/pages/index/index')">
-            店铺首页
-            <div class="activeIcon">
-              <span class="iconfont icon-duihao"></span>
-            </div>
-          </div>
-          <div class="main_page_list_item" :class="{active: state.link === '/pages/product/index'}" @click="handleSelect('/pages/product/index')">
-            全部商品
-            <div class="activeIcon">
-              <span class="iconfont icon-duihao"></span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="main_page">
-        <div class="main_page_title">
-          <span class="iconfont icon-biaodanyemian"></span>
-          会员中心
-        </div>
-        <div class="main_page_list">
-          <div class="main_page_list_item" :class="{active: state.link === '/pages/mine/index'}" @click="handleSelect('/pages/mine/index')">
-            个人中心
-            <div class="activeIcon">
-              <span class="iconfont icon-duihao"></span>
-            </div>
-          </div>
-          <div class="main_page_list_item" :class="{active: state.link === '/pages/order/index'}" @click="handleSelect('/pages/order/index')">
-            我的订单
+          <div
+            class="main_page_list_item"
+            :class="{active: state.link === '/pages/index/index'}"
+            v-for="listItem in item.list"
+            @click="handleSelect('/pages/index/index')">
+            {{ listItem.name }}
             <div class="activeIcon">
               <span class="iconfont icon-duihao"></span>
             </div>
@@ -52,6 +30,9 @@
 <script setup>
 import { reactive, onMounted } from 'vue';
 import { getDataItem, getItemAll } from '@/api'
+
+import datas from '@/datas/linkPath'
+console.log('datas', datas)
 
 const state = reactive({
   categoryIndex: 0,
