@@ -1,7 +1,10 @@
 export default {
   title: '标题栏',
   content: '请输入文本',
-  link: '',
+  link: {
+    name: '',
+    code: ''
+  },
 
   bgStyle: {
     bgColor: '#ffffff',

@@ -26,7 +26,7 @@
       <span class="cus-btn" @click="config.bgStyle.bgImageUrl = ''">清除</span>
     </configItem>
     <configItem :label="'标题链接'">
-      <input type="text" class="cus-input" v-model="config.link">
+      <input type="text" class="cus-input" disabled v-model="config.link.name">
       <span class="cus-btn" @click="selectLink">选择链接</span>
       <span class="cus-btn" @click="config.link = ''">清除</span>
     </configItem>
@@ -68,7 +68,7 @@ const props = defineProps({
 let { fontSize, marginTop, marginLeft, paddingTop, paddingLeft, paddingBottom } = useStyle(props)
 
 const selectBgImg = () => Bus.emit('selectImage', res => props.config.bgStyle.bgImageUrl = res.picUrl)
-const selectLink = () => Bus.emit('selectLink', link => props.config.link = link)
+const selectLink = () => Bus.emit('selectLink', link => props.config.link = link, props.config.link)
 
 </script>
 

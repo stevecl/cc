@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, onMounted, nextTick } from 'vue'
 import pagesVue from './pages.vue';
 import goodsVue from './goods.vue';
 import categoryVue from './category.vue';
@@ -40,6 +40,7 @@ const typeDatas = [
 ]
 
 const state = reactive({
+  def_value: {},
   typeIndex: 1,
   dialogVisible: false,
   callback: null,
@@ -48,6 +49,9 @@ const state = reactive({
 const changeType = index => {
   if (state.typeIndex === index) return
   state.typeIndex = index
+  nextTick(() => {
+    childDom.value?.init?.(state.def_value)
+  })
 }
 
 const childDom = ref(null)
@@ -61,10 +65,14 @@ const handleSubmit = () => {
 const handleClose = () => state.dialogVisible = false
 
 onMounted(() => {
-  Bus.on('selectLink', cb => {
+  Bus.on('selectLink', (cb, value) => {
+    state.def_value = value
     state.typeIndex = 1
     state.dialogVisible = true
     state.callback = cb
+    nextTick(() => {
+      childDom.value?.init?.(value)
+    })
   })
 })
 

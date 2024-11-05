@@ -24,11 +24,11 @@ const menu = [
     icon: 'Calendar',
     pathName: 'tabbar'
   },
-  {
-    name: '启动广告',
-    icon: 'setting',
-    pathName: 'advert'
-  },
+  // {
+  //   name: '启动广告',
+  //   icon: 'setting',
+  //   pathName: 'advert'
+  // },
 ]
 
 export default menu

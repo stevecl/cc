@@ -43,11 +43,11 @@
           <template #default>
             <div class="right-icon">
               <p class="mb10">
-                <input class="cus-input" type="text" v-model="item.url" placeholder="请选择图片或输入图片地址">
+                <input class="cus-input" type="text" v-model="item.url" placeholder="请选择图片">
                 <span class="cus-btn" @click="selectImage(item)">选择图片</span>
               </p>
               <p>
-                <input class="cus-input" type="text" v-model="item.link" placeholder="请选择链接或输入链接地址">
+                <input class="cus-input" type="text" disabled v-model="item.link.name" placeholder="请选择链接">
                 <span class="cus-btn" @click="selectLink(item)">选择链接</span>
               </p>
             </div>
@@ -79,7 +79,7 @@ let { marginTop, marginLeft, paddingTop, paddingLeft, paddingBottom } = useStyle
 
 const selectBgImage = () => Bus.emit('selectImage', res => props.config.style.bgImageUrl = res.picUrl)
 const selectImage = item => Bus.emit('selectImage', res => item.url = res.picUrl)
-const selectLink = item => Bus.emit('selectLink', link => item.link = link)
+const selectLink = item => Bus.emit('selectLink', link => item.link = link, item.link)
 
 const handleAdd = () => {
   let _obj = {

@@ -1,0 +1,1 @@
+let e={title:"图片轮播",imgRadius:0,imgRatio:"1/1",indicator:{show:!1,color:"#ffffff"},style:{padding:"0 0 0 0",margin:"0 0 0 0",borderRadius:0},bgStyle:{bgColor:"#ffffff",bgImageUrl:""},datas:[{defaultIcon:"default_picture.png",url:"",link:{name:"",code:""}},{defaultIcon:"default_picture.png",url:"",link:{name:"",code:""}}]};export{e as default};

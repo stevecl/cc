@@ -17,12 +17,18 @@ let config = {
   },
   datas: [{
     defaultIcon: 'default_picture.png',
-    url: 'https://img0.baidu.com/it/u=2616823501,3205478532&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1725728400&t=9bfc66f4034977c95e05d37c90a5720a',
-    link: ''
+    url: '',
+    link: {
+      name: '',
+      code: ''
+    }
   },{
     defaultIcon: 'default_picture.png',
     url: '',
-    link: ''
+    link: {
+      name: '',
+      code: ''
+    }
   }]
 
 }

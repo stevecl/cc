@@ -12,6 +12,7 @@
     "colorpicker-v3": "^2.10.2",
     "element-plus": "^2.7.6",
     "pinia": "^2.1.7",
+    "qrcode": "^1.5.4",
     "sass": "^1.77.6",
     "swiper": "^11.1.4",
     "vue": "^3.0.4",

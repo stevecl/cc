@@ -1,33 +1,47 @@
 // 模块选择框   页面
 <template>
   <div class="module-select-box">
-    <div class="module-list" v-for="(item, index) in materialConfig" :key="index">
-      <div class="module-list_type">{{ item.name }}({{ item.data.length }})</div>
-      <div class="module-list_data">
-        <div
-          class="module-list_data_item"
-          :style="bgStyle(com.icon)"
-          v-for="(com, c_index) in item.data"
-          :key="'c_'+c_index"
-          @click="emit('add', materialDatas[com.component])">
-          <p class="title">{{ com.name }}</p>
+    <template v-for="(item, index) in materialConfig" :key="index">
+      <div class="module-list" v-if="!item.permission || item.permission?.includes(baseInfo.category)">
+        <div class="module-list_type" @click="handleClick(item)">{{ item.name }}({{ item.data.length }}){{ item.open }}<span class="iconfont icon-3101jiantou3" :class="{up: hideList.includes(item.name)}"></span></div>
+        <div class="module-list_data" v-if="!hideList.includes(item.name)">
+          <div
+            class="module-list_data_item"
+            :style="bgStyle(com.icon)"
+            v-for="(com, c_index) in item.data"
+            :key="'c_'+c_index"
+            @click="emit('add', materialDatas[com.component], com.unique)">
+            <p class="title">{{ com.name }}</p>
+          </div>
         </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 
 <script setup>
-import { inject, computed, onMounted } from 'vue';
+import { ref, inject, computed, onMounted } from 'vue';
 import { useCommonStore } from '@/stores/common'
 import materialConfig from '@/datas/material'
 
 const { materialDatas } = useCommonStore()
+console.log('materialDatas', materialConfig)
 
 const emit = defineEmits(['add', 'global'])
 const baseInfo = inject('baseInfo')
 
 const bgStyle = file => ({ backgroundImage: `url(${new URL(`../../assets/images/default/${file}`, import.meta.url).href})` })
+
+const hideList = ref([])
+const handleClick = (item) => {
+  let index = hideList.value.indexOf(item.name)
+  console.log('asd', item.name, index)
+  if (index > -1) {
+    hideList.value.splice(index, 1)
+  } else {
+    hideList.value.push(item.name)
+  }
+}
 
 onMounted(async () => {
   if (Object.keys(materialDatas).some(key => !materialDatas[key].title)) {
@@ -51,6 +65,7 @@ onMounted(async () => {
   width: 300px;
   height: 100%;
   padding: 16px;
+  overflow: auto;
   .module-list {
     // flex: 1;
     border: 1px solid #EEEEEE;
@@ -58,6 +73,7 @@ onMounted(async () => {
       margin-bottom: 12px;
     }
     &_type {
+      position: relative;
       display: flex;
       align-items: center;
       height: 40px;
@@ -68,6 +84,13 @@ onMounted(async () => {
       background-color: #F7F7FA;
       border-bottom: 1px solid #EEEEEE;
       cursor: pointer;
+      .iconfont {
+        position: absolute;
+        right: 10px;
+        &.up {
+          transform: rotate(180deg);
+        }
+      }
     }
     &_data {
       display: flex;

@@ -25,19 +25,28 @@ let config = {
     supTitle: '上标题',
     subTitle: '下标题',
     icon: '',
-    link: ''
+    link: {
+      name: '',
+      code: ''
+    }
   },{
     defaultIcon: 'default_picture.png',
     supTitle: '上标题',
     subTitle: '下标题',
     icon: '',
-    link: ''
+    link: {
+      name: '',
+      code: ''
+    }
   },{
     defaultIcon: 'default_picture.png',
     supTitle: '上标题',
     subTitle: '下标题',
     icon: '',
-    link: ''
+    link: {
+      name: '',
+      code: ''
+    }
   }]
 
 }

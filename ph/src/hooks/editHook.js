@@ -9,8 +9,6 @@ import { ElMessage } from 'element-plus'
 import { deepClone, deepMerge } from '../utils'
 
 export default function(baseInfo, setting, activeIndex) {
-  const router = useRouter()
-
   const initData = async (type, id) => {
     baseInfo.value.id = id
     baseInfo.value.category = type
@@ -54,11 +52,19 @@ export default function(baseInfo, setting, activeIndex) {
     if (['BOTTOM_MENU', 'HOME_ADVERT'].includes(category)) activeIndex.value = 0
   }
 
-  const submitData = async () => {
+  const submitData = async (isPreview = false) => {
     let templateConfigParams = setting.value.map(({ name, title, config }) => ({ name, title, config }))
     let params = { ...baseInfo.value }
+    let { id, templateName, templateImg } = params
+    if (!templateName) return ElMessage({ type: 'warning', message: '模板名称不能为空 ' })
+    if (!templateImg) return ElMessage({ type: 'warning', message: '模板封面不能为空 ' })
     params.templateConfigParams = JSON.stringify(templateConfigParams)
-    await editModule(params)
+    console.log('params', templateConfigParams)
+    let res = await editModule(params)
+    if (id && isPreview) {
+      return Bus.emit('preview', { templateName, id })
+    }
+    console.log('返回 result:', res, isPreview)
     ElMessage({ type: 'success', message: '保存成功' })
   }
   return {

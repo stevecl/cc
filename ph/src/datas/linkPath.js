@@ -1,5 +1,23 @@
 const mainPage = [
   {
+    groupName: '测试页面',
+    groupCode: 'TEST',
+    list: [
+      {
+        code: 'TEST_HOME',
+        name: '首页'
+      },
+      {
+        code: 'TEST_HSH',
+        name: '惠生活'
+      },
+      {
+        code: 'TEST_MINE',
+        name: '个人中心'
+      },
+    ]
+  },
+  {
     groupName: '线上商城',
     groupCode: 'ONLINE',
     list: [

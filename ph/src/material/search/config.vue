@@ -57,7 +57,7 @@
       <selectColor v-model="config.left.color" :resetColor="'#ffffff'"></selectColor>
     </configItem>
     <configItem :label="'链接'">
-      <el-input style="flex: 1;" v-model="config.left.link">
+      <el-input style="flex: 1;" disabled v-model="config.left.link.name">
         <template #append>
           <el-button @click="selectLeftLink">选择链接</el-button>
         </template>
@@ -86,7 +86,7 @@
       </el-radio-group>
     </configItem>
     <configItem :label="'链接'" v-if="config.right.btnType === 'link'">
-      <el-input style="flex: 1;" v-model="config.right.link">
+      <el-input style="flex: 1;" disabled v-model="config.right.link.name">
         <template #append>
           <el-button @click="selectRightLink">选择链接</el-button>
         </template>
@@ -105,8 +105,8 @@ const { marginTop, marginLeft, paddingTop, paddingLeft, paddingBottom } = useSty
 const selectImage = () => Bus.emit('selectImage', res => props.config.style.bgImageUrl = res.url)
 const selectLeftIcon = () => Bus.emit('selectIcon', icon => props.config.left.icon = icon)
 const selectRightIcon = () => Bus.emit('selectIcon', icon => props.config.right.icon = icon)
-const selectLeftLink = () => Bus.emit('selectLink', link => props.config.left.link = link)
-const selectRightLink = () => Bus.emit('selectLink', link => props.config.right.link = link)
+const selectLeftLink = () => Bus.emit('selectLink', linkItem => props.config.left.link = linkItem, props.config.left.link)
+const selectRightLink = () => Bus.emit('selectLink', linkItem => props.config.right.link = linkItem, props.config.right.link)
 
 </script>
 

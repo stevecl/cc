@@ -78,7 +78,7 @@
                 <span class="cus-btn" @click="selectImage(item)">选择图片</span>
               </p> -->
               <p>
-                <input class="cus-input" type="text" v-model="item.link" placeholder="请选择链接或输入链接地址">
+                <input class="cus-input" type="text" disabled v-model="item.link.name" placeholder="请选择链接">
                 <span class="cus-btn" @click="selectLink(item)">选择链接</span>
               </p>
             </div>
@@ -98,6 +98,8 @@
 import draggable from 'vuedraggable'
 import useDefaultSource from '@/hooks/useDefaultSource'
 import useStyle from '@/hooks/useStyle'
+
+import { ElMessageBox } from 'element-plus'
 
 const props = defineProps({
   config: Object

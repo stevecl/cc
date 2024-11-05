@@ -1,0 +1,1 @@
+const t={title:"店铺组",type:1,style:{padding:"0 0 0 0",margin:"0 0 0 0"},colorSet:{background:"#F5F8FB",itemBg:"#fff",name:"#2F3033",adress:"#626260"},dataConfig:{type:"product",selectList:[],categoryId:"",categoryName:"",showNum:1}};export{t as default};

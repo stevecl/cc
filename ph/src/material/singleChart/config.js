@@ -11,13 +11,19 @@ let config = {
       id: 0,
       defaultIcon: 'default_banner.png',
       url: '',
-      link: ''
+      link: {
+        name: '',
+        code: ''
+      }
     },
     {
       id: 1,
       defaultIcon: 'default_banner.png',
       url: '',
-      link: ''
+      link: {
+        name: '',
+        code: ''
+      }
     }
   ]
 }

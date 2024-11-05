@@ -1,1 +1,0 @@
-import{f as s,T as t,z as l,k as r,e as o}from"./index-Mzu7L1o1.js";const c={class:"config-list-box"},n={key:0,class:"left-box"},i={class:"right-box"},_={__name:"listBox",props:{left:!0},setup(a){return(e,d)=>(o(),s("div",c,[a.left!==!1?(o(),s("div",n,[t(e.$slots,"left")])):l("",!0),r("div",i,[t(e.$slots,"default")])]))}};export{_ as default};

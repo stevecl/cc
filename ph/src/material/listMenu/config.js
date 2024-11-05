@@ -28,19 +28,28 @@ let config = {
       text: '文字',
       alert: '查看',
       icon: 'icon-gouwuche',
-      link: ''
+      link: {
+        name: '',
+        code: ''
+      }
     },
     {
       text: '文字',
       alert: '提示',
       icon: 'icon-gouwuche',
-      link: ''
+      link: {
+        name: '',
+        code: ''
+      }
     },
     {
       text: '文字',
       alert: '提示',
       icon: 'icon-gouwuche',
-      link: ''
+      link: {
+        name: '',
+        code: ''
+      }
     }
   ]
 }

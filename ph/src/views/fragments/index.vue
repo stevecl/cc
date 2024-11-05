@@ -5,7 +5,8 @@
         <el-icon><ArrowLeft /></el-icon>返回
       </div>
       <div class="flex-1"></div>
-      <el-button type="primary" @click="submitData">保存</el-button>
+      <el-button type="primary" @click="submitData(true)" v-if="baseInfo.id">保存并预览</el-button>
+      <el-button type="primary" @click="submitData(false)">保存</el-button>
     </div>
     <materialPanel :activeIndex="activeIndex" @add="handleAddModule"></materialPanel>
     <engine :pageConfig="baseInfo" @select="selectCurrentModule(-1)">
@@ -58,11 +59,11 @@ const baseInfo = ref({
   id: '',
   category: 'HOME', // 页面分类(首页:HOME,惠生活:HSH,会员中心:MEMBER_CENTER,自定义页面:CUSTOM_PAGE,底部菜单:BOTTOM_MENU,启动广告:HOME_ADVERT)
   sourceType: 'MARKET_APPLETS', // 终端类型SourceTypeEnum(普惠空间的店:MARKET_APPLETS)
-  templateName: '页面名称', // 页面名称
-  templateTitle: '页面标题', // 页面标题
-  templateImg: 'https://img0.baidu.com/it/u=3773090653,2338589126&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500', // 封面图片
+  templateName: '', // 页面名称
+  templateTitle: '', // 页面标题
+  templateImg: '', // 封面图片
   backgroundColor: '#ffffff', // 背景颜色
-  searchKey: '首页', // 关键字
+  searchKey: 'v', // 关键字
   templateConfigParams: '[]', // 配置信息
   componentIds: '', // 组件id
 })
@@ -81,8 +82,8 @@ const activeItem = computed(() => {
 const { initData, submitData } = useEditHook(baseInfo, setting, activeIndex)
 
 // 添加模块
-const handleAddModule = item => {
-  if (item.name === 'floatButtons' && setting.value.some(obj => obj.name === 'floatButtons')) return ElMessage ({ message: `${item.title}组件只能添加一个`, type: 'warning' })
+const handleAddModule = (item, isOnly = false) => {
+  if (isOnly && setting.value.some(obj => obj.name === item.name)) return ElMessage ({ message: `${item.title}组件只能添加一个`, type: 'warning' })
   let newItem = deepClone(item)
   newItem.config = deepClone(newItem.defConfig)
   if (activeIndex.value === -1) {

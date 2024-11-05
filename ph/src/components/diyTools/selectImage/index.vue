@@ -224,6 +224,7 @@ onMounted(() => {
       flex-direction: row;
       flex-wrap: wrap;
       padding: 10px;
+      overflow: auto;
       .right-image-item {
         position: relative;
         width: 160px;

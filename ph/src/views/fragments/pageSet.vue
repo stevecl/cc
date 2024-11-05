@@ -36,8 +36,8 @@ const props = defineProps({
 const uploadImage = async e => {
   let files = e.target.files
   for (var i = 0; i < files.length; i++) {
-    let re = await uploadFile(files[i]);
-    console.log('商城？？？', re)
+    let post = await uploadFile(files[i]);
+    props.config.templateImg = post
   }
 }
 

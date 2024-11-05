@@ -1,0 +1,1 @@
+import{f as t,T as s,e as a}from"./index-0bWp895S.js";const o={__name:"index",props:{config:Object},setup(e){return(l,n)=>(a(),t("div",{class:"edit-module-assist-blank",style:s(e.config.style)},null,4))}};export{o as default};

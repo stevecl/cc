@@ -5,7 +5,7 @@
       <div class="category_item" :class="{active: searchQuery.type === 'CITY'}" @click="handleType('CITY')">同城商品</div>
     </div>
     <div class="main">
-      <div class="main_search">
+      <div class="flex main_search">
         <el-input
           class="wid160 mr10"
           v-model="searchQuery.goodsName"
@@ -127,7 +127,6 @@ const handleSelect = (item) => {
   if (index > -1) {
     selectList.value.splice(index, 1)
   } else {
-    // selectList.value.push(item)
     selectList.value = [ item ]
   }
 }
@@ -159,9 +158,28 @@ const handlePage = page => {
   getProductData()
 }
 
-const submit = () => selectList.value.length ? selectList.value[0].id : ''
+const init = linkObj => selectList.value = [{ id: linkObj.query?.id }]
+const submit = () => {
+  let result = {
+    code: 'GOODS',
+    name: '',
+    query: {
+      id: ''
+    }
+  }
+  let product = selectList.value[selectList.value.length - 1]
+  if (!product) return result
+  return {
+    code: 'GOODS',
+    name: `${product.goodsName}【${searchQuery.value.type === 'ONLINE' ? '线上' : '同城'}商品】`,
+    query: {
+      id: product.id
+    }
+  }
+}
 
 defineExpose({
+  init,
   submit
 })
 
@@ -215,9 +233,6 @@ onMounted(async () => {
     border-radius: 4px;
     padding: 10px;
     overflow-y: auto;
-    &_search {
-      display: flex;
-    }
     .product-list {
       flex: 1;
       display: flex;

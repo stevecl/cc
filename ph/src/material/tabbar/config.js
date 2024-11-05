@@ -15,7 +15,10 @@ let config = {
       img: '',
       activeImg: '',
       defaultIcon: '',
-      link: ''
+      link: {
+        name: '',
+        code: ''
+      }
     },
     {
       text: '购物车',
@@ -23,7 +26,10 @@ let config = {
       img: '',
       activeImg: '',
       defaultIcon: '',
-      link: ''
+      link: {
+        name: '',
+        code: ''
+      }
     },
     {
       text: '个人中心',
@@ -31,7 +37,10 @@ let config = {
       img: '',
       activeImg: '',
       defaultIcon: '',
-      link: ''
+      link: {
+        name: '',
+        code: ''
+      }
     }
   ]
 }

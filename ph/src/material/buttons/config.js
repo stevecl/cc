@@ -15,25 +15,37 @@ let config = {
     icon: '',
     text: '按钮文字',
     color: '#666',
-    link: ''
+    link: {
+      name: '',
+      code: ''
+    }
   },{
     defaultIcon: 'default_btn2.png',
     icon: '',
     text: '按钮文字',
     color: '#666',
-    link: ''
+    link: {
+      name: '',
+      code: ''
+    }
   },{
     defaultIcon: 'default_btn3.png',
     icon: '',
     text: '按钮文字',
     color: '#666',
-    link: ''
+    link: {
+      name: '',
+      code: ''
+    }
   },{
     defaultIcon: 'default_btn4.png',
     icon: '',
     text: '按钮文字',
     color: '#666',
-    link: ''
+    link: {
+      name: '',
+      code: ''
+    }
   }]
 
 }

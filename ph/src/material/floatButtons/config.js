@@ -11,7 +11,10 @@ let config = {
     {
       icon: 'icon-shouye',
       img: '',
-      link: ''
+      link: {
+        name: '',
+        code: ''
+      }
     },
   ]
 }

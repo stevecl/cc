@@ -50,7 +50,7 @@
             </template>
             <div class="right-icon">
               <p style="margin-top: 20px;">
-                <input class="cus-input" type="text" disabled v-model="item.link" placeholder="请选择链接或输入链接地址">
+                <input class="cus-input" type="text" disabled v-model="item.link.name" placeholder="请选择链接">
                 <span class="pointer cus-btn" @click="selectLink(item)">选择链接</span>
               </p>
             </div>
@@ -86,7 +86,10 @@ const handleAdd = (type = '') => {
   let _obj = {
     icon: isTop ? 'icon-fanhuidingbunew' : 'icon-shouye',
     img: '',
-    link: isTop ? '返回顶部' : ''
+    link: {
+      name: isTop ? '返回顶部' : '',
+      code: ''
+    }
   }
   props.config.datas.push( _obj )
 }

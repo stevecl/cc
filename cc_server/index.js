@@ -10,11 +10,11 @@ const router = new Router()
 app.use(serve('./web'))
 
 app.use(koaConnect(createProxyMiddleware('/custom', { 
-  target: 'http://test-boss.beixiaoji.cn', // 目标服务器地址
+  target: 'http://test-admin-boss.beixiaoji.cn/api', // 目标服务器地址
   changeOrigin: true,
 })));
 app.use(koaConnect(createProxyMiddleware('/goods', { 
-  target: 'http://test-boss.beixiaoji.cn', // 目标服务器地址
+  target: 'http://test-admin-boss.beixiaoji.cn/api', // 目标服务器地址
   changeOrigin: true,
 })));
 

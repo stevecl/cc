@@ -7,6 +7,10 @@
         <el-image :src="item.templateImg" fit="contain"></el-image>
         <div class="cover">
           <div>
+            <p @click="handlePreview(item)" v-if="item.category !== 'BOTTOM_MENU'">
+              <i class="iconfont icon-qiyong1"></i>
+              <span>预览</span>
+            </p>
             <p @click="handleOpen(item)" v-if="item.state == 0">
               <i class="iconfont icon-qiyong1"></i>
               <span>启用</span>
@@ -42,6 +46,11 @@ const emit = defineEmits(['update'])
 const props = defineProps({
   datas: Array
 })
+
+const handlePreview = item => {
+  console.log('预览:', item)
+  Bus.emit('preview', item)
+}
 
 const handleOpen = async ({ id }) => {
   await editModuleStatus(id)

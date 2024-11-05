@@ -68,7 +68,7 @@
                 <selectColor class="style1" v-model="item.color" :resetColor="'#666'"></selectColor>
               </p>
               <p>
-                <input class="cus-input" type="text" v-model="item.link" placeholder="请选择链接或输入链接地址">
+                <input class="cus-input" type="text" disabled v-model="item.link.name" placeholder="请选择链接">
                 <span class="cus-btn" @click="selectLink(item)">选择链接</span>
               </p>
             </div>

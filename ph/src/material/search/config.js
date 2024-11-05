@@ -18,14 +18,20 @@ let config = {
     icon: 'icon-shouye',
     color: '#fff',
     btnType: 'link',
-    link: ''
+    link: {
+      name: '',
+      code: '',
+    }
   },
   right: {
     type: 1,
     icon: 'icon-shangpin',
     color: '#fff',
     btnType: 'link',
-    link: ''
+    link: {
+      name: '',
+      code: '',
+    }
   }
 }
 
