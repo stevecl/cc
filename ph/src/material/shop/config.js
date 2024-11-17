@@ -7,11 +7,49 @@ export default {
     margin: '0 0 0 0',
   },
 
-  colorSet: {
-    background: '#F5F8FB',
-    itemBg: '#fff',
-    name: '#2F3033',
-    adress: '#626260',
+  contentSet: {
+    bg: {
+      bgColor: '#F5F8FB'
+    },
+    item: {
+      bgColor: '#fff'
+    },
+    name: {
+      show: true,
+      fontSize: 20,
+      color: '#2F3033',
+    },
+    adress: {
+      show: true,
+      fontSize: 12,
+      color: '#626260',
+    },
+    star: {
+      show: true,
+      fontSize: 12,
+      color: '#FC6635',
+    },
+    appraise: {
+      show: true,
+      fontSize: 12,
+      color: '#626260',
+    },
+    per: {
+      show: true,
+      fontSize: 12,
+      color: '#626260',
+    },
+    intro: {
+      show: true,
+      fontSize: 12,
+      color: '#626260',
+    },
+  },
+
+  imgRadiusSet: {
+    item: 10,
+    shop: 4,
+    product: 4,
   },
 
   dataConfig: {

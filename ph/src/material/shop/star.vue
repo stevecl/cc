@@ -1,6 +1,12 @@
 <template>
-  <div class="star">5星</div>
+  <div class="star" :style="{fontSize: starSet.fontSize + 'px'}">5星</div>
 </template>
+
+<script setup>
+const props = defineProps({
+  starSet: Object
+})
+</script>
 
 <style lang="scss" scoped>
 .star {

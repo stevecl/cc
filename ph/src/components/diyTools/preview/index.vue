@@ -33,7 +33,7 @@ onMounted(() => {
     state.title = templateName
     state.dialogVisible = true
     nextTick(() => {
-      QRCode.toCanvas(qrcodeCanvas.value, 'this.text水水水水水水水水水水水水水水水水水水水', error => {
+      QRCode.toCanvas(qrcodeCanvas.value, `http://cc92.top/mini.html#/diyPages/main/custom/index?id=${id}`, error => {
         if (error) console.error(error)
       })
     })

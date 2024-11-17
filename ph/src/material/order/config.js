@@ -6,7 +6,9 @@ export default {
     bgImageUrl: '',
   },
   style: {
+    txtSize: 13,
     txtColor: '#333333',
+    iconSize: 20,
     iconColor: '#333333',
     padding: '5px 5px 5px 5px',
     margin: '0 0 0 0',

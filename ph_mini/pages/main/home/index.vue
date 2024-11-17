@@ -5,10 +5,12 @@
 			<view>您已登录，账号为{{vuex_tel}}</view>
 			<view>点击我，退出登录</view>
 		</view>
+		<testVue></testVue>
 	</view>
 </template>
 
 <script>
+	import testVue from './test.vue'
 	export default {
 		data() {
 			return {
@@ -22,6 +24,9 @@
 		onReachBottom() {},
 		onPullDownRefresh() {},
 		onPageScroll(e) {},
+		components: {
+			testVue
+		},
 		methods: {
 			loginHandle() {
 				uni.navigateTo({

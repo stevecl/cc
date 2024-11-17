@@ -1,6 +1,11 @@
 // 这里的vm，就是我们在vue文件里面的this，所以我们能在这里获取vuex的变量，比如存放在里面的token
 // 同时，我们也可以在此使用getApp().globalData，如果你把token放在getApp().globalData的话，也是可以使用的
 const install = (Vue, vm) => {
+	// #ifdef H5
+		let __wxConfig = {
+			envVersion: "develop"
+		}
+	// #endif
 	Vue.prototype.$u.http.setConfig({
 
 		baseUrl: __wxConfig.envVersion == "release" ?
@@ -16,9 +21,26 @@ const install = (Vue, vm) => {
 			'https://customer-mph5.shang-cloud.com' : // 生产线，暂时是hztest环境
 			'https://customer-mph5.shang-cloud.com',
 	});
+	// #ifdef H5
+		Vue.prototype.$u.http.setConfig({
+			baseUrl: __wxConfig.envVersion == "release" ?
+				'https://bxj.beixiaoji.com' : // 生产线，不要改
+				'/test', // 测试环境
+				// 'https://bxj.beixiaoji.com',
+
+			h5Url: __wxConfig.envVersion == "release" ?
+				'https://h5.beixiaoji.com' : // 生产线，不要改
+				'https://h5.beixiaoji.com',
+
+			imUrl: __wxConfig.envVersion == "release" ?
+				'https://customer-mph5.shang-cloud.com' : // 生产线，暂时是hztest环境
+				'https://customer-mph5.shang-cloud.com',
+		});
+	// #endif
 	// 请求拦截，配置Token等参数
 	Vue.prototype.$u.http.interceptor.request = (config) => {
-		config.header.token = vm.vuex_token;
+		// config.header.token = vm.vuex_token;
+		config.header.token = uni.getStorageSync('TESTTOKEN');
 		config.header.sourceType = vm.vuex_sideType;
 		config.data.source_type = vm.vuex_sideType;
 		config.data.buyerId = vm.vuex_userId;

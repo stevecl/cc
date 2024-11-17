@@ -7,6 +7,7 @@ let config = {
     bgColor: '#ffffff',
     bgImageUrl: '',
     fontSize: '14px',
+    iconSize: 40,
     padding: '0 0 0 0',
     margin: '0 0 0 0'
   },

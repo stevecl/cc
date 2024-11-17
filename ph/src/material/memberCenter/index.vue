@@ -5,12 +5,12 @@
         <img class="img" src="https://img1.baidu.com/it/u=2931243091,718249849&fm=253&app=120&size=w931&n=0&f=JPEG&fmt=auto?sec=1730826000&t=45f5e4715aacf31c255483a0177d472c" alt="">
       </div>
       <div class="name">
-        <span class="txt">昵称昵称昵称昵称昵称昵称昵称昵称昵称昵称昵称昵称昵称昵称昵称昵称</span>
+        <span class="txt" :style="{ fontSize: config.detail.memberName.fontSize + 'px', color: config.detail.memberName.color }">昵称昵称昵称昵称昵称昵称昵称昵称昵称昵称昵称昵称昵称昵称昵称昵称</span>
         <span class="iconfont icon-setting" :class="[config.clickItem.signin.icon]" :style="{ color: config.clickItem.signin.iconColor }" v-if="config.clickItem.signin.show"></span>
         <span class="iconfont icon-setting" :class="[config.clickItem.setting.icon]" :style="{ color: config.clickItem.setting.iconColor }" v-if="config.clickItem.setting.show"></span>
       </div>
-      <div class="level" v-if="config.detail.memberLevel.show">普通会员</div>
-      <div class="progress" v-if="config.detail.grow.show">成长值：152/500</div>
+      <div class="level" v-if="config.detail.memberLevel.show" :style="{ fontSize: config.detail.memberLevel.fontSize + 'px', color: config.detail.memberLevel.color }">普通会员</div>
+      <div class="progress" v-if="config.detail.grow.show" :style="{ fontSize: config.detail.grow.fontSize + 'px', color: config.detail.grow.color }">成长值：152/500</div>
     </div>
     <div class="score-info" :style="detailStyle">
       <div class="txt">绿积分<img class="help" src="../../assets/images/member/help.png" alt=""></div>
@@ -18,20 +18,20 @@
       <div class="score_detail" :style="{color: config.clickItem.look.color }">{{ config.clickItem.look.text || '查看明细' }}<img class="right" src="../../assets/images/member/right.png" alt=""></div>
       <div class="detail">
         <div class="detail_item" v-if="config.detail.withdraw.show">
-          <p class="name">可提现<img class="help" src="../../assets/images/member/help.png" alt=""></p>
-          <p class="num">582</p>
+          <p class="name" :style="{ fontSize: config.detail.withdraw.fontSize + 'px', color: config.detail.withdraw.color }">可提现<img class="help" src="../../assets/images/member/help.png" alt=""></p>
+          <p class="num" :style="{ fontSize: config.detail.withdraw.fontSize + 4 + 'px'}">582</p>
         </div>
         <div class="detail_item" v-if="config.detail.integral.show">
-          <p class="name">待入账绿积分<img class="help" src="../../assets/images/member/help.png" alt=""></p>
-          <p class="num">582</p>
+          <p class="name" :style="{ fontSize: config.detail.integral.fontSize + 'px', color: config.detail.integral.color }">待入账绿积分<img class="help" src="../../assets/images/member/help.png" alt=""></p>
+          <p class="num" :style="{ fontSize: config.detail.integral.fontSize + 4 + 'px'}">582</p>
         </div>
         <div class="detail_item" v-if="config.detail.deductible.show">
-          <p class="name">绿积分可抵<img class="help" src="../../assets/images/member/help.png" alt=""></p>
-          <p class="num">582</p>
+          <p class="name" :style="{ fontSize: config.detail.deductible.fontSize + 'px', color: config.detail.deductible.color }">绿积分可抵<img class="help" src="../../assets/images/member/help.png" alt=""></p>
+          <p class="num" :style="{ fontSize: config.detail.deductible.fontSize + 4 + 'px'}">582</p>
         </div>
         <div class="detail_item" v-if="config.detail.contribution.show">
-          <p class="name">贡献值<img class="help" src="../../assets/images/member/help.png" alt=""></p>
-          <p class="num">582</p>
+          <p class="name" :style="{ fontSize: config.detail.contribution.fontSize + 'px', color: config.detail.contribution.color }">贡献值<img class="help" src="../../assets/images/member/help.png" alt=""></p>
+          <p class="num" :style="{ fontSize: config.detail.contribution.fontSize + 4 + 'px'}">582</p>
         </div>
       </div>
     </div>
@@ -72,9 +72,6 @@ const detailStyle = computed(() => {
   .member-info {
     flex-shrink: 0;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     height: 60px;
     color: #ffffff;
     margin-top: 80px!important;
@@ -111,21 +108,22 @@ const detailStyle = computed(() => {
       }
     }
     .level {
-      width: 73.5px;
-      height: 15px;
-      line-height: 15px;
+      display: inline-block;
+      // width: auto;
+      // height: 15px;
+      // line-height: 15px;
       font-size: 9px;
       font-weight: 800;
+      text-align: right;
       background: #fb9b83;
       border-radius: 7.5px;
-      text-align: right;
-      padding-right: 10px;
+      padding: 2px 10px;
       margin-top: 8px;
     }
     .progress {
-      width: 88.5px;
-      height: 10.5px;
-      font-size: 11px;
+      // width: 88.5px;
+      // height: 10.5px;
+      // font-size: 11px;
       font-weight: 500;
       margin-top: 8px;
     }
@@ -180,10 +178,6 @@ const detailStyle = computed(() => {
       &_item {
         flex: 1;
         text-align: center;
-        // margin-right: 22px;
-        &:first-of-type {
-          // margin-left: 16px;
-        }
         .name {
           display: flex;
           align-items: center;

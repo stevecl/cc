@@ -6,10 +6,10 @@
       <div class="sort_item">距离</div>
     </div>
     <template v-if="config.type === 1">
-      <shopType1 :colorSet="config.colorSet" v-for="item in 4"></shopType1>
+      <shopType1 :contentSet="config.contentSet" :imgRadiusSet="config.imgRadiusSet" v-for="item in 4"></shopType1>
     </template>
     <template v-if="config.type === 2">
-      <shopType2 :colorSet="config.colorSet" v-for="item in 4"></shopType2>
+      <shopType2 :contentSet="config.contentSet" :imgRadiusSet="config.imgRadiusSet" v-for="item in 4"></shopType2>
     </template>
   </div>
 </template>
@@ -24,10 +24,10 @@ const props = defineProps({
 })
 
 const styleObj = computed(() => {
-  let { style = {}, colorSet = {} } = props.config
+  let { style = {}, contentSet = {} } = props.config
   return {
     ...style,
-    background: colorSet.background
+    background: contentSet.bg.bgColor
   }
 })
 

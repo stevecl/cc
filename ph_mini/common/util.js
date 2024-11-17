@@ -1,4 +1,5 @@
 import Vue from 'vue';
+
 /**
  * 获取 openid 和 sessionKey
  * */

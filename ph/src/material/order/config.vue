@@ -33,6 +33,13 @@
       <selectColor v-model="config.style.iconColor" :resetColor="'#333333'"></selectColor>
     </configItem>
 
+    <div class="module-edit-title">大小设置</div>
+    <configItem :label="'文字大小'">
+      <inputNumber v-model="config.style.txtSize"></inputNumber>
+      <div class="label2 wid70">图标大小</div>
+      <inputNumber v-model="config.style.iconSize"></inputNumber>
+    </configItem>
+
     <draggable v-model="config.datas" item-key="index">
       <template #item="{ element: item }">
         <listBox class="cus-list-nav-style">

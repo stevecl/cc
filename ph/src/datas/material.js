@@ -96,7 +96,7 @@ const component_image = {
 // 用户信息组
 const component_member = {
   name: '会员中心',
-  permission: ['MEMBER_CENTER'],
+  // permission: ['MEMBER_CENTER'],
   data: [
     {
       name: '用户信息组',

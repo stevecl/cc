@@ -8,7 +8,8 @@ function getRequests(vm, apis, requests = {}) {
 const install = (Vue, vm) => {
 	/** 自定义用到的接口，写到以下这个对象 */
 	let customInterfaceUrl = {
-		getDiy: '/request?cmd=loadCustomTemplatePage'
+		getDiy: '/request?cmd=loadCustomTemplatePage',
+		getCustomTemplatePage: '/request?cmd=getCustomTemplatePage',
 	};
 
 	/** 登录、权限 */

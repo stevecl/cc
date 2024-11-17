@@ -1,8 +1,7 @@
 {
 	"easycom": {
 		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue",
-		"^uni-(.*)": "@/components/$1/index.vue", // 匹配components目录内的vue文件
-		"^diy-(.*)": "@/components/diy/$1/index.vue" // 匹配components目录内的vue文件\
+		"^diy-(.*)": "@/diyPages/components/$1/index.vue" // 装修组件
 	},
 	"mp-weixin": {
 		"optimization": {
@@ -28,23 +27,40 @@
 					}
 				}
 			}
-		},
-		{
-			"path" : "pages/diy/index/index",
-			"style" : 
-			{
-				"navigationBarTitleText" : ""
-			}
-		},
-		{
-			"path" : "pages/diy/mine/index",
-			"style" : 
-			{
-				"navigationBarTitleText" : ""
-			}
 		}
 	],
-	"subPackages": [],
+	"subPackages": [
+		{
+			"root": "diyPages",
+			"pages": [
+				{
+					"path": "main/index/index",
+					"style": {
+						"navigationBarTitleText": "首页"
+					}
+				},
+				{
+					"path": "main/hsh/index",
+					"style": {
+						"navigationBarTitleText": "惠生活"
+					}
+				},
+				{
+					"path": "main/mine/index",
+					"style": {
+						"navigationBarTitleText": "个人中心",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "main/custom/index",
+					"style": {
+						"navigationBarTitleText": "自定义页面"
+					}
+				}
+			]
+		}
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uView",

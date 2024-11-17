@@ -36,6 +36,9 @@
     <configItem :label="'字体大小'" :labelWidth="70">
       <inputNumber v-model="fontSize" :config="{ min: 10, max: 20 }"></inputNumber>
     </configItem>
+    <configItem :label="'图片大小'" :labelWidth="70">
+      <inputNumber v-model="config.style.iconSize" :config="{ min: 40, max: 80 }"></inputNumber>
+    </configItem>
     <configItem :label="'每行数量'">
       <el-radio-group v-model="config.lineNum">
         <el-radio :value="3">3个</el-radio>

@@ -1,8 +1,8 @@
 <template>
   <div class="edit-module-order" :style="styleObj">
     <div class="edit-module-order_item" v-for="item in config.datas">
-      <span class="iconfont" :class="item.icon" :style="{color: config.style.iconColor }"></span>
-      <p class="txt">{{ item.text }}</p>
+      <span class="iconfont" :class="item.icon" :style="{color: config.style.iconColor, fontSize: config.style.iconSize + 'px' }"></span>
+      <p class="txt" :style="{ fontSize: config.style.txtSize + 'px' }">{{ item.text }}</p>
     </div>
   </div>
 </template>
@@ -30,7 +30,7 @@ const styleObj = computed(() => {
 <style lang="scss" scoped>
 .edit-module-order {
   display: flex;
-  height: 68px;
+  // height: 68px;
   &_item {
     flex: 1;
     display: flex;

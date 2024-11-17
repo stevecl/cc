@@ -1,13 +1,13 @@
 <template>
-  <div class="shop-item" :style="{ backgroundColor: colorSet.itemBg }">
-    <img class="preview" src="https://img1.baidu.com/it/u=2931243091,718249849&fm=253&app=120&size=w931&n=0&f=JPEG&fmt=auto?sec=1730826000&t=45f5e4715aacf31c255483a0177d472c" alt="">
-    <div class="text-overflow shop-item_name" :style="{ color: colorSet.name }">店铺名称店铺名称店铺名称店铺名称店铺名称店铺名称店铺名称店铺名称店铺名称</div>
+  <div class="shop-item" :style="{ backgroundColor: contentSet.item.bgColor, borderRadius: imgRadiusSet.item + 'px' }">
+    <img class="preview" :style="{ borderRadius: imgRadiusSet.shop + 'px' }" src="https://img1.baidu.com/it/u=2931243091,718249849&fm=253&app=120&size=w931&n=0&f=JPEG&fmt=auto?sec=1730826000&t=45f5e4715aacf31c255483a0177d472c" alt="">
+    <div class="text-overflow shop-item_name" :style="{ color: contentSet.name.color, fontSize: contentSet.name.fontSize + 'px' }">店铺名称店铺名称店铺名称店铺名称店铺名称店铺名称店铺名称店铺名称店铺名称</div>
     <div class="shop-item_star">
-      <starVue></starVue>
-      <span>人均￥10</span>
+      <starVue v-if="contentSet.star.show" :starSet="contentSet.star"></starVue>
+      <span v-if="contentSet.per.show" :style="{ color: contentSet.per.color, fontSize: contentSet.per.fontSize + 'px' }">人均￥10</span>
     </div>
     <div class="shop-item_adress">
-      <span class="adr" :style="{ color: colorSet.adress }">渝中区</span>
+      <span class="adr" v-if="contentSet.adress.show" :style="{ color: contentSet.adress.color, fontSize: contentSet.adress.fontSize + 'px' }">渝中区</span>
       <span>已售544</span>
       <span class="flex-1"></span>
       <span>1.1km</span>
@@ -37,7 +37,8 @@
 import starVue from './star.vue';
 
 const props = defineProps({
-  colorSet: Object
+  contentSet: Object,
+  imgRadiusSet: Object,
 })
 
 </script>
@@ -47,14 +48,12 @@ const props = defineProps({
   position: relative;
   margin-top: 10px;
   padding: 10px 10px 10px 80px;
-  border-radius: 10px;
   .preview {
     position: absolute;
     width: 60px;
     height: 60px;
     left: 10px;
     top: 18px;
-    border-radius: 4px;
     overflow: hidden;
     border: 1px solid #eee;
   }
@@ -65,6 +64,7 @@ const props = defineProps({
   }
   &_star {
     display: flex;
+    align-items: center;
     gap: 10px;
     font-size: 12px;
     color: #626260;
@@ -72,6 +72,7 @@ const props = defineProps({
   }
   &_adress {
     display: flex;
+    align-items: center;
     font-size: 12px;
     color: #626260;
     .adr {

@@ -1,6 +1,6 @@
 {
     "name" : "ph-mp-bxj",
-    "appid" : "__UNI__09DC726",
+    "appid" : "__UNI__1EF9741",
     "description" : "多平台快速开发的UI框架",
     "versionName" : "1.8.4",
     "versionCode" : "100",
@@ -92,18 +92,16 @@
     },
     "quickapp" : {},
     "mp-weixin" : {
-        "appid" : "wxb00be1d5b469a54a",
-        "libVersion" : "latest",
-        "plugins" : {
-            "captcha" : {
-                "version" : "1.1.2",
-                "provider" : "wxb7c8f9ea9ceb4663"
-            },
-            "materialPlugin" : {
-                "version" : "1.0.5",
-                "provider" : "wx4d2deeab3aed6e5a"
-            }
-        },
+        "appid" : "wxb70eeb7f9a572ada",
+        "plugins" : {},
+        // "captcha" : {
+        //     "version" : "1.1.2",
+        //     "provider" : "wxb7c8f9ea9ceb4663"
+        // },
+        // "materialPlugin" : {
+        //     "version" : "1.0.5",
+        //     "provider" : "wx4d2deeab3aed6e5a"
+        // }
         "setting" : {
             "urlCheck" : false,
             "es6" : true,
@@ -140,21 +138,19 @@
     "mp-toutiao" : {
         "usingComponents" : true,
         "appid" : ""
-    },
-    "h5" : {
-        "template" : "template.h5.html",
-        "router" : {
-            "mode" : "hash",
-            "base" : ""
-        },
-        "optimization" : {
-            "treeShaking" : {
-                "enable" : false
-            }
-        },
-        "title" : "uView UI",
-        "sdkConfigs" : {
-            "maps" : {}
-        }
     }
 }
+// "h5" : {
+//     "template" : "template.h5.html",
+//     "router" : {
+//         "mode" : "hash",
+//         "base" : ""
+//     },
+//     "optimization" : {
+//         "treeShaking" : {
+//             "enable" : false
+//         }
+//     },
+//     "title" : "uView UI"
+// }
+

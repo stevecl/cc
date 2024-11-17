@@ -5,7 +5,7 @@
       v-for="(item, index) in config.datas"
       :key="index"
       >
-      <img :src="item.icon || getDefaultImage(item.defaultIcon)" :style="{borderRadius: config.imgBorderRadius + 'px'}">
+      <img :src="item.icon || getDefaultImage(item.defaultIcon)" :style="{ width: config.style.iconSize + 'px', height: config.style.iconSize + 'px',  borderRadius: config.imgBorderRadius + 'px'}">
       <p class="text-overflow" :style="{'color': item.color }">{{ item.text }}</p>
     </div>
   </div>

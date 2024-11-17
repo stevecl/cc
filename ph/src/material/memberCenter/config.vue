@@ -31,6 +31,20 @@
 
 
     <div class="module-edit-title">显示内容</div>
+    <template v-for="(item, key) in config.detail">
+      <!-- <div class="content_item">
+        <el-checkbox v-model="item.show"></el-checkbox>
+        <div class="name" @click="item.show = !item.show">{{ item.name }}</div>
+      </div> -->
+      <configItem :label="item.name" :labelWidth="80">
+        <el-checkbox v-model="item.show" label="显示" size="large" :disabled="item.name === '会员昵称'" />
+        <div style="margin: 0 10px 0 20px;">字号</div>
+        <inputNumber v-model="item.fontSize"></inputNumber>
+        <selectColor v-model="item.color" :resetColor="item.resetColor" style="margin-left: 20px;"></selectColor>
+      </configItem>
+    </template>
+
+
     <div class="content">
       <template v-for="(item, key) in config.detail">
         <div class="content_item">
